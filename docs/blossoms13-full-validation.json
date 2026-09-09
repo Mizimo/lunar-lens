@@ -1,0 +1,112 @@
+{
+  "version": "1.3.0",
+  "sourceName": "Blossoms Bring an Old Friend_spotdown.org.mp3",
+  "sourceDurationSeconds": 193.316281,
+  "runtimeHashes": {
+    "patchers/Lunar Lens.maxpat": "d999ef2d931bf89065142ce6a1492737f73542476fdd69d87c5145047ec3ee69",
+    "patchers/lens_analysis.gendsp": "845d008779a0fea04be82120904c5a281bc908dc3e6d018d5a4e586432871581",
+    "patchers/lens_context.gendsp": "83dd8968434258771f146a1596f0910581c456cb67b5bcf95c83dd3621fad8c0",
+    "patchers/lens_fx.gendsp": "8dee70dba943812f0569d7cc5ef3b64f1bba4745cd6132477ff1663f96304843",
+    "patchers/lens_grid.js": "b72ad1c60aebae9380fc10879392d3d95636f98d955248bd7efba702fa36a635",
+    "patchers/lens_runtime.js": "4e3bda67a47481336693adfee978afaa63ae7d6427c62e86e7657700bfbcc097",
+    "patchers/lens_screen.js": "ebcdd0605051d9e55ea81893426958b1f33c77c42e5f835da90a187ea58bb006",
+    "patchers/lens_spectral.gendsp": "f9dd0d53454cc231f925f864fd31c7696fe77b77a3041c1b060b94def42043d7",
+    "patchers/lens_spectral.maxpat": "7fcb058d8f2a02da36503f9c9ebd46482f55cec1c027fd5d1b31b0a2a489ebea"
+  },
+  "durationSeconds": 193.31628117913831,
+  "frames": 6019,
+  "activeFrames": 5902,
+  "meanFrameMs": 32.61881022803527,
+  "p99FrameMs": 49.99995231628418,
+  "maxFrameMs": 69.99993324279785,
+  "roleMedian": [
+    0.045092953548320186,
+    0.5207660662393896,
+    0.39986262047175825,
+    0.3436733824499576,
+    0.08481948950167509
+  ],
+  "roleP95": [
+    0.698064443455863,
+    0.6945144353212875,
+    0.6611415108464544,
+    0.4148362844269611,
+    0.4800697468949737
+  ],
+  "roleCorrelation": [
+    [
+      1.0,
+      0.1955026137478472,
+      0.09272214636911376,
+      0.10209886423805149,
+      0.05565826155554429
+    ],
+    [
+      0.19550261374784716,
+      1.0,
+      0.18393164575445928,
+      0.30037836624529546,
+      0.037542339068806455
+    ],
+    [
+      0.09272214636911376,
+      0.18393164575445928,
+      1.0,
+      0.25420333353452823,
+      0.23233985955790382
+    ],
+    [
+      0.1020988642380515,
+      0.30037836624529546,
+      0.2542033335345282,
+      1.0,
+      0.22437046967950505
+    ],
+    [
+      0.05565826155554429,
+      0.037542339068806455,
+      0.23233985955790382,
+      0.22437046967950502,
+      0.9999999999999998
+    ]
+  ],
+  "eventCounts": [
+    223,
+    1362,
+    897
+  ],
+  "monitorOffThroughout": true,
+  "endStopped": true,
+  "endBlack": true,
+  "rgbValid": true,
+  "maxSimultaneouslyLitCells": 54,
+  "monitorOnPositionRange": [],
+  "maxPlaybackFrameMs": 69.99993324279785,
+  "perBandEventCounts": [
+    339,
+    786,
+    1111,
+    1230,
+    1279,
+    1286,
+    838,
+    514
+  ],
+  "onsetStrengthP10P50P90": [
+    [
+      0.5614288902782645,
+      0.7695617497747377,
+      0.904617268166754
+    ],
+    [
+      0.2631826809900977,
+      0.40393704764189575,
+      0.6495859506454691
+    ],
+    [
+      0.09312872958587996,
+      0.2297914816464312,
+      0.6522275638857533
+    ]
+  ]
+}

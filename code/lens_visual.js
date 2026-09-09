@@ -1,5 +1,8 @@
 /* Five sound behaviours, six genuinely different spatial grammars.
    No score, title, transport position, instrument label or free-running beat. */
+if(typeof module!=="undefined"){
+ var LensInteraction=require('./lens_interaction.js'),LensTransition=require('./lens_transition.js');
+}
 var LensVisual=(function(){
  function clamp(x,a,b){return Math.max(a,Math.min(b,x));}
  function hash(n){var x=Math.sin(n*12.9898+78.233)*43758.5453;return x-Math.floor(x);}
@@ -19,28 +22,25 @@ var LensVisual=(function(){
   [[1,.84,.20],[1,.19,.37],[.12,.89,.81],[.36,.18,.85],[.75,.95,.99]]
  ];
  function palette(scene,choice){return palettes[choice?clamp(choice-1,0,5):clamp(scene,0,5)];}
- function Engine(){this.time=0;this.motion=0;this.serial=0;this.clear();}
+ function Engine(interaction){this.input=interaction||new LensInteraction.Engine();this.transition=new LensTransition.Engine();this.time=0;this.motion=0;this.serial=0;this.clear();}
  Engine.prototype.clear=function(){
-  this.held={};this.waves=[];this.impacts=[];this.particles=[];this.lastCounts=[0,0,0];
+  this.input.clear();this.transition.clear();this.impacts=[];this.particles=[];this.lastCounts=[0,0,0];
   this.trails=empty();this.layers=empty();this.frame=[];this.midHistory=[];this.flash=0;
   this.phraseClock=0;this.bedClock=0;this.turn=0;this.lastScene=-1;
  };
- Engine.prototype.touch=function(note,velocity){
-  var x=note%10-1,y=Math.floor(note/10)-1;if(x<0||x>7||y<0||y>7||note%1)return false;
-  this.held[note]={x:x,y:y,p:clamp(velocity/127,.15,1),v:clamp(velocity/127,.15,1)};
-  this.waves.push({x:x,y:y,t:0,p:clamp(velocity/127,.3,1)});if(this.waves.length>16)this.waves.shift();return true;
- };
- Engine.prototype.release=function(note){delete this.held[note];};
- Engine.prototype.pressure=function(note,value){for(var k in this.held)if(note===-1||Number(k)===note)this.held[k].p=clamp(value/127,0,1);};
- Engine.prototype.gesture=function(){
-  var weight=0,x=0,y=0,n=0;for(var k in this.held){var h=this.held[k],w=.15+.85*h.p;weight+=w;x+=h.x*w;y+=h.y*w;n++;}
-  return {count:n,strength:clamp(weight/1.1,0,1),x:weight?x/weight/7:.5,y:weight?y/weight/7:.5};
- };
+ // Compatibility accessors for existing standalone renderers; state lives in input.
+ Object.defineProperty(Engine.prototype,"held",{get:function(){return this.input.held;},set:function(v){this.input.held=v;}});
+ Object.defineProperty(Engine.prototype,"waves",{get:function(){return this.input.waves;}});
+ Engine.prototype.touch=function(n,v){return this.input.touch(n,v);};
+ Engine.prototype.release=function(n){this.input.release(n);};
+ Engine.prototype.pressure=function(n,v){this.input.pressure(n,v);};
+ Engine.prototype.gesture=function(){return this.input.gesture();};
  Engine.prototype.step=function(f,dt,p){
   dt=clamp(dt,.001,.1);this.time+=dt;var g=this.gesture(),i,j,k,x,y,pt;
+  var ev=f.eventVisual||{},roleSettings=p.roles||[];
   var scene=clamp(p.scene||0,0,5),counts=f.counts||[0,0,0],hits=f.transients||[0,0,0];
   var body=f.body===undefined?f.bands[0]:f.body,b=f.behaviour;
-  var phrase=b?b.phrase:f.bands[1],bed=b?b.bed:0,art=b?b.articulation:.6,contour=f.midContour===undefined?.5:f.midContour;
+  var phrase=b?(b.phrase||0):f.bands[1],bed=b?(b.bed||0):0,art=b?(b.articulation||0):.6,contour=f.midContour===undefined?.5:f.midContour;
   var dynamics=f.bandDynamics||[],bassAttack=0,midAttack=0,register=0;
   for(i=0;i<8;i++)if(dynamics[i]){
    if(i<3)bassAttack=Math.max(bassAttack,dynamics[i].impact);
@@ -55,7 +55,7 @@ var LensVisual=(function(){
    if(counts[0]>this.lastCounts[0]){this.impacts.push({t:0,p:Math.max(.025,hits[0]),dir:counts[0]%2,fresh:true});if(this.impacts.length>4)this.impacts.shift();}
    if(counts[1]>this.lastCounts[1]){this.flash=Math.max(.025,hits[1]);this.turn++;}
    if(counts[2]>this.lastCounts[2]){
-    var n=1+Math.floor(f.bands[2]*p.detail*2);
+    var n=1+Math.floor(f.bands[2]*p.detail*2+(ev.density||0)*.8);
     for(i=0;i<n;i++){
      var id=++this.serial;this.particles.push({x:Math.floor(hash(id*2+3)*8),y:5+Math.floor(hash(id+19)*3),id:id,band:f.highIndex||0,t:0,life:1,duration:(f.highIndex?.07:.12)+p.detail*.08,p:Math.max(.025,hits[2])});
     }if(this.particles.length>16)this.particles.splice(0,this.particles.length-16);
@@ -67,13 +67,15 @@ var LensVisual=(function(){
    for(i=0;i<this.particles.length;i++)if(this.particles[i].t<.09)this.particles[i].p=Math.max(this.particles[i].p,hits[2]);
   }
   this.lastCounts=counts.slice();
-  for(i=this.waves.length-1;i>=0;i--){this.waves[i].t+=dt;if(this.waves[i].t>1.5)this.waves.splice(i,1);}
+  this.input.step(dt);
   if(!p.freeze){
    this.flash*=Math.exp(-dt/.13);
    for(i=this.impacts.length-1;i>=0;i--){if(this.impacts[i].fresh)this.impacts[i].fresh=false;else this.impacts[i].t+=dt;if(this.impacts[i].t>.52)this.impacts.splice(i,1);}
    for(i=this.particles.length-1;i>=0;i--){pt=this.particles[i];pt.t+=dt;pt.life=Math.max(0,1-pt.t/pt.duration);if(pt.life<=0)this.particles.splice(i,1);}
    var next=empty(),cx=3.5+(g.count?(g.x*7-3.5)*g.strength*.55:0),cy=3.5+(g.count?(g.y*7-3.5)*g.strength*.4:0);
-   var spread=1+(f.width||0)*.25,pc=this.phraseClock,bc=this.bedClock,turn=this.turn,flash=this.flash;
+   cx+=(ev.pan||0)*.7;
+   var spread=1+(f.width||0)*.25+(ev.reframe||0)*.16,pc=this.phraseClock+(ev.entry||0)*.35,
+    bc=this.bedClock+(ev.reframe||0)*.6,turn=this.turn,flash=this.flash;
    for(y=0;y<8;y++)for(x=0;x<8;x++){
     var idx=y*8+x,dx=(x-cx)/spread,dy=y-cy,rr=Math.sqrt(dx*dx+dy*dy),angle=Math.atan2(dy,dx);
     var foundation=0,fore=0,bedShape=0,impact=0,detail=0;
@@ -146,29 +148,34 @@ var LensVisual=(function(){
     }
     if((x===0&&y===7)||(x===7&&y===0))detail+=f.bands[2]*.055;
     next[0][idx]=impact;
-    next[1][idx]=foundation*low*(.48+low*.5)*(1+bassAttack*.35);
-    next[2][idx]=fore*phrase*(.64+flash*.3);
-    next[3][idx]=bedShape*bed*.55*(1-clamp(fore*phrase,0,.6));
-    next[4][idx]=detail;
+    next[1][idx]=foundation*low*(.48+low*.5)*(1+bassAttack*.35)*(1+(ev.trend||0)*.12);
+    next[2][idx]=fore*phrase*(.64+flash*.3)*(1+(ev.entry||0)*.22);
+    next[3][idx]=bedShape*bed*.55*(1-clamp(fore*phrase,0,.6))*(1-(ev.release||0)*.35)*(1-(ev.reframe||0)*.65*edge(x-((ev.direction||0)?4.5:2.5),.9));
+    next[4][idx]=detail*(1+(ev.texture||0)*.25);
    }
    var tau=[.035,.09+p.trails*.25,.045+p.trails*.11,.18+p.trails*.30,.020+p.trails*.025];
-   for(j=0;j<5;j++)for(i=0;i<64;i++){next[j][i]=Math.max(next[j][i],this.trails[j][i]*Math.exp(-dt/tau[j]));if(next[j][i]<.0001)next[j][i]=0;}
+   for(j=0;j<5;j++)for(i=0;i<64;i++){next[j][i]=Math.max(next[j][i],this.trails[j][i]*Math.exp(-dt/(tau[j]*((roleSettings[j]||{}).release||1))));if(next[j][i]<.0001)next[j][i]=0;}
    this.trails=next;this.layers=next;
   }
   var budgets=[5.2,5.3,3.7,2.6,1.6],scales=[],colours=palette(scene,p.palette||0);
   for(j=0;j<5;j++){var sum=0;for(i=0;i<64;i++)sum+=this.layers[j][i];scales[j]=Math.min(1,budgets[j]/Math.max(.001,sum));}
-  var rgb=[],total=0;
+  var rgb=[],live=[],total=0;
   for(y=0;y<8;y++)for(x=0;x<8;x++){
-   var idx=y*8+x,c=[0,0,0],local=0;
+   var idx=y*8+x,c=[0,0,0],attack=[0,0,0],local=0;
    for(j=0;j<5;j++){
-    var value=focus&&focus!==j+1?0:this.layers[j][idx]*scales[j];local+=value;
-    for(k=0;k<3;k++)c[k]+=value*colours[j][k];
+    var settings=roleSettings[j]||{},wide=(settings.width||1)*(j===3?1+(ev.spread||0)*.35:1),sx=clamp(3.5+(x-3.5)/wide,0,7),left=Math.floor(sx),right=Math.min(7,left+1);
+    var sample=this.layers[j][y*8+left]*(1-(sx-left))+this.layers[j][y*8+right]*(sx-left);
+    var value=focus&&focus!==j+1?0:sample*scales[j]*(settings.gain===undefined?1:settings.gain);local+=value;
+    for(k=0;k<3;k++)if(j===0)attack[k]+=value*colours[j][k];else c[k]+=value*colours[j][k];
    }
-   for(k=0;k<3;k++)c[k]/=Math.max(1,Math.pow(local,.65));
-   for(var key in this.held){var h=this.held[key],v=glow(x,y,h.x,h.y,.24+h.p*.3)*(.55+h.p*.65);c[0]+=v;c[1]+=v*.69;c[2]+=v*.34;}
-   for(i=0;i<this.waves.length;i++){var w=this.waves[i],d=Math.sqrt(Math.pow(x-w.x,2)+Math.pow(y-w.y,2));var v=edge(d-w.t*3.8,.36)*Math.exp(-w.t*3)*w.p*.5;c[0]+=v*.8;c[1]+=v*.4;c[2]+=v;}
-   rgb.push(c);total+=Math.max.apply(Math,c);
+   for(k=0;k<3;k++){c[k]/=Math.max(1,Math.pow(local,.65));attack[k]/=Math.max(1,Math.pow(local,.65));}
+   for(var key in this.held){var h=this.held[key],v=glow(x,y,h.x,h.y,.24+h.p*.3)*(.55+h.p*.65);attack[0]+=v;attack[1]+=v*.69;attack[2]+=v*.34;}
+   for(i=0;i<this.waves.length;i++){var w=this.waves[i],d=Math.sqrt(Math.pow(x-w.x,2)+Math.pow(y-w.y,2));var v=edge(d-w.t*3.8,.36)*Math.exp(-w.t*3)*w.p*.5;attack[0]+=v*.8;attack[1]+=v*.4;attack[2]+=v;}
+   rgb.push(c);live.push(attack);
   }
+  if(p.black)this.transition.clear();
+  rgb=this.transition.step(rgb,scene+":"+(p.palette||0)+":"+focus,dt,p.transition===undefined?.85:p.transition,scene);
+  for(i=0;i<64;i++){for(k=0;k<3;k++)rgb[i][k]+=live[i][k];total+=Math.max.apply(Math,rgb[i]);}
   var scale=Math.min(1,(12+f.slow*2+g.strength*2)/Math.max(.001,total)),output=[];
   for(i=0;i<64;i++)for(k=0;k<3;k++){var v=clamp(rgb[i][k]*scale,0,1)*127*clamp(p.brightness,0,1);output.push(p.black||v<1.6?0:Math.round(v));}
   this.frame=output;return output;

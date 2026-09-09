@@ -1,0 +1,4393 @@
+{
+  "schemaVersion": 1,
+  "tracks": [
+    {
+      "sourceName": "Blossoms Bring an Old Friend_spotdown.org.mp3",
+      "durationSeconds": 193.316281,
+      "frames": 6019,
+      "traceSha256": "131f37892b8b7176ff608aee48e9e21ea51b25887e9299c450c19caecce613ca",
+      "eventTotals": {
+        "sound.enter": 1,
+        "onset": 2482,
+        "role.enter": 2,
+        "texture.change": 119,
+        "dynamics.rise": 4,
+        "structure.change": 7,
+        "dynamics.fall": 5,
+        "role.exit": 2,
+        "sound.exit": 1
+      },
+      "events": [
+        {
+          "id": "5:1",
+          "type": "sound.enter",
+          "time": 1788938848.086,
+          "observedTime": 1788938848.086,
+          "strength": 0.055347460262747054,
+          "confidence": 0.9,
+          "evidence": {
+            "rms": 0.002144878960470862
+          },
+          "position": 0.188
+        },
+        {
+          "id": "5:4",
+          "type": "role.enter",
+          "time": 1788938848.406,
+          "observedTime": 1788938848.406,
+          "strength": 0.2824523056122908,
+          "confidence": 0.6,
+          "evidence": {
+            "articulation": 0.9964183455798469,
+            "persistence": 0.026287384264470914
+          },
+          "role": "phrase",
+          "position": 0.508
+        },
+        {
+          "id": "5:14",
+          "type": "texture.change",
+          "time": 1788938849.506,
+          "observedTime": 1788938849.506,
+          "strength": 0.3728741450675961,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.18643707253379804,
+            "entropy": 0.4647938315420441
+          },
+          "position": 1.607
+        },
+        {
+          "id": "5:25",
+          "type": "role.enter",
+          "time": 1788938850.266,
+          "observedTime": 1788938850.266,
+          "strength": 0.21031985696287525,
+          "confidence": 0.6,
+          "evidence": {
+            "articulation": 0.5093517647628405,
+            "persistence": 0.3707400583312361
+          },
+          "role": "bed",
+          "position": 2.366
+        },
+        {
+          "id": "5:37",
+          "type": "dynamics.rise",
+          "time": 1788938850.906,
+          "observedTime": 1788938850.906,
+          "strength": 0.660592569982243,
+          "confidence": 0.65,
+          "evidence": {
+            "momentaryDb": -16.88066096474797,
+            "shortTermDb": -22.165401524605915
+          },
+          "position": 3.007
+        },
+        {
+          "id": "5:45",
+          "type": "texture.change",
+          "time": 1788938851.226,
+          "observedTime": 1788938851.226,
+          "strength": 0.7315133321467613,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.36575666607338064,
+            "entropy": 0.5277138774037481
+          },
+          "position": 3.328
+        },
+        {
+          "id": "5:51",
+          "type": "structure.change",
+          "time": 1788938851.667,
+          "observedTime": 1788938851.206,
+          "strength": 0.9890469044653019,
+          "confidence": 0.7961664165628557,
+          "evidence": {
+            "shapeDistance": 0.5024539025783176,
+            "textureDistance": 0.028264352017134495,
+            "widthDistance": 0.37946738994216733,
+            "levelDifferenceDb": 34.699673781777115
+          },
+          "position": 3.766
+        },
+        {
+          "id": "5:71",
+          "type": "texture.change",
+          "time": 1788938853.706,
+          "observedTime": 1788938853.706,
+          "strength": 0.251674342069621,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.1258371710348105,
+            "entropy": 0.5557552780413682
+          },
+          "position": 5.807
+        },
+        {
+          "id": "5:111",
+          "type": "texture.change",
+          "time": 1788938856.786,
+          "observedTime": 1788938856.786,
+          "strength": 0.2037520023889241,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.10187600119446205,
+            "entropy": 0.4625539746257205
+          },
+          "position": 8.887
+        },
+        {
+          "id": "5:133",
+          "type": "texture.change",
+          "time": 1788938858.626,
+          "observedTime": 1788938858.626,
+          "strength": 0.24687111434014652,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.12343555717007326,
+            "entropy": 0.5719467511262104
+          },
+          "position": 10.725
+        },
+        {
+          "id": "5:156",
+          "type": "texture.change",
+          "time": 1788938860.066,
+          "observedTime": 1788938860.066,
+          "strength": 0.29712234350478317,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.14856117175239159,
+            "entropy": 0.475058013289011
+          },
+          "position": 12.163
+        },
+        {
+          "id": "5:194",
+          "type": "texture.change",
+          "time": 1788938863.546,
+          "observedTime": 1788938863.546,
+          "strength": 0.2808392921332963,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.14041964606664814,
+            "entropy": 0.5656946587709261
+          },
+          "position": 15.654
+        },
+        {
+          "id": "5:213",
+          "type": "texture.change",
+          "time": 1788938864.906,
+          "observedTime": 1788938864.906,
+          "strength": 0.42408738729153406,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.21204369364576703,
+            "entropy": 0.4863138839072991
+          },
+          "position": 17.011
+        },
+        {
+          "id": "5:240",
+          "type": "texture.change",
+          "time": 1788938866.826,
+          "observedTime": 1788938866.826,
+          "strength": 0.7986767212675931,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.3993383606337966,
+            "entropy": 0.5838634960793105
+          },
+          "position": 18.928
+        },
+        {
+          "id": "5:261",
+          "type": "texture.change",
+          "time": 1788938868.486,
+          "observedTime": 1788938868.486,
+          "strength": 0.4247849916377553,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.21239249581887765,
+            "entropy": 0.5781480256162347
+          },
+          "position": 20.589
+        },
+        {
+          "id": "5:280",
+          "type": "texture.change",
+          "time": 1788938869.926,
+          "observedTime": 1788938869.926,
+          "strength": 0.20278002578333232,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.10139001289166616,
+            "entropy": 0.5111553410637085
+          },
+          "position": 22.027
+        },
+        {
+          "id": "5:293",
+          "type": "texture.change",
+          "time": 1788938871.178,
+          "observedTime": 1788938871.178,
+          "strength": 0.2543656746632659,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.12718283733163294,
+            "entropy": 0.49152437106963826
+          },
+          "position": 23.284
+        },
+        {
+          "id": "5:320",
+          "type": "texture.change",
+          "time": 1788938873.007,
+          "observedTime": 1788938873.007,
+          "strength": 0.2741053449678199,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.13705267248390995,
+            "entropy": 0.603058975640238
+          },
+          "position": 25.11
+        },
+        {
+          "id": "5:340",
+          "type": "texture.change",
+          "time": 1788938874.246,
+          "observedTime": 1788938874.246,
+          "strength": 0.5382395409525573,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.26911977047627866,
+            "entropy": 0.5676127582605017
+          },
+          "position": 26.345
+        },
+        {
+          "id": "5:382",
+          "type": "texture.change",
+          "time": 1788938876.693,
+          "observedTime": 1788938876.693,
+          "strength": 0.3475705783519305,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.17378528917596525,
+            "entropy": 0.663874345297655
+          },
+          "position": 28.797
+        },
+        {
+          "id": "5:409",
+          "type": "structure.change",
+          "time": 1788938878.012,
+          "observedTime": 1788938877.552,
+          "strength": 0.7398844222906031,
+          "confidence": 0.7089595478017111,
+          "evidence": {
+            "shapeDistance": 0.1556124167737305,
+            "textureDistance": 0.017412375289336222,
+            "widthDistance": 0.008776651267605018,
+            "levelDifferenceDb": 4.068669247520209
+          },
+          "position": 30.109
+        },
+        {
+          "id": "5:415",
+          "type": "texture.change",
+          "time": 1788938878.352,
+          "observedTime": 1788938878.352,
+          "strength": 0.40367771569593414,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.20183885784796707,
+            "entropy": 0.6116952814835046
+          },
+          "position": 30.452
+        },
+        {
+          "id": "5:441",
+          "type": "texture.change",
+          "time": 1788938879.792,
+          "observedTime": 1788938879.792,
+          "strength": 0.22850006124972122,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.11425003062486061,
+            "entropy": 0.5562435013709033
+          },
+          "position": 31.89
+        },
+        {
+          "id": "5:463",
+          "type": "texture.change",
+          "time": 1788938881.128,
+          "observedTime": 1788938881.128,
+          "strength": 0.7606036330508807,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.3803018165254404,
+            "entropy": 0.5448362425949521
+          },
+          "position": 33.225
+        },
+        {
+          "id": "5:486",
+          "type": "texture.change",
+          "time": 1788938882.472,
+          "observedTime": 1788938882.472,
+          "strength": 0.7644310063970683,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.38221550319853415,
+            "entropy": 0.5540987167737836
+          },
+          "position": 34.578
+        },
+        {
+          "id": "5:517",
+          "type": "texture.change",
+          "time": 1788938884.297,
+          "observedTime": 1788938884.297,
+          "strength": 0.4860903794407887,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.24304518972039435,
+            "entropy": 0.5379376040922476
+          },
+          "position": 36.404
+        },
+        {
+          "id": "5:538",
+          "type": "texture.change",
+          "time": 1788938885.617,
+          "observedTime": 1788938885.617,
+          "strength": 0.3053073182704009,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.15265365913520046,
+            "entropy": 0.3394002994427489
+          },
+          "position": 37.723
+        },
+        {
+          "id": "5:568",
+          "type": "texture.change",
+          "time": 1788938887.397,
+          "observedTime": 1788938887.397,
+          "strength": 0.5835325847829962,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.2917662923914981,
+            "entropy": 0.3722548750693613
+          },
+          "position": 39.504
+        },
+        {
+          "id": "5:591",
+          "type": "texture.change",
+          "time": 1788938888.917,
+          "observedTime": 1788938888.917,
+          "strength": 0.66036373259807,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.330181866299035,
+            "entropy": 0.35316841815524314
+          },
+          "position": 41.02
+        },
+        {
+          "id": "5:625",
+          "type": "texture.change",
+          "time": 1788938890.7,
+          "observedTime": 1788938890.7,
+          "strength": 0.23035371235781543,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.11517685617890772,
+            "entropy": 0.5660751015454285
+          },
+          "position": 42.802
+        },
+        {
+          "id": "5:649",
+          "type": "texture.change",
+          "time": 1788938892.137,
+          "observedTime": 1788938892.137,
+          "strength": 0.41975226039856084,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.20987613019928042,
+            "entropy": 0.4298074038804217
+          },
+          "position": 44.243
+        },
+        {
+          "id": "5:678",
+          "type": "texture.change",
+          "time": 1788938893.777,
+          "observedTime": 1788938893.777,
+          "strength": 0.35868250734755036,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.17934125367377518,
+            "entropy": 0.3885920595786337
+          },
+          "position": 45.883
+        },
+        {
+          "id": "5:709",
+          "type": "texture.change",
+          "time": 1788938895.517,
+          "observedTime": 1788938895.517,
+          "strength": 0.33761086574459154,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.16880543287229577,
+            "entropy": 0.3704126679526573
+          },
+          "position": 47.618
+        },
+        {
+          "id": "5:729",
+          "type": "texture.change",
+          "time": 1788938896.837,
+          "observedTime": 1788938896.837,
+          "strength": 0.6169067502468017,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.3084533751234009,
+            "entropy": 0.5729016740787228
+          },
+          "position": 48.942
+        },
+        {
+          "id": "5:752",
+          "type": "texture.change",
+          "time": 1788938898.097,
+          "observedTime": 1788938898.097,
+          "strength": 0.22310157169660383,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.11155078584830191,
+            "entropy": 0.5804270877716028
+          },
+          "position": 50.199
+        },
+        {
+          "id": "5:770",
+          "type": "texture.change",
+          "time": 1788938899.326,
+          "observedTime": 1788938899.326,
+          "strength": 0.33550663398165725,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.16775331699082863,
+            "entropy": 0.3195940897831068
+          },
+          "position": 51.431
+        },
+        {
+          "id": "5:806",
+          "type": "texture.change",
+          "time": 1788938901.37,
+          "observedTime": 1788938901.37,
+          "strength": 0.2749964489425021,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.13749822447125104,
+            "entropy": 0.39946543902135645
+          },
+          "position": 53.471
+        },
+        {
+          "id": "5:823",
+          "type": "structure.change",
+          "time": 1788938902.169,
+          "observedTime": 1788938901.713,
+          "strength": 0.8457472140546229,
+          "confidence": 0.746011524919118,
+          "evidence": {
+            "shapeDistance": 0.27179500402304,
+            "textureDistance": 0.06349215449598904,
+            "widthDistance": 0.016367486519446584,
+            "levelDifferenceDb": 4.635047992344386
+          },
+          "position": 54.273
+        },
+        {
+          "id": "5:827",
+          "type": "dynamics.fall",
+          "time": 1788938902.289,
+          "observedTime": 1788938902.289,
+          "strength": 0.34930431797949035,
+          "confidence": 0.65,
+          "evidence": {
+            "momentaryDb": -14.722860818144916,
+            "shortTermDb": -11.928426274308993
+          },
+          "position": 54.393
+        },
+        {
+          "id": "5:832",
+          "type": "texture.change",
+          "time": 1788938902.591,
+          "observedTime": 1788938902.591,
+          "strength": 0.8883686750238935,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.44418433751194675,
+            "entropy": 0.45063523001020894
+          },
+          "position": 54.696
+        },
+        {
+          "id": "5:860",
+          "type": "texture.change",
+          "time": 1788938904.07,
+          "observedTime": 1788938904.07,
+          "strength": 0.24737617480922136,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.12368808740461068,
+            "entropy": 0.35453869216103173
+          },
+          "position": 56.169
+        },
+        {
+          "id": "5:877",
+          "type": "texture.change",
+          "time": 1788938905.286,
+          "observedTime": 1788938905.286,
+          "strength": 0.8132499011022294,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.4066249505511147,
+            "entropy": 0.3500457680569266
+          },
+          "position": 57.393
+        },
+        {
+          "id": "5:899",
+          "type": "texture.change",
+          "time": 1788938907.121,
+          "observedTime": 1788938907.121,
+          "strength": 0.4551978783228874,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.2275989391614437,
+            "entropy": 0.5270774449379136
+          },
+          "position": 59.22
+        },
+        {
+          "id": "5:918",
+          "type": "texture.change",
+          "time": 1788938908.761,
+          "observedTime": 1788938908.761,
+          "strength": 0.3381050258284175,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.16905251291420875,
+            "entropy": 0.5209443711755335
+          },
+          "position": 60.858
+        },
+        {
+          "id": "5:935",
+          "type": "texture.change",
+          "time": 1788938910.221,
+          "observedTime": 1788938910.221,
+          "strength": 0.5398694397996566,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.2699347198998283,
+            "entropy": 0.3772899445332443
+          },
+          "position": 62.322
+        },
+        {
+          "id": "5:956",
+          "type": "texture.change",
+          "time": 1788938912.061,
+          "observedTime": 1788938912.061,
+          "strength": 0.6240286626151679,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.31201433130758394,
+            "entropy": 0.5259603989338892
+          },
+          "position": 64.157
+        },
+        {
+          "id": "5:968",
+          "type": "texture.change",
+          "time": 1788938913.281,
+          "observedTime": 1788938913.281,
+          "strength": 0.4158157902092865,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.20790789510464325,
+            "entropy": 0.5153380363714696
+          },
+          "position": 65.385
+        },
+        {
+          "id": "5:983",
+          "type": "texture.change",
+          "time": 1788938914.521,
+          "observedTime": 1788938914.521,
+          "strength": 0.2931256368076325,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.14656281840381624,
+            "entropy": 0.5534379627471812
+          },
+          "position": 66.628
+        },
+        {
+          "id": "5:996",
+          "type": "texture.change",
+          "time": 1788938915.961,
+          "observedTime": 1788938915.961,
+          "strength": 0.3694229178519486,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.1847114589259743,
+            "entropy": 0.4726730463546448
+          },
+          "position": 68.068
+        },
+        {
+          "id": "5:1015",
+          "type": "texture.change",
+          "time": 1788938917.801,
+          "observedTime": 1788938917.801,
+          "strength": 0.5753088206222674,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.2876544103111337,
+            "entropy": 0.45564283578483344
+          },
+          "position": 69.905
+        },
+        {
+          "id": "5:1027",
+          "type": "texture.change",
+          "time": 1788938919.021,
+          "observedTime": 1788938919.021,
+          "strength": 0.7397685156121458,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.3698842578060729,
+            "entropy": 0.48649935696146673
+          },
+          "position": 71.124
+        },
+        {
+          "id": "5:1040",
+          "type": "texture.change",
+          "time": 1788938920.289,
+          "observedTime": 1788938920.289,
+          "strength": 0.4787998771090427,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.23939993855452135,
+            "entropy": 0.3018280269993836
+          },
+          "position": 72.393
+        },
+        {
+          "id": "5:1053",
+          "type": "texture.change",
+          "time": 1788938921.907,
+          "observedTime": 1788938921.907,
+          "strength": 0.43618508270449574,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.21809254135224787,
+            "entropy": 0.45894318627428554
+          },
+          "position": 74.004
+        },
+        {
+          "id": "5:1066",
+          "type": "texture.change",
+          "time": 1788938923.377,
+          "observedTime": 1788938923.377,
+          "strength": 0.3640672021447551,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.18203360107237754,
+            "entropy": 0.29290086756235356
+          },
+          "position": 75.476
+        },
+        {
+          "id": "5:1085",
+          "type": "texture.change",
+          "time": 1788938925.611,
+          "observedTime": 1788938925.611,
+          "strength": 0.24469673595606478,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.12234836797803239,
+            "entropy": 0.3167776101014855
+          },
+          "position": 77.714
+        },
+        {
+          "id": "5:1103",
+          "type": "texture.change",
+          "time": 1788938927.674,
+          "observedTime": 1788938927.674,
+          "strength": 0.24169518026677128,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.12084759013338564,
+            "entropy": 0.4614531823467724
+          },
+          "position": 79.772
+        },
+        {
+          "id": "5:1114",
+          "type": "texture.change",
+          "time": 1788938928.912,
+          "observedTime": 1788938928.912,
+          "strength": 0.7939265333154433,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.39696326665772164,
+            "entropy": 0.3111784930351113
+          },
+          "position": 81.017
+        },
+        {
+          "id": "5:1130",
+          "type": "texture.change",
+          "time": 1788938930.358,
+          "observedTime": 1788938930.358,
+          "strength": 0.5296456346230869,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.26482281731154345,
+            "entropy": 0.34101050224914176
+          },
+          "position": 82.465
+        },
+        {
+          "id": "5:1143",
+          "type": "texture.change",
+          "time": 1788938931.586,
+          "observedTime": 1788938931.586,
+          "strength": 0.2344400737466199,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.11722003687330995,
+            "entropy": 0.3130194917974042
+          },
+          "position": 83.684
+        },
+        {
+          "id": "5:1159",
+          "type": "texture.change",
+          "time": 1788938932.805,
+          "observedTime": 1788938932.805,
+          "strength": 0.27940707492456784,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.13970353746228392,
+            "entropy": 0.5148907151114067
+          },
+          "position": 84.905
+        },
+        {
+          "id": "5:1177",
+          "type": "texture.change",
+          "time": 1788938934.26,
+          "observedTime": 1788938934.26,
+          "strength": 0.6405943522179689,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.32029717610898445,
+            "entropy": 0.5346021264378785
+          },
+          "position": 86.365
+        },
+        {
+          "id": "5:1190",
+          "type": "texture.change",
+          "time": 1788938935.486,
+          "observedTime": 1788938935.486,
+          "strength": 0.26971076473583344,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.13485538236791672,
+            "entropy": 0.33649473760030807
+          },
+          "position": 87.583
+        },
+        {
+          "id": "5:1207",
+          "type": "texture.change",
+          "time": 1788938936.746,
+          "observedTime": 1788938936.746,
+          "strength": 0.6469648189059665,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.32348240945298323,
+            "entropy": 0.3642076474433025
+          },
+          "position": 88.847
+        },
+        {
+          "id": "5:1225",
+          "type": "texture.change",
+          "time": 1788938938.179,
+          "observedTime": 1788938938.179,
+          "strength": 0.8103461820091262,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.4051730910045631,
+            "entropy": 0.335318568963563
+          },
+          "position": 90.281
+        },
+        {
+          "id": "5:1240",
+          "type": "texture.change",
+          "time": 1788938939.383,
+          "observedTime": 1788938939.383,
+          "strength": 0.3293699276329436,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.1646849638164718,
+            "entropy": 0.5033135313919155
+          },
+          "position": 91.487
+        },
+        {
+          "id": "5:1259",
+          "type": "texture.change",
+          "time": 1788938940.822,
+          "observedTime": 1788938940.822,
+          "strength": 0.25739588459358664,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.12869794229679332,
+            "entropy": 0.507034661686517
+          },
+          "position": 92.924
+        },
+        {
+          "id": "5:1279",
+          "type": "texture.change",
+          "time": 1788938942.461,
+          "observedTime": 1788938942.461,
+          "strength": 0.3012817900120377,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.15064089500601885,
+            "entropy": 0.48059558112030765
+          },
+          "position": 94.561
+        },
+        {
+          "id": "5:1302",
+          "type": "texture.change",
+          "time": 1788938943.679,
+          "observedTime": 1788938943.679,
+          "strength": 0.2831858104867404,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.1415929052433702,
+            "entropy": 0.3434825298950641
+          },
+          "position": 95.783
+        },
+        {
+          "id": "5:1325",
+          "type": "texture.change",
+          "time": 1788938945.343,
+          "observedTime": 1788938945.343,
+          "strength": 0.25048974083015785,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.12524487041507892,
+            "entropy": 0.3645791503181895
+          },
+          "position": 97.448
+        },
+        {
+          "id": "5:1341",
+          "type": "texture.change",
+          "time": 1788938946.637,
+          "observedTime": 1788938946.637,
+          "strength": 0.2905407638966129,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.14527038194830644,
+            "entropy": 0.333123716263894
+          },
+          "position": 98.737
+        },
+        {
+          "id": "5:1353",
+          "type": "texture.change",
+          "time": 1788938948.017,
+          "observedTime": 1788938948.017,
+          "strength": 0.6101144078936345,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.30505720394681723,
+            "entropy": 0.4664467289300129
+          },
+          "position": 100.115
+        },
+        {
+          "id": "5:1370",
+          "type": "texture.change",
+          "time": 1788938949.229,
+          "observedTime": 1788938949.229,
+          "strength": 0.3047819008322483,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.15239095041612416,
+            "entropy": 0.5290063978899965
+          },
+          "position": 101.33
+        },
+        {
+          "id": "5:1386",
+          "type": "texture.change",
+          "time": 1788938950.687,
+          "observedTime": 1788938950.687,
+          "strength": 0.39241327605155396,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.19620663802577698,
+            "entropy": 0.5879985645366766
+          },
+          "position": 102.784
+        },
+        {
+          "id": "5:1398",
+          "type": "texture.change",
+          "time": 1788938951.918,
+          "observedTime": 1788938951.918,
+          "strength": 0.2280114024772797,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.11400570123863984,
+            "entropy": 0.374314470350277
+          },
+          "position": 104.02
+        },
+        {
+          "id": "5:1411",
+          "type": "texture.change",
+          "time": 1788938953.137,
+          "observedTime": 1788938953.137,
+          "strength": 0.6360366375127464,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.3180183187563732,
+            "entropy": 0.49069482723590063
+          },
+          "position": 105.236
+        },
+        {
+          "id": "5:1426",
+          "type": "texture.change",
+          "time": 1788938954.617,
+          "observedTime": 1788938954.617,
+          "strength": 0.7192028674922415,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.35960143374612075,
+            "entropy": 0.3681102938726914
+          },
+          "position": 106.719
+        },
+        {
+          "id": "5:1443",
+          "type": "texture.change",
+          "time": 1788938956.265,
+          "observedTime": 1788938956.265,
+          "strength": 0.2947609033411722,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.1473804516705861,
+            "entropy": 0.5217555888956538
+          },
+          "position": 108.371
+        },
+        {
+          "id": "5:1469",
+          "type": "texture.change",
+          "time": 1788938958.507,
+          "observedTime": 1788938958.507,
+          "strength": 0.8868773390031723,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.44343866950158617,
+            "entropy": 0.34499481771584406
+          },
+          "position": 110.612
+        },
+        {
+          "id": "5:1489",
+          "type": "texture.change",
+          "time": 1788938959.741,
+          "observedTime": 1788938959.741,
+          "strength": 0.4303753649251538,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.2151876824625769,
+            "entropy": 0.5152499765429619
+          },
+          "position": 111.839
+        },
+        {
+          "id": "5:1512",
+          "type": "texture.change",
+          "time": 1788938961.786,
+          "observedTime": 1788938961.786,
+          "strength": 0.535523226939695,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.2677616134698475,
+            "entropy": 0.3216489723388386
+          },
+          "position": 113.881
+        },
+        {
+          "id": "5:1527",
+          "type": "texture.change",
+          "time": 1788938963.048,
+          "observedTime": 1788938963.048,
+          "strength": 0.6375729743167995,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.31878648715839975,
+            "entropy": 0.5189793938201488
+          },
+          "position": 115.146
+        },
+        {
+          "id": "5:1550",
+          "type": "texture.change",
+          "time": 1788938965.081,
+          "observedTime": 1788938965.081,
+          "strength": 0.4214645345445036,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.2107322672722518,
+            "entropy": 0.35693438498233976
+          },
+          "position": 117.185
+        },
+        {
+          "id": "5:1565",
+          "type": "texture.change",
+          "time": 1788938966.335,
+          "observedTime": 1788938966.335,
+          "strength": 1,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.5035393789258298,
+            "entropy": 0.586849708354105
+          },
+          "position": 118.44
+        },
+        {
+          "id": "5:1593",
+          "type": "texture.change",
+          "time": 1788938968.564,
+          "observedTime": 1788938968.564,
+          "strength": 0.239910314313027,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.1199551571565135,
+            "entropy": 0.5122289421398042
+          },
+          "position": 120.668
+        },
+        {
+          "id": "5:1620",
+          "type": "texture.change",
+          "time": 1788938970.219,
+          "observedTime": 1788938970.219,
+          "strength": 0.308963785790336,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.154481892895168,
+            "entropy": 0.5214272964045674
+          },
+          "position": 122.324
+        },
+        {
+          "id": "5:1638",
+          "type": "texture.change",
+          "time": 1788938971.456,
+          "observedTime": 1788938971.456,
+          "strength": 0.2164996326257007,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.10824981631285036,
+            "entropy": 0.5014615052178324
+          },
+          "position": 123.551
+        },
+        {
+          "id": "5:1656",
+          "type": "texture.change",
+          "time": 1788938972.943,
+          "observedTime": 1788938972.943,
+          "strength": 0.24180830420549349,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.12090415210274674,
+            "entropy": 0.36088637089371617
+          },
+          "position": 125.047
+        },
+        {
+          "id": "5:1674",
+          "type": "texture.change",
+          "time": 1788938974.306,
+          "observedTime": 1788938974.306,
+          "strength": 0.4337000922098422,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.2168500461049211,
+            "entropy": 0.5075147168598446
+          },
+          "position": 126.409
+        },
+        {
+          "id": "5:1701",
+          "type": "texture.change",
+          "time": 1788938976.569,
+          "observedTime": 1788938976.569,
+          "strength": 0.561342956957948,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.280671478478974,
+            "entropy": 0.5986137070662001
+          },
+          "position": 128.672
+        },
+        {
+          "id": "5:1726",
+          "type": "texture.change",
+          "time": 1788938978.288,
+          "observedTime": 1788938978.288,
+          "strength": 0.5119459970583273,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.25597299852916366,
+            "entropy": 0.36975457859062644
+          },
+          "position": 130.39
+        },
+        {
+          "id": "5:1750",
+          "type": "texture.change",
+          "time": 1788938979.505,
+          "observedTime": 1788938979.505,
+          "strength": 0.3165448343521229,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.15827241717606144,
+            "entropy": 0.33259305904314845
+          },
+          "position": 131.603
+        },
+        {
+          "id": "5:1788",
+          "type": "texture.change",
+          "time": 1788938981.725,
+          "observedTime": 1788938981.725,
+          "strength": 0.49617463019717056,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.24808731509858528,
+            "entropy": 0.5519108717319389
+          },
+          "position": 133.822
+        },
+        {
+          "id": "5:1811",
+          "type": "texture.change",
+          "time": 1788938983.012,
+          "observedTime": 1788938983.012,
+          "strength": 0.6493072336384256,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.3246536168192128,
+            "entropy": 0.5701238029857464
+          },
+          "position": 135.109
+        },
+        {
+          "id": "5:1835",
+          "type": "texture.change",
+          "time": 1788938984.237,
+          "observedTime": 1788938984.237,
+          "strength": 0.33649471753523796,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.16824735876761898,
+            "entropy": 0.38557429322011344
+          },
+          "position": 136.334
+        },
+        {
+          "id": "5:1854",
+          "type": "texture.change",
+          "time": 1788938985.499,
+          "observedTime": 1788938985.499,
+          "strength": 0.2208556805526336,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.1104278402763168,
+            "entropy": 0.5441019828466784
+          },
+          "position": 137.599
+        },
+        {
+          "id": "5:1878",
+          "type": "texture.change",
+          "time": 1788938986.859,
+          "observedTime": 1788938986.859,
+          "strength": 0.30258816331561555,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.15129408165780778,
+            "entropy": 0.6294115896585376
+          },
+          "position": 138.959
+        },
+        {
+          "id": "5:1910",
+          "type": "texture.change",
+          "time": 1788938988.484,
+          "observedTime": 1788938988.484,
+          "strength": 0.45737224636464324,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.22868612318232162,
+            "entropy": 0.6195276324549344
+          },
+          "position": 140.587
+        },
+        {
+          "id": "5:1933",
+          "type": "texture.change",
+          "time": 1788938989.696,
+          "observedTime": 1788938989.696,
+          "strength": 0.5098560351772767,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.25492801758863837,
+            "entropy": 0.4159121696644087
+          },
+          "position": 141.801
+        },
+        {
+          "id": "5:1960",
+          "type": "texture.change",
+          "time": 1788938991.184,
+          "observedTime": 1788938991.184,
+          "strength": 0.2022102005505515,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.10110510027527575,
+            "entropy": 0.5175265859401176
+          },
+          "position": 143.288
+        },
+        {
+          "id": "5:1982",
+          "type": "texture.change",
+          "time": 1788938992.435,
+          "observedTime": 1788938992.435,
+          "strength": 0.6632132316513657,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.33160661582568285,
+            "entropy": 0.361256934310863
+          },
+          "position": 144.534
+        },
+        {
+          "id": "5:2013",
+          "type": "texture.change",
+          "time": 1788938994.157,
+          "observedTime": 1788938994.157,
+          "strength": 0.24430034636297404,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.12215017318148702,
+            "entropy": 0.31788457518760976
+          },
+          "position": 146.258
+        },
+        {
+          "id": "5:2033",
+          "type": "texture.change",
+          "time": 1788938995.452,
+          "observedTime": 1788938995.452,
+          "strength": 0.2807438477862576,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.1403719238931288,
+            "entropy": 0.51898727565791
+          },
+          "position": 147.557
+        },
+        {
+          "id": "5:2055",
+          "type": "texture.change",
+          "time": 1788938996.716,
+          "observedTime": 1788938996.716,
+          "strength": 0.2785034254535663,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.13925171272678316,
+            "entropy": 0.6024792007823411
+          },
+          "position": 148.82
+        },
+        {
+          "id": "5:2081",
+          "type": "texture.change",
+          "time": 1788938997.931,
+          "observedTime": 1788938997.931,
+          "strength": 0.22210900733152195,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.11105450366576097,
+            "entropy": 0.5217389277951995
+          },
+          "position": 150.035
+        },
+        {
+          "id": "5:2108",
+          "type": "texture.change",
+          "time": 1788938999.473,
+          "observedTime": 1788938999.473,
+          "strength": 0.26197888774638467,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.13098944387319233,
+            "entropy": 0.4066101356752709
+          },
+          "position": 151.574
+        },
+        {
+          "id": "5:2131",
+          "type": "texture.change",
+          "time": 1788939000.821,
+          "observedTime": 1788939000.821,
+          "strength": 0.36079595800789055,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.18039797900394527,
+            "entropy": 0.5276354589284249
+          },
+          "position": 152.918
+        },
+        {
+          "id": "5:2170",
+          "type": "texture.change",
+          "time": 1788939003.282,
+          "observedTime": 1788939003.282,
+          "strength": 0.21089463991671575,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.10544731995835788,
+            "entropy": 0.5761889859782143
+          },
+          "position": 155.379
+        },
+        {
+          "id": "5:2192",
+          "type": "texture.change",
+          "time": 1788939004.537,
+          "observedTime": 1788939004.537,
+          "strength": 0.41642869963064255,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.20821434981532128,
+            "entropy": 0.3573061518965424
+          },
+          "position": 156.64
+        },
+        {
+          "id": "5:2214",
+          "type": "texture.change",
+          "time": 1788939005.756,
+          "observedTime": 1788939005.756,
+          "strength": 0.7421846127370202,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.3710923063685101,
+            "entropy": 0.3798499592366567
+          },
+          "position": 157.862
+        },
+        {
+          "id": "5:2244",
+          "type": "structure.change",
+          "time": 1788939007.349,
+          "observedTime": 1788939006.892,
+          "strength": 0.8281836454765821,
+          "confidence": 0.7398642759168037,
+          "evidence": {
+            "shapeDistance": 0.24531502037481695,
+            "textureDistance": 0.08051240435033906,
+            "widthDistance": 0.01099714005398117,
+            "levelDifferenceDb": 5.125997537014674
+          },
+          "position": 159.447
+        },
+        {
+          "id": "5:2246",
+          "type": "dynamics.fall",
+          "time": 1788939007.389,
+          "observedTime": 1788939007.389,
+          "strength": 0.5238976461573528,
+          "confidence": 0.65,
+          "evidence": {
+            "momentaryDb": -15.56496822468562,
+            "shortTermDb": -11.373787055426797
+          },
+          "position": 159.485
+        },
+        {
+          "id": "5:2255",
+          "type": "texture.change",
+          "time": 1788939007.79,
+          "observedTime": 1788939007.79,
+          "strength": 0.7977449078870744,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.3988724539435372,
+            "entropy": 0.579387742479426
+          },
+          "position": 159.892
+        },
+        {
+          "id": "5:2280",
+          "type": "texture.change",
+          "time": 1788939009.036,
+          "observedTime": 1788939009.036,
+          "strength": 0.21276715430808824,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.10638357715404412,
+            "entropy": 0.4152684973007859
+          },
+          "position": 161.14
+        },
+        {
+          "id": "5:2311",
+          "type": "dynamics.fall",
+          "time": 1788939011.12,
+          "observedTime": 1788939011.12,
+          "strength": 0.5734255605917642,
+          "confidence": 0.65,
+          "evidence": {
+            "momentaryDb": -17.88966261732086,
+            "shortTermDb": -13.302258132586745
+          },
+          "position": 163.223
+        },
+        {
+          "id": "5:2314",
+          "type": "texture.change",
+          "time": 1788939011.52,
+          "observedTime": 1788939011.52,
+          "strength": 0.4401294754854894,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.2200647377427447,
+            "entropy": 0.5356259734495067
+          },
+          "position": 163.622
+        },
+        {
+          "id": "5:2325",
+          "type": "structure.change",
+          "time": 1788939012.917,
+          "observedTime": 1788939012.458,
+          "strength": 0.9565595970824731,
+          "confidence": 0.7847958589788655,
+          "evidence": {
+            "shapeDistance": 0.4621670826578151,
+            "textureDistance": 0.10197069001653722,
+            "widthDistance": 0.01847288386612911,
+            "levelDifferenceDb": 0.766096356546365
+          },
+          "position": 165.02
+        },
+        {
+          "id": "5:2328",
+          "type": "texture.change",
+          "time": 1788939013.148,
+          "observedTime": 1788939013.148,
+          "strength": 0.6077734949256228,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.3038867474628114,
+            "entropy": 0.5265654889648631
+          },
+          "position": 165.244
+        },
+        {
+          "id": "5:2344",
+          "type": "dynamics.fall",
+          "time": 1788939014.535,
+          "observedTime": 1788939014.535,
+          "strength": 0.5362133989167808,
+          "confidence": 0.65,
+          "evidence": {
+            "momentaryDb": -20.22509981782838,
+            "shortTermDb": -15.935392626494133
+          },
+          "position": 166.631
+        },
+        {
+          "id": "5:2347",
+          "type": "texture.change",
+          "time": 1788939014.775,
+          "observedTime": 1788939014.775,
+          "strength": 0.33462193335329804,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.16731096667664902,
+            "entropy": 0.5188060991203911
+          },
+          "position": 166.874
+        },
+        {
+          "id": "5:2358",
+          "type": "dynamics.rise",
+          "time": 1788939015.909,
+          "observedTime": 1788939015.909,
+          "strength": 0.37212842768270793,
+          "confidence": 0.65,
+          "evidence": {
+            "momentaryDb": -12.232494984641269,
+            "shortTermDb": -15.209522406102932
+          },
+          "position": 168.006
+        },
+        {
+          "id": "5:2363",
+          "type": "texture.change",
+          "time": 1788939016.429,
+          "observedTime": 1788939016.429,
+          "strength": 0.547673782756555,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.2738368913782775,
+            "entropy": 0.5323050590325136
+          },
+          "position": 168.531
+        },
+        {
+          "id": "5:2376",
+          "type": "texture.change",
+          "time": 1788939018.067,
+          "observedTime": 1788939018.067,
+          "strength": 0.7076070179112601,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.35380350895563006,
+            "entropy": 0.5130310378536687
+          },
+          "position": 170.163
+        },
+        {
+          "id": "5:2391",
+          "type": "texture.change",
+          "time": 1788939019.715,
+          "observedTime": 1788939019.715,
+          "strength": 1,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.6120797506261606,
+            "entropy": 0.5366466671376905
+          },
+          "position": 171.814
+        },
+        {
+          "id": "5:2408",
+          "type": "texture.change",
+          "time": 1788939021.378,
+          "observedTime": 1788939021.378,
+          "strength": 0.620116832900482,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.310058416450241,
+            "entropy": 0.515627799882177
+          },
+          "position": 173.481
+        },
+        {
+          "id": "5:2426",
+          "type": "structure.change",
+          "time": 1788939022.866,
+          "observedTime": 1788939022.407,
+          "strength": 0.8480290921077105,
+          "confidence": 0.7468101822376987,
+          "evidence": {
+            "shapeDistance": 0.2661600412510957,
+            "textureDistance": 0.0462892972022337,
+            "widthDistance": 0.11626139488799347,
+            "levelDifferenceDb": 5.974089045644819
+          },
+          "position": 174.96
+        },
+        {
+          "id": "5:2427",
+          "type": "dynamics.rise",
+          "time": 1788939022.886,
+          "observedTime": 1788939022.886,
+          "strength": 0.3919388022371957,
+          "confidence": 0.65,
+          "evidence": {
+            "momentaryDb": -10.648983626323258,
+            "shortTermDb": -13.784494044220823
+          },
+          "position": 174.99
+        },
+        {
+          "id": "5:2430",
+          "type": "texture.change",
+          "time": 1788939023.009,
+          "observedTime": 1788939023.009,
+          "strength": 0.3565961391980206,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.1782980695990103,
+            "entropy": 0.5530770116891097
+          },
+          "position": 175.109
+        },
+        {
+          "id": "5:2452",
+          "type": "texture.change",
+          "time": 1788939024.672,
+          "observedTime": 1788939024.672,
+          "strength": 0.4055023529333446,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.2027511764666723,
+            "entropy": 0.5590417241507554
+          },
+          "position": 176.766
+        },
+        {
+          "id": "5:2470",
+          "type": "texture.change",
+          "time": 1788939026.295,
+          "observedTime": 1788939026.295,
+          "strength": 0.27979876307936413,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.13989938153968207,
+            "entropy": 0.555808284660371
+          },
+          "position": 178.397
+        },
+        {
+          "id": "5:2485",
+          "type": "texture.change",
+          "time": 1788939027.542,
+          "observedTime": 1788939027.542,
+          "strength": 0.29865034317106565,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.14932517158553282,
+            "entropy": 0.3616725015327444
+          },
+          "position": 179.645
+        },
+        {
+          "id": "5:2508",
+          "type": "dynamics.rise",
+          "time": 1788939029.489,
+          "observedTime": 1788939029.489,
+          "strength": 0.2771754047619446,
+          "confidence": 0.65,
+          "evidence": {
+            "momentaryDb": -9.26772472579624,
+            "shortTermDb": -11.485127963891797
+          },
+          "position": 181.591
+        },
+        {
+          "id": "5:2511",
+          "type": "texture.change",
+          "time": 1788939029.589,
+          "observedTime": 1788939029.589,
+          "strength": 0.3302380035815269,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.16511900179076344,
+            "entropy": 0.5461566858587442
+          },
+          "position": 181.69
+        },
+        {
+          "id": "5:2528",
+          "type": "texture.change",
+          "time": 1788939030.837,
+          "observedTime": 1788939030.837,
+          "strength": 0.4681347200088779,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.23406736000443895,
+            "entropy": 0.3543875519262683
+          },
+          "position": 182.941
+        },
+        {
+          "id": "5:2545",
+          "type": "texture.change",
+          "time": 1788939032.052,
+          "observedTime": 1788939032.052,
+          "strength": 0.45570788184623945,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.22785394092311972,
+            "entropy": 0.5037078861174119
+          },
+          "position": 184.148
+        },
+        {
+          "id": "5:2570",
+          "type": "texture.change",
+          "time": 1788939034.105,
+          "observedTime": 1788939034.105,
+          "strength": 0.2418528606195558,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.1209264303097779,
+            "entropy": 0.3758964552965352
+          },
+          "position": 186.2
+        },
+        {
+          "id": "5:2587",
+          "type": "texture.change",
+          "time": 1788939035.412,
+          "observedTime": 1788939035.412,
+          "strength": 0.5522316794133437,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.27611583970667186,
+            "entropy": 0.319190731833264
+          },
+          "position": 187.511
+        },
+        {
+          "id": "5:2593",
+          "type": "structure.change",
+          "time": 1788939036.008,
+          "observedTime": 1788939035.554,
+          "strength": 0.711854464335319,
+          "confidence": 0.6991490625173616,
+          "evidence": {
+            "shapeDistance": 0.25398447389442913,
+            "textureDistance": 0.1099780347690569,
+            "widthDistance": 0.19202977260720705,
+            "levelDifferenceDb": 0.20949878343351536
+          },
+          "position": 188.109
+        },
+        {
+          "id": "5:2605",
+          "type": "dynamics.fall",
+          "time": 1788939037.324,
+          "observedTime": 1788939037.324,
+          "strength": 0.7190549795017211,
+          "confidence": 0.65,
+          "evidence": {
+            "momentaryDb": -19.654710720868145,
+            "shortTermDb": -13.902270884854376
+          },
+          "position": 189.423
+        },
+        {
+          "id": "5:2613",
+          "type": "role.exit",
+          "time": 1788939038.332,
+          "observedTime": 1788939038.332,
+          "strength": 0.3,
+          "confidence": 0.6,
+          "evidence": {
+            "articulation": 0.4594021558752209,
+            "persistence": 0.9960904982815195
+          },
+          "role": "phrase",
+          "position": 190.428
+        },
+        {
+          "id": "5:2622",
+          "type": "role.exit",
+          "time": 1788939039.426,
+          "observedTime": 1788939039.426,
+          "strength": 0.3,
+          "confidence": 0.6,
+          "evidence": {
+            "articulation": 0.4376170071923831,
+            "persistence": 0.9997469302975834
+          },
+          "role": "bed",
+          "position": 191.528
+        },
+        {
+          "id": "5:2623",
+          "type": "sound.exit",
+          "time": 1788939040.781,
+          "observedTime": 1788939040.781,
+          "strength": 0.3,
+          "confidence": 0.9,
+          "evidence": {
+            "rms": 5.3096481577283e-05
+          },
+          "position": 192.876
+        }
+      ],
+      "validSpectraDuringActiveAudio": true,
+      "analysisMsP99": 1.0001659393310547,
+      "renderMsP99": 3.000020980834961,
+      "limitations": "No manually labelled event truth. Counts and timelines are diagnostic, not precision/recall."
+    },
+    {
+      "sourceName": "10 ヰ世界の宝石譚.wav",
+      "durationSeconds": 235.92,
+      "frames": 7370,
+      "traceSha256": "d49a5f35b93e8392aee213ea4598ca3953b4d77735acf99cc7b3a64b79892a62",
+      "eventTotals": {
+        "onset": 3784,
+        "sound.enter": 2,
+        "role.enter": 4,
+        "texture.change": 152,
+        "structure.change": 16,
+        "dynamics.rise": 4,
+        "dynamics.fall": 5,
+        "role.exit": 4,
+        "sound.exit": 2
+      },
+      "events": [
+        {
+          "id": "9:3",
+          "type": "sound.enter",
+          "time": 1788939089.09,
+          "observedTime": 1788939089.09,
+          "strength": 0.9502128794033955,
+          "confidence": 0.9,
+          "evidence": {
+            "rms": 0.2533187239281217
+          },
+          "position": 0.541
+        },
+        {
+          "id": "9:4",
+          "type": "role.enter",
+          "time": 1788939089.142,
+          "observedTime": 1788939089.142,
+          "strength": 0.9607127924795715,
+          "confidence": 0.6,
+          "evidence": {
+            "articulation": 0.9989718561117076,
+            "persistence": 1.5005911104106134e-06
+          },
+          "role": "phrase",
+          "position": 0.592
+        },
+        {
+          "id": "9:20",
+          "type": "texture.change",
+          "time": 1788939090.074,
+          "observedTime": 1788939090.074,
+          "strength": 0.7900257845508343,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.39501289227541714,
+            "entropy": 0.5238861141487269
+          },
+          "position": 1.524
+        },
+        {
+          "id": "9:36",
+          "type": "role.enter",
+          "time": 1788939091.021,
+          "observedTime": 1788939091.021,
+          "strength": 0.20263012247552256,
+          "confidence": 0.6,
+          "evidence": {
+            "articulation": 0.9999999999999208,
+            "persistence": 0.5416338450379311
+          },
+          "role": "bed",
+          "position": 2.473
+        },
+        {
+          "id": "9:45",
+          "type": "texture.change",
+          "time": 1788939091.498,
+          "observedTime": 1788939091.498,
+          "strength": 0.9270065753826839,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.46350328769134197,
+            "entropy": 0.4584018387954354
+          },
+          "position": 2.94
+        },
+        {
+          "id": "9:58",
+          "type": "structure.change",
+          "time": 1788939092.398,
+          "observedTime": 1788939091.947,
+          "strength": 0.9790700695438092,
+          "confidence": 0.7926745243403333,
+          "evidence": {
+            "shapeDistance": 0.37964532514147653,
+            "textureDistance": 0.0342556514659013,
+            "widthDistance": 0.06626456811488246,
+            "levelDifferenceDb": 6.968441133310767
+          },
+          "position": 3.845
+        },
+        {
+          "id": "9:63",
+          "type": "texture.change",
+          "time": 1788939092.785,
+          "observedTime": 1788939092.785,
+          "strength": 0.5552852608826,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.2776426304413,
+            "entropy": 0.5494985760576365
+          },
+          "position": 4.231
+        },
+        {
+          "id": "9:84",
+          "type": "texture.change",
+          "time": 1788939094.214,
+          "observedTime": 1788939094.214,
+          "strength": 0.48803693195594255,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.24401846597797128,
+            "entropy": 0.5278736871534637
+          },
+          "position": 5.66
+        },
+        {
+          "id": "9:105",
+          "type": "texture.change",
+          "time": 1788939095.514,
+          "observedTime": 1788939095.514,
+          "strength": 0.4627382436719294,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.2313691218359647,
+            "entropy": 0.2996707249141884
+          },
+          "position": 6.962
+        },
+        {
+          "id": "9:129",
+          "type": "texture.change",
+          "time": 1788939096.929,
+          "observedTime": 1788939096.929,
+          "strength": 1,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.5400231358608558,
+            "entropy": 0.5876645591480252
+          },
+          "position": 8.372
+        },
+        {
+          "id": "9:138",
+          "type": "structure.change",
+          "time": 1788939097.389,
+          "observedTime": 1788939096.929,
+          "strength": 0.9708087381067438,
+          "confidence": 0.7897830583373604,
+          "evidence": {
+            "shapeDistance": 0.5997055909621865,
+            "textureDistance": 0.11185678160024654,
+            "widthDistance": 0.12109847776886279,
+            "levelDifferenceDb": 5.663209981053452
+          },
+          "position": 8.841
+        },
+        {
+          "id": "9:146",
+          "type": "dynamics.rise",
+          "time": 1788939097.779,
+          "observedTime": 1788939097.779,
+          "strength": 0.5241665763605345,
+          "confidence": 0.65,
+          "evidence": {
+            "momentaryDb": -8.686101323885435,
+            "shortTermDb": -12.879433934769711
+          },
+          "position": 9.225
+        },
+        {
+          "id": "9:157",
+          "type": "texture.change",
+          "time": 1788939098.345,
+          "observedTime": 1788939098.345,
+          "strength": 0.921570285907757,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.4607851429538785,
+            "entropy": 0.5588621284615991
+          },
+          "position": 9.791
+        },
+        {
+          "id": "9:180",
+          "type": "texture.change",
+          "time": 1788939099.662,
+          "observedTime": 1788939099.662,
+          "strength": 0.2068738940972985,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.10343694704864925,
+            "entropy": 0.3182860087296652
+          },
+          "position": 11.11
+        },
+        {
+          "id": "9:212",
+          "type": "texture.change",
+          "time": 1788939101.458,
+          "observedTime": 1788939101.458,
+          "strength": 0.4717120574436948,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.2358560287218474,
+            "entropy": 0.5355971512969776
+          },
+          "position": 12.908
+        },
+        {
+          "id": "9:238",
+          "type": "texture.change",
+          "time": 1788939102.931,
+          "observedTime": 1788939102.931,
+          "strength": 0.24295071243531852,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.12147535621765926,
+            "entropy": 0.5126747897496002
+          },
+          "position": 14.377
+        },
+        {
+          "id": "9:261",
+          "type": "texture.change",
+          "time": 1788939104.174,
+          "observedTime": 1788939104.174,
+          "strength": 0.4882378193377459,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.24411890966887295,
+            "entropy": 0.5293138696797558
+          },
+          "position": 15.617
+        },
+        {
+          "id": "9:284",
+          "type": "texture.change",
+          "time": 1788939105.594,
+          "observedTime": 1788939105.594,
+          "strength": 0.8544569604449677,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.42722848022248383,
+            "entropy": 0.5741600773957266
+          },
+          "position": 17.04
+        },
+        {
+          "id": "9:290",
+          "type": "structure.change",
+          "time": 1788939105.956,
+          "observedTime": 1788939105.49,
+          "strength": 0.9822913297705673,
+          "confidence": 0.7938019654196986,
+          "evidence": {
+            "shapeDistance": 0.6811469604744016,
+            "textureDistance": 0.14845242883324072,
+            "widthDistance": 0.05950579520344729,
+            "levelDifferenceDb": 4.282365531736136
+          },
+          "position": 17.409
+        },
+        {
+          "id": "9:306",
+          "type": "texture.change",
+          "time": 1788939106.853,
+          "observedTime": 1788939106.853,
+          "strength": 0.510837924256216,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.255418962128108,
+            "entropy": 0.5361079118463488
+          },
+          "position": 18.303
+        },
+        {
+          "id": "9:337",
+          "type": "texture.change",
+          "time": 1788939108.718,
+          "observedTime": 1788939108.718,
+          "strength": 0.2648407244634965,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.13242036223174825,
+            "entropy": 0.5064341594405944
+          },
+          "position": 20.169
+        },
+        {
+          "id": "9:340",
+          "type": "dynamics.fall",
+          "time": 1788939108.819,
+          "observedTime": 1788939108.819,
+          "strength": 0.7096066353315866,
+          "confidence": 0.65,
+          "evidence": {
+            "momentaryDb": -18.005134066705214,
+            "shortTermDb": -12.32828098405252
+          },
+          "position": 20.263
+        },
+        {
+          "id": "9:362",
+          "type": "texture.change",
+          "time": 1788939110.005,
+          "observedTime": 1788939110.005,
+          "strength": 0.3764463903553339,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.18822319517766695,
+            "entropy": 0.3139461056815027
+          },
+          "position": 21.447
+        },
+        {
+          "id": "9:389",
+          "type": "texture.change",
+          "time": 1788939111.659,
+          "observedTime": 1788939111.659,
+          "strength": 0.2058529494491974,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.1029264747245987,
+            "entropy": 0.18079645280819975
+          },
+          "position": 23.104
+        },
+        {
+          "id": "9:410",
+          "type": "texture.change",
+          "time": 1788939112.879,
+          "observedTime": 1788939112.879,
+          "strength": 0.2736679769688497,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.13683398848442485,
+            "entropy": 0.778482459384457
+          },
+          "position": 24.329
+        },
+        {
+          "id": "9:422",
+          "type": "dynamics.fall",
+          "time": 1788939113.6,
+          "observedTime": 1788939113.6,
+          "strength": 0.7611816987794766,
+          "confidence": 0.65,
+          "evidence": {
+            "momentaryDb": -20.737879034619677,
+            "shortTermDb": -14.648425444383864
+          },
+          "position": 25.044
+        },
+        {
+          "id": "9:425",
+          "type": "structure.change",
+          "time": 1788939113.764,
+          "observedTime": 1788939113.307,
+          "strength": 0.9802327436956927,
+          "confidence": 0.7930814602934924,
+          "evidence": {
+            "shapeDistance": 0.552915151462445,
+            "textureDistance": 0.1830647079457199,
+            "widthDistance": 0.14024637791676872,
+            "levelDifferenceDb": 0.6275958095282803
+          },
+          "position": 25.215
+        },
+        {
+          "id": "9:432",
+          "type": "texture.change",
+          "time": 1788939114.125,
+          "observedTime": 1788939114.125,
+          "strength": 0.23114776255829672,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.11557388127914836,
+            "entropy": 0.28599639400702265
+          },
+          "position": 25.574
+        },
+        {
+          "id": "9:436",
+          "type": "dynamics.rise",
+          "time": 1788939114.329,
+          "observedTime": 1788939114.329,
+          "strength": 0.3142894616691134,
+          "confidence": 0.65,
+          "evidence": {
+            "momentaryDb": -10.482801070770265,
+            "shortTermDb": -12.997116764123172
+          },
+          "position": 25.777
+        },
+        {
+          "id": "9:462",
+          "type": "texture.change",
+          "time": 1788939115.84,
+          "observedTime": 1788939115.84,
+          "strength": 0.32810967840058347,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.16405483920029174,
+            "entropy": 0.2604012272795009
+          },
+          "position": 27.283
+        },
+        {
+          "id": "9:481",
+          "type": "texture.change",
+          "time": 1788939117.041,
+          "observedTime": 1788939117.041,
+          "strength": 0.4641573800569827,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.23207869002849135,
+            "entropy": 0.3726855741188124
+          },
+          "position": 28.487
+        },
+        {
+          "id": "9:505",
+          "type": "texture.change",
+          "time": 1788939118.31,
+          "observedTime": 1788939118.31,
+          "strength": 0.28603910426749546,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.14301955213374773,
+            "entropy": 0.5745070897364334
+          },
+          "position": 29.757
+        },
+        {
+          "id": "9:531",
+          "type": "texture.change",
+          "time": 1788939119.899,
+          "observedTime": 1788939119.899,
+          "strength": 0.584266494478815,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.2921332472394075,
+            "entropy": 0.5871022839505572
+          },
+          "position": 31.341
+        },
+        {
+          "id": "9:551",
+          "type": "texture.change",
+          "time": 1788939121.119,
+          "observedTime": 1788939121.119,
+          "strength": 0.21143081305962985,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.10571540652981493,
+            "entropy": 0.5839106409031335
+          },
+          "position": 32.567
+        },
+        {
+          "id": "9:554",
+          "type": "structure.change",
+          "time": 1788939121.193,
+          "observedTime": 1788939120.719,
+          "strength": 0.929751308678442,
+          "confidence": 0.7754129580374547,
+          "evidence": {
+            "shapeDistance": 0.31776088700977945,
+            "textureDistance": 0.1640192638421104,
+            "widthDistance": 0.05321117861452335,
+            "levelDifferenceDb": 4.409891697523262
+          },
+          "position": 32.639
+        },
+        {
+          "id": "9:577",
+          "type": "texture.change",
+          "time": 1788939122.544,
+          "observedTime": 1788939122.544,
+          "strength": 0.29939316287799755,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.14969658143899878,
+            "entropy": 0.39036229646122894
+          },
+          "position": 33.987
+        },
+        {
+          "id": "9:599",
+          "type": "texture.change",
+          "time": 1788939123.822,
+          "observedTime": 1788939123.822,
+          "strength": 0.878982263998668,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.439491131999334,
+            "entropy": 0.5420695159531549
+          },
+          "position": 35.264
+        },
+        {
+          "id": "9:625",
+          "type": "texture.change",
+          "time": 1788939125.163,
+          "observedTime": 1788939125.163,
+          "strength": 0.24986563863673372,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.12493281931836686,
+            "entropy": 0.3777974149135757
+          },
+          "position": 36.607
+        },
+        {
+          "id": "9:652",
+          "type": "texture.change",
+          "time": 1788939126.729,
+          "observedTime": 1788939126.729,
+          "strength": 0.4534469410933162,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.2267234705466581,
+            "entropy": 0.32296691131646066
+          },
+          "position": 38.173
+        },
+        {
+          "id": "9:672",
+          "type": "texture.change",
+          "time": 1788939127.963,
+          "observedTime": 1788939127.963,
+          "strength": 0.9534689643393401,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.47673448216967007,
+            "entropy": 0.5320736382033002
+          },
+          "position": 39.408
+        },
+        {
+          "id": "9:699",
+          "type": "texture.change",
+          "time": 1788939129.312,
+          "observedTime": 1788939129.312,
+          "strength": 0.20014257995816864,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.10007128997908432,
+            "entropy": 0.35236538540314144
+          },
+          "position": 40.76
+        },
+        {
+          "id": "9:726",
+          "type": "texture.change",
+          "time": 1788939130.895,
+          "observedTime": 1788939130.895,
+          "strength": 0.2907280638363541,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.14536403191817704,
+            "entropy": 0.3864728578525854
+          },
+          "position": 42.339
+        },
+        {
+          "id": "9:740",
+          "type": "structure.change",
+          "time": 1788939131.595,
+          "observedTime": 1788939131.135,
+          "strength": 0.9489367214828347,
+          "confidence": 0.7821278525189921,
+          "evidence": {
+            "shapeDistance": 0.44256259279988996,
+            "textureDistance": 0.12200060910260495,
+            "widthDistance": 0.1669986375705937,
+            "levelDifferenceDb": 0.9592023757601691
+          },
+          "position": 43.046
+        },
+        {
+          "id": "9:751",
+          "type": "texture.change",
+          "time": 1788939132.155,
+          "observedTime": 1788939132.155,
+          "strength": 0.40097450983430716,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.20048725491715358,
+            "entropy": 0.35746968073566315
+          },
+          "position": 43.604
+        },
+        {
+          "id": "9:775",
+          "type": "texture.change",
+          "time": 1788939133.463,
+          "observedTime": 1788939133.463,
+          "strength": 0.5443719341627371,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.27218596708136855,
+            "entropy": 0.33662048815567724
+          },
+          "position": 44.914
+        },
+        {
+          "id": "9:802",
+          "type": "texture.change",
+          "time": 1788939134.857,
+          "observedTime": 1788939134.857,
+          "strength": 0.5317491146921867,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.26587455734609333,
+            "entropy": 0.486541017550294
+          },
+          "position": 46.309
+        },
+        {
+          "id": "9:829",
+          "type": "texture.change",
+          "time": 1788939136.272,
+          "observedTime": 1788939136.272,
+          "strength": 0.7309976339718001,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.36549881698590003,
+            "entropy": 0.38338709806681887
+          },
+          "position": 47.721
+        },
+        {
+          "id": "9:852",
+          "type": "texture.change",
+          "time": 1788939137.517,
+          "observedTime": 1788939137.517,
+          "strength": 0.24138066219036114,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.12069033109518057,
+            "entropy": 0.5819553755449164
+          },
+          "position": 48.968
+        },
+        {
+          "id": "9:878",
+          "type": "texture.change",
+          "time": 1788939138.985,
+          "observedTime": 1788939138.985,
+          "strength": 0.3484558036263059,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.17422790181315295,
+            "entropy": 0.5347782427829972
+          },
+          "position": 50.432
+        },
+        {
+          "id": "9:900",
+          "type": "texture.change",
+          "time": 1788939140.301,
+          "observedTime": 1788939140.301,
+          "strength": 0.6017311068538957,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.3008655534269479,
+            "entropy": 0.5383701053755752
+          },
+          "position": 51.75
+        },
+        {
+          "id": "9:924",
+          "type": "texture.change",
+          "time": 1788939141.547,
+          "observedTime": 1788939141.547,
+          "strength": 0.5105403094111114,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.2552701547055557,
+            "entropy": 0.3531832896554464
+          },
+          "position": 52.994
+        },
+        {
+          "id": "9:946",
+          "type": "texture.change",
+          "time": 1788939142.802,
+          "observedTime": 1788939142.802,
+          "strength": 0.30411636164573896,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.15205818082286948,
+            "entropy": 0.3863209775307064
+          },
+          "position": 54.248
+        },
+        {
+          "id": "9:979",
+          "type": "texture.change",
+          "time": 1788939144.411,
+          "observedTime": 1788939144.411,
+          "strength": 0.2549834842046861,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.12749174210234304,
+            "entropy": 0.5695569118371223
+          },
+          "position": 55.855
+        },
+        {
+          "id": "9:1001",
+          "type": "texture.change",
+          "time": 1788939145.611,
+          "observedTime": 1788939145.611,
+          "strength": 0.34745506897665,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.173727534488325,
+            "entropy": 0.5750428992178226
+          },
+          "position": 57.059
+        },
+        {
+          "id": "9:1039",
+          "type": "texture.change",
+          "time": 1788939147.735,
+          "observedTime": 1788939147.735,
+          "strength": 0.4090547111684575,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.20452735558422874,
+            "entropy": 0.5404539252109175
+          },
+          "position": 59.188
+        },
+        {
+          "id": "9:1053",
+          "type": "structure.change",
+          "time": 1788939148.356,
+          "observedTime": 1788939147.875,
+          "strength": 0.9995955463147592,
+          "confidence": 0.7998584412101657,
+          "evidence": {
+            "shapeDistance": 0.5473904115660304,
+            "textureDistance": 0.016717139032619063,
+            "widthDistance": 0.3252520832000282,
+            "levelDifferenceDb": 1.8912198079790663
+          },
+          "position": 59.807
+        },
+        {
+          "id": "9:1066",
+          "type": "texture.change",
+          "time": 1788939149.157,
+          "observedTime": 1788939149.157,
+          "strength": 0.34456258553909924,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.17228129276954962,
+            "entropy": 0.5600794917572252
+          },
+          "position": 60.607
+        },
+        {
+          "id": "9:1095",
+          "type": "texture.change",
+          "time": 1788939150.962,
+          "observedTime": 1788939150.962,
+          "strength": 0.33483292591286773,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.16741646295643386,
+            "entropy": 0.5523623319665313
+          },
+          "position": 62.406
+        },
+        {
+          "id": "9:1116",
+          "type": "texture.change",
+          "time": 1788939152.223,
+          "observedTime": 1788939152.223,
+          "strength": 0.24839518982126374,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.12419759491063187,
+            "entropy": 0.5774685681563366
+          },
+          "position": 63.667
+        },
+        {
+          "id": "9:1167",
+          "type": "texture.change",
+          "time": 1788939155.387,
+          "observedTime": 1788939155.387,
+          "strength": 0.31236277819687897,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.15618138909843948,
+            "entropy": 0.5495887718453482
+          },
+          "position": 66.836
+        },
+        {
+          "id": "9:1185",
+          "type": "structure.change",
+          "time": 1788939156.501,
+          "observedTime": 1788939156.035,
+          "strength": 0.9934687613672538,
+          "confidence": 0.7977140664785388,
+          "evidence": {
+            "shapeDistance": 0.5059093798584773,
+            "textureDistance": 0.06190724857154112,
+            "widthDistance": 0.16971268077400123,
+            "levelDifferenceDb": 2.857947153475461
+          },
+          "position": 67.945
+        },
+        {
+          "id": "9:1188",
+          "type": "texture.change",
+          "time": 1788939156.643,
+          "observedTime": 1788939156.643,
+          "strength": 0.7663485509770356,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.3831742754885178,
+            "entropy": 0.6160928318172155
+          },
+          "position": 68.095
+        },
+        {
+          "id": "9:1211",
+          "type": "texture.change",
+          "time": 1788939157.938,
+          "observedTime": 1788939157.938,
+          "strength": 0.26198312030464566,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.13099156015232283,
+            "entropy": 0.5975199491642574
+          },
+          "position": 69.39
+        },
+        {
+          "id": "9:1232",
+          "type": "texture.change",
+          "time": 1788939159.175,
+          "observedTime": 1788939159.175,
+          "strength": 0.23671700929105688,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.11835850464552844,
+            "entropy": 0.4418906981111834
+          },
+          "position": 70.623
+        },
+        {
+          "id": "9:1255",
+          "type": "texture.change",
+          "time": 1788939160.444,
+          "observedTime": 1788939160.444,
+          "strength": 0.4428755612981423,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.22143778064907116,
+            "entropy": 0.575252667395261
+          },
+          "position": 71.886
+        },
+        {
+          "id": "9:1273",
+          "type": "texture.change",
+          "time": 1788939161.646,
+          "observedTime": 1788939161.646,
+          "strength": 0.27946409434394703,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.13973204717197352,
+            "entropy": 0.6163402162077579
+          },
+          "position": 73.097
+        },
+        {
+          "id": "9:1296",
+          "type": "texture.change",
+          "time": 1788939163.061,
+          "observedTime": 1788939163.061,
+          "strength": 0.5490679240295395,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.27453396201476976,
+            "entropy": 0.636245200963941
+          },
+          "position": 74.509
+        },
+        {
+          "id": "9:1316",
+          "type": "texture.change",
+          "time": 1788939164.277,
+          "observedTime": 1788939164.277,
+          "strength": 0.5112559007567956,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.2556279503783978,
+            "entropy": 0.6627056462945201
+          },
+          "position": 75.719
+        },
+        {
+          "id": "9:1362",
+          "type": "texture.change",
+          "time": 1788939166.799,
+          "observedTime": 1788939166.799,
+          "strength": 0.23198697668113666,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.11599348834056833,
+            "entropy": 0.5895332869045384
+          },
+          "position": 78.243
+        },
+        {
+          "id": "9:1385",
+          "type": "texture.change",
+          "time": 1788939168.123,
+          "observedTime": 1788939168.123,
+          "strength": 0.31338903819395036,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.15669451909697518,
+            "entropy": 0.5757828228198559
+          },
+          "position": 79.565
+        },
+        {
+          "id": "9:1408",
+          "type": "texture.change",
+          "time": 1788939169.343,
+          "observedTime": 1788939169.343,
+          "strength": 0.22923032406084687,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.11461516203042343,
+            "entropy": 0.5984931317039036
+          },
+          "position": 80.792
+        },
+        {
+          "id": "9:1435",
+          "type": "texture.change",
+          "time": 1788939170.738,
+          "observedTime": 1788939170.738,
+          "strength": 0.22327931933249423,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.11163965966624712,
+            "entropy": 0.4259486988434724
+          },
+          "position": 82.187
+        },
+        {
+          "id": "9:1457",
+          "type": "texture.change",
+          "time": 1788939171.971,
+          "observedTime": 1788939171.971,
+          "strength": 0.3906724902065284,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.1953362451032642,
+            "entropy": 0.56930633253116
+          },
+          "position": 83.42
+        },
+        {
+          "id": "9:1481",
+          "type": "texture.change",
+          "time": 1788939173.297,
+          "observedTime": 1788939173.297,
+          "strength": 0.610412033394468,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.305206016697234,
+            "entropy": 0.6111516345227748
+          },
+          "position": 84.741
+        },
+        {
+          "id": "9:1512",
+          "type": "texture.change",
+          "time": 1788939175.092,
+          "observedTime": 1788939175.092,
+          "strength": 0.305904437714309,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.1529522188571545,
+            "entropy": 0.6534668982477216
+          },
+          "position": 86.536
+        },
+        {
+          "id": "9:1538",
+          "type": "texture.change",
+          "time": 1788939176.39,
+          "observedTime": 1788939176.39,
+          "strength": 0.4342320033546554,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.2171160016773277,
+            "entropy": 0.41834893496820447
+          },
+          "position": 87.833
+        },
+        {
+          "id": "9:1561",
+          "type": "texture.change",
+          "time": 1788939177.608,
+          "observedTime": 1788939177.608,
+          "strength": 0.4762537690634594,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.2381268845317297,
+            "entropy": 0.5361947966465183
+          },
+          "position": 89.051
+        },
+        {
+          "id": "9:1589",
+          "type": "texture.change",
+          "time": 1788939179.111,
+          "observedTime": 1788939179.111,
+          "strength": 0.2795385590765713,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.13976927953828566,
+            "entropy": 0.40448695916416083
+          },
+          "position": 90.551
+        },
+        {
+          "id": "9:1612",
+          "type": "texture.change",
+          "time": 1788939180.412,
+          "observedTime": 1788939180.412,
+          "strength": 0.49341959304429417,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.24670979652214708,
+            "entropy": 0.5503817891725682
+          },
+          "position": 91.86
+        },
+        {
+          "id": "9:1637",
+          "type": "texture.change",
+          "time": 1788939181.825,
+          "observedTime": 1788939181.825,
+          "strength": 0.259686273052413,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.1298431365262065,
+            "entropy": 0.5235330915474938
+          },
+          "position": 93.272
+        },
+        {
+          "id": "9:1661",
+          "type": "texture.change",
+          "time": 1788939183.065,
+          "observedTime": 1788939183.065,
+          "strength": 0.26657538369678435,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.13328769184839218,
+            "entropy": 0.3597266067755831
+          },
+          "position": 94.515
+        },
+        {
+          "id": "9:1689",
+          "type": "texture.change",
+          "time": 1788939184.554,
+          "observedTime": 1788939184.554,
+          "strength": 0.6881766454282401,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.34408832271412004,
+            "entropy": 0.5437719151474719
+          },
+          "position": 95.997
+        },
+        {
+          "id": "9:1712",
+          "type": "texture.change",
+          "time": 1788939185.842,
+          "observedTime": 1788939185.842,
+          "strength": 0.5100383608589727,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.25501918042948635,
+            "entropy": 0.5138377667954841
+          },
+          "position": 97.29
+        },
+        {
+          "id": "9:1741",
+          "type": "texture.change",
+          "time": 1788939187.489,
+          "observedTime": 1788939187.489,
+          "strength": 0.3707504545332996,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.1853752272666498,
+            "entropy": 0.3833470988259722
+          },
+          "position": 98.94
+        },
+        {
+          "id": "9:1752",
+          "type": "structure.change",
+          "time": 1788939187.949,
+          "observedTime": 1788939187.489,
+          "strength": 0.6359752336811799,
+          "confidence": 0.6725913317884129,
+          "evidence": {
+            "shapeDistance": 0.22698714400211448,
+            "textureDistance": 0.025372786582703775,
+            "widthDistance": 0.12336040358131475,
+            "levelDifferenceDb": 0.44850167501374116
+          },
+          "position": 99.401
+        },
+        {
+          "id": "9:1767",
+          "type": "texture.change",
+          "time": 1788939188.729,
+          "observedTime": 1788939188.729,
+          "strength": 0.591146201918004,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.295573100959002,
+            "entropy": 0.6341127903235764
+          },
+          "position": 100.178
+        },
+        {
+          "id": "9:1791",
+          "type": "texture.change",
+          "time": 1788939189.969,
+          "observedTime": 1788939189.969,
+          "strength": 0.24785361228327774,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.12392680614163887,
+            "entropy": 0.525622366811434
+          },
+          "position": 101.417
+        },
+        {
+          "id": "9:1811",
+          "type": "texture.change",
+          "time": 1788939191.229,
+          "observedTime": 1788939191.229,
+          "strength": 0.9703862686363793,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.48519313431818967,
+            "entropy": 0.48734234174321034
+          },
+          "position": 102.68
+        },
+        {
+          "id": "9:1834",
+          "type": "texture.change",
+          "time": 1788939192.438,
+          "observedTime": 1788939192.438,
+          "strength": 0.2972707104375232,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.1486353552187616,
+            "entropy": 0.5201873428225465
+          },
+          "position": 103.879
+        },
+        {
+          "id": "9:1862",
+          "type": "texture.change",
+          "time": 1788939193.809,
+          "observedTime": 1788939193.809,
+          "strength": 0.52356743091556,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.26178371545778,
+            "entropy": 0.31614597004576567
+          },
+          "position": 105.258
+        },
+        {
+          "id": "9:1894",
+          "type": "texture.change",
+          "time": 1788939195.529,
+          "observedTime": 1788939195.529,
+          "strength": 0.20703631279823642,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.10351815639911821,
+            "entropy": 0.32743682574538513
+          },
+          "position": 106.97
+        },
+        {
+          "id": "9:1917",
+          "type": "texture.change",
+          "time": 1788939196.809,
+          "observedTime": 1788939196.809,
+          "strength": 0.2693596530104685,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.13467982650523425,
+            "entropy": 0.5432412427851298
+          },
+          "position": 108.252
+        },
+        {
+          "id": "9:1945",
+          "type": "texture.change",
+          "time": 1788939198.097,
+          "observedTime": 1788939198.097,
+          "strength": 0.3280637264312376,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.1640318632156188,
+            "entropy": 0.3424228234067929
+          },
+          "position": 109.538
+        },
+        {
+          "id": "9:1967",
+          "type": "texture.change",
+          "time": 1788939199.329,
+          "observedTime": 1788939199.329,
+          "strength": 0.4429048816836869,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.22145244084184346,
+            "entropy": 0.5052664349488034
+          },
+          "position": 110.778
+        },
+        {
+          "id": "9:1991",
+          "type": "texture.change",
+          "time": 1788939200.571,
+          "observedTime": 1788939200.571,
+          "strength": 0.25718817915862346,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.12859408957931173,
+            "entropy": 0.5112465960040232
+          },
+          "position": 112.02
+        },
+        {
+          "id": "9:2013",
+          "type": "texture.change",
+          "time": 1788939201.809,
+          "observedTime": 1788939201.809,
+          "strength": 0.8374701898061754,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.4187350949030877,
+            "entropy": 0.5385667756498652
+          },
+          "position": 113.258
+        },
+        {
+          "id": "9:2037",
+          "type": "texture.change",
+          "time": 1788939203.03,
+          "observedTime": 1788939203.03,
+          "strength": 0.5491663640618436,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.2745831820309218,
+            "entropy": 0.5587895122225616
+          },
+          "position": 114.478
+        },
+        {
+          "id": "9:2063",
+          "type": "texture.change",
+          "time": 1788939204.489,
+          "observedTime": 1788939204.489,
+          "strength": 0.4997251204195461,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.24986256020977304,
+            "entropy": 0.6020068148503736
+          },
+          "position": 115.931
+        },
+        {
+          "id": "9:2101",
+          "type": "texture.change",
+          "time": 1788939206.589,
+          "observedTime": 1788939206.589,
+          "strength": 0.5103556376543184,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.2551778188271592,
+            "entropy": 0.60291655275178
+          },
+          "position": 118.034
+        },
+        {
+          "id": "9:2130",
+          "type": "texture.change",
+          "time": 1788939208.169,
+          "observedTime": 1788939208.169,
+          "strength": 0.5419457387146538,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.2709728693573269,
+            "entropy": 0.6288509972129882
+          },
+          "position": 119.612
+        },
+        {
+          "id": "9:2157",
+          "type": "texture.change",
+          "time": 1788939209.747,
+          "observedTime": 1788939209.747,
+          "strength": 0.3916183901784145,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.19580919508920724,
+            "entropy": 0.6510609499983608
+          },
+          "position": 121.19
+        },
+        {
+          "id": "9:2187",
+          "type": "texture.change",
+          "time": 1788939211.569,
+          "observedTime": 1788939211.569,
+          "strength": 0.3832373427814657,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.19161867139073285,
+            "entropy": 0.6549183715065402
+          },
+          "position": 123.01
+        },
+        {
+          "id": "9:2211",
+          "type": "texture.change",
+          "time": 1788939212.816,
+          "observedTime": 1788939212.816,
+          "strength": 0.6542339134893542,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.3271169567446771,
+            "entropy": 0.6087656971699014
+          },
+          "position": 124.262
+        },
+        {
+          "id": "9:2236",
+          "type": "texture.change",
+          "time": 1788939214.172,
+          "observedTime": 1788939214.172,
+          "strength": 0.5034041865634176,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.2517020932817088,
+            "entropy": 0.6412616394328485
+          },
+          "position": 125.618
+        },
+        {
+          "id": "9:2265",
+          "type": "texture.change",
+          "time": 1788939215.613,
+          "observedTime": 1788939215.613,
+          "strength": 0.2925499589621263,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.14627497948106316,
+            "entropy": 0.44056062048792344
+          },
+          "position": 127.059
+        },
+        {
+          "id": "9:2289",
+          "type": "texture.change",
+          "time": 1788939216.988,
+          "observedTime": 1788939216.988,
+          "strength": 0.518406070092065,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.2592030350460325,
+            "entropy": 0.648058468643581
+          },
+          "position": 128.431
+        },
+        {
+          "id": "9:2316",
+          "type": "texture.change",
+          "time": 1788939218.409,
+          "observedTime": 1788939218.409,
+          "strength": 0.3237898551340912,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.1618949275670456,
+            "entropy": 0.4103918435165245
+          },
+          "position": 129.849
+        },
+        {
+          "id": "9:2342",
+          "type": "texture.change",
+          "time": 1788939219.609,
+          "observedTime": 1788939219.609,
+          "strength": 0.5018873808080602,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.2509436904040301,
+            "entropy": 0.5983466029263005
+          },
+          "position": 131.055
+        },
+        {
+          "id": "9:2365",
+          "type": "texture.change",
+          "time": 1788939220.829,
+          "observedTime": 1788939220.829,
+          "strength": 0.32926467231270906,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.16463233615635453,
+            "entropy": 0.5928582646856041
+          },
+          "position": 132.274
+        },
+        {
+          "id": "9:2388",
+          "type": "texture.change",
+          "time": 1788939222.029,
+          "observedTime": 1788939222.029,
+          "strength": 0.24267480429548471,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.12133740214774236,
+            "entropy": 0.42447421728429124
+          },
+          "position": 133.472
+        },
+        {
+          "id": "9:2417",
+          "type": "texture.change",
+          "time": 1788939223.489,
+          "observedTime": 1788939223.489,
+          "strength": 0.567474721945876,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.283737360972938,
+            "entropy": 0.5786985351423801
+          },
+          "position": 134.932
+        },
+        {
+          "id": "9:2446",
+          "type": "texture.change",
+          "time": 1788939224.989,
+          "observedTime": 1788939224.989,
+          "strength": 1,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.6684594052542989,
+            "entropy": 0.37585791274775043
+          },
+          "position": 136.435
+        },
+        {
+          "id": "9:2473",
+          "type": "texture.change",
+          "time": 1788939226.305,
+          "observedTime": 1788939226.305,
+          "strength": 0.45598236285162264,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.22799118142581132,
+            "entropy": 0.40519036517507295
+          },
+          "position": 137.748
+        },
+        {
+          "id": "9:2484",
+          "type": "structure.change",
+          "time": 1788939226.889,
+          "observedTime": 1788939226.429,
+          "strength": 0.9681118280894819,
+          "confidence": 0.7888391398313186,
+          "evidence": {
+            "shapeDistance": 0.44507220530059316,
+            "textureDistance": 0.007006835405074332,
+            "widthDistance": 0.18354125736654836,
+            "levelDifferenceDb": 3.3463063161391737
+          },
+          "position": 138.336
+        },
+        {
+          "id": "9:2493",
+          "type": "dynamics.fall",
+          "time": 1788939227.488,
+          "observedTime": 1788939227.488,
+          "strength": 0.707411713214763,
+          "confidence": 0.65,
+          "evidence": {
+            "momentaryDb": -14.506350294918647,
+            "shortTermDb": -8.847056589200543
+          },
+          "position": 138.928
+        },
+        {
+          "id": "9:2513",
+          "type": "texture.change",
+          "time": 1788939228.806,
+          "observedTime": 1788939228.806,
+          "strength": 0.26910414443009034,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.13455207221504517,
+            "entropy": 0.3743398551443314
+          },
+          "position": 140.249
+        },
+        {
+          "id": "9:2542",
+          "type": "texture.change",
+          "time": 1788939230.836,
+          "observedTime": 1788939230.836,
+          "strength": 0.2281243919721061,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.11406219598605305,
+            "entropy": 0.4948584783555757
+          },
+          "position": 142.283
+        },
+        {
+          "id": "9:2569",
+          "type": "texture.change",
+          "time": 1788939232.547,
+          "observedTime": 1788939232.547,
+          "strength": 0.24030752607838068,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.12015376303919034,
+            "entropy": 0.511752402039359
+          },
+          "position": 143.996
+        },
+        {
+          "id": "9:2609",
+          "type": "texture.change",
+          "time": 1788939235.396,
+          "observedTime": 1788939235.396,
+          "strength": 1,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.5789644848944111,
+            "entropy": 0.5427810602450731
+          },
+          "position": 146.843
+        },
+        {
+          "id": "9:2654",
+          "type": "texture.change",
+          "time": 1788939238.296,
+          "observedTime": 1788939238.296,
+          "strength": 0.4506449746558352,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.2253224873279176,
+            "entropy": 0.5433264885657618
+          },
+          "position": 149.742
+        },
+        {
+          "id": "9:2674",
+          "type": "texture.change",
+          "time": 1788939239.496,
+          "observedTime": 1788939239.496,
+          "strength": 0.4655507445251843,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.23277537226259215,
+            "entropy": 0.5055754076055136
+          },
+          "position": 150.939
+        },
+        {
+          "id": "9:2701",
+          "type": "texture.change",
+          "time": 1788939241.216,
+          "observedTime": 1788939241.216,
+          "strength": 0.8192763418248041,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.40963817091240207,
+            "entropy": 0.605365366508698
+          },
+          "position": 152.666
+        },
+        {
+          "id": "9:2729",
+          "type": "texture.change",
+          "time": 1788939242.956,
+          "observedTime": 1788939242.956,
+          "strength": 0.3293400945960081,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.16467004729800405,
+            "entropy": 0.5401003743078207
+          },
+          "position": 154.407
+        },
+        {
+          "id": "9:2754",
+          "type": "texture.change",
+          "time": 1788939244.256,
+          "observedTime": 1788939244.256,
+          "strength": 0.2697301628565383,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.13486508142826914,
+            "entropy": 0.5547973265914704
+          },
+          "position": 155.698
+        },
+        {
+          "id": "9:2795",
+          "type": "structure.change",
+          "time": 1788939246.596,
+          "observedTime": 1788939246.136,
+          "strength": 0.9599677653565165,
+          "confidence": 0.7859887178747808,
+          "evidence": {
+            "shapeDistance": 0.4073321456389245,
+            "textureDistance": 0.0019775873123535894,
+            "widthDistance": 0.26469560064182207,
+            "levelDifferenceDb": 2.76026764816228
+          },
+          "position": 158.038
+        },
+        {
+          "id": "9:2801",
+          "type": "texture.change",
+          "time": 1788939246.956,
+          "observedTime": 1788939246.956,
+          "strength": 0.2424071764904301,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.12120358824521504,
+            "entropy": 0.47886313434570577
+          },
+          "position": 158.404
+        },
+        {
+          "id": "9:2806",
+          "type": "dynamics.fall",
+          "time": 1788939247.336,
+          "observedTime": 1788939247.336,
+          "strength": 0.39302058482790825,
+          "confidence": 0.65,
+          "evidence": {
+            "momentaryDb": -16.398236603525987,
+            "shortTermDb": -13.254071924902721
+          },
+          "position": 158.783
+        },
+        {
+          "id": "9:2830",
+          "type": "role.exit",
+          "time": 1788939248.796,
+          "observedTime": 1788939248.796,
+          "strength": 0.3,
+          "confidence": 0.6,
+          "evidence": {
+            "articulation": 0.36485845846542714,
+            "persistence": 0.9929386936141563
+          },
+          "role": "phrase",
+          "position": 160.242
+        },
+        {
+          "id": "9:2835",
+          "type": "role.exit",
+          "time": 1788939249.316,
+          "observedTime": 1788939249.316,
+          "strength": 0.3,
+          "confidence": 0.6,
+          "evidence": {
+            "articulation": 0.3392019936565537,
+            "persistence": 0.9980755694177396
+          },
+          "role": "bed",
+          "position": 160.767
+        },
+        {
+          "id": "9:2838",
+          "type": "sound.exit",
+          "time": 1788939250.876,
+          "observedTime": 1788939250.876,
+          "strength": 0.3,
+          "confidence": 0.9,
+          "evidence": {
+            "rms": 0.00021086938496048076
+          },
+          "position": 162.322
+        },
+        {
+          "id": "9:2839",
+          "type": "texture.change",
+          "time": 1788939251.396,
+          "observedTime": 1788939251.396,
+          "strength": 0.5683663049849486,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.2841831524924743,
+            "entropy": 0.6663528641287623
+          },
+          "position": 162.838
+        },
+        {
+          "id": "9:2840",
+          "type": "sound.enter",
+          "time": 1788939251.497,
+          "observedTime": 1788939251.497,
+          "strength": 0.01656729282142784,
+          "confidence": 0.9,
+          "evidence": {
+            "rms": 0.0017051259904002618
+          },
+          "position": 162.946
+        },
+        {
+          "id": "9:2843",
+          "type": "structure.change",
+          "time": 1788939251.956,
+          "observedTime": 1788939251.497,
+          "strength": 0.9791112288114578,
+          "confidence": 0.7926889300840103,
+          "evidence": {
+            "shapeDistance": 0.4463898314878346,
+            "textureDistance": 0.1478171703111082,
+            "widthDistance": 0.1341988936217223,
+            "levelDifferenceDb": 4.771546994182408
+          },
+          "position": 163.402
+        },
+        {
+          "id": "9:2849",
+          "type": "role.enter",
+          "time": 1788939252.596,
+          "observedTime": 1788939252.596,
+          "strength": 0.5538960184910853,
+          "confidence": 0.6,
+          "evidence": {
+            "articulation": 0.9999868226043565,
+            "persistence": 0.0608286842895247
+          },
+          "role": "phrase",
+          "position": 164.037
+        },
+        {
+          "id": "9:2850",
+          "type": "texture.change",
+          "time": 1788939252.596,
+          "observedTime": 1788939252.596,
+          "strength": 0.3277269885739673,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.16386349428698366,
+            "entropy": 0.3906205053796685
+          },
+          "position": 164.037
+        },
+        {
+          "id": "9:2861",
+          "type": "dynamics.rise",
+          "time": 1788939253.202,
+          "observedTime": 1788939253.202,
+          "strength": 0.3592004110008482,
+          "confidence": 0.65,
+          "evidence": {
+            "momentaryDb": -14.603573114499236,
+            "shortTermDb": -17.47717640250602
+          },
+          "position": 164.646
+        },
+        {
+          "id": "9:2880",
+          "type": "role.enter",
+          "time": 1788939254.282,
+          "observedTime": 1788939254.282,
+          "strength": 0.21622111994456278,
+          "confidence": 0.6,
+          "evidence": {
+            "articulation": 0.6738649954940511,
+            "persistence": 0.5761438723895691
+          },
+          "role": "bed",
+          "position": 165.725
+        },
+        {
+          "id": "9:2905",
+          "type": "texture.change",
+          "time": 1788939255.756,
+          "observedTime": 1788939255.756,
+          "strength": 0.2686964097716271,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.13434820488581356,
+            "entropy": 0.5256816868090742
+          },
+          "position": 167.196
+        },
+        {
+          "id": "9:2917",
+          "type": "structure.change",
+          "time": 1788939256.456,
+          "observedTime": 1788939255.988,
+          "strength": 0.9122858744796101,
+          "confidence": 0.7693000560678636,
+          "evidence": {
+            "shapeDistance": 0.27476498349731365,
+            "textureDistance": 0.10396907170922699,
+            "widthDistance": 0.08549930015120433,
+            "levelDifferenceDb": 10.62395151314486
+          },
+          "position": 167.9
+        },
+        {
+          "id": "9:2937",
+          "type": "texture.change",
+          "time": 1788939257.616,
+          "observedTime": 1788939257.616,
+          "strength": 0.250211348237227,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.1251056741186135,
+            "entropy": 0.48970243404803765
+          },
+          "position": 169.056
+        },
+        {
+          "id": "9:2968",
+          "type": "texture.change",
+          "time": 1788939259.465,
+          "observedTime": 1788939259.465,
+          "strength": 0.37547585043431453,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.18773792521715726,
+            "entropy": 0.5293698073748554
+          },
+          "position": 170.911
+        },
+        {
+          "id": "9:2998",
+          "type": "texture.change",
+          "time": 1788939261.496,
+          "observedTime": 1788939261.496,
+          "strength": 0.5977307851696554,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.2988653925848277,
+            "entropy": 0.5334874038109879
+          },
+          "position": 172.947
+        },
+        {
+          "id": "9:3016",
+          "type": "structure.change",
+          "time": 1788939262.255,
+          "observedTime": 1788939261.779,
+          "strength": 0.9933808489011281,
+          "confidence": 0.7976832971153949,
+          "evidence": {
+            "shapeDistance": 0.629748837347039,
+            "textureDistance": 0.07375565771186553,
+            "widthDistance": 0.2949894000037749,
+            "levelDifferenceDb": 3.2236228025724323
+          },
+          "position": 173.704
+        },
+        {
+          "id": "9:3024",
+          "type": "texture.change",
+          "time": 1788939262.736,
+          "observedTime": 1788939262.736,
+          "strength": 0.24215416649723998,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.12107708324861999,
+            "entropy": 0.6046019553244422
+          },
+          "position": 174.181
+        },
+        {
+          "id": "9:3028",
+          "type": "dynamics.rise",
+          "time": 1788939262.836,
+          "observedTime": 1788939262.836,
+          "strength": 0.5105615503246279,
+          "confidence": 0.65,
+          "evidence": {
+            "momentaryDb": -8.351127339471924,
+            "shortTermDb": -12.435619742068948
+          },
+          "position": 174.286
+        },
+        {
+          "id": "9:3048",
+          "type": "texture.change",
+          "time": 1788939263.936,
+          "observedTime": 1788939263.936,
+          "strength": 0.3163746908539895,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.15818734542699475,
+            "entropy": 0.43354766018361146
+          },
+          "position": 175.377
+        },
+        {
+          "id": "9:3073",
+          "type": "texture.change",
+          "time": 1788939265.256,
+          "observedTime": 1788939265.256,
+          "strength": 0.2527696211204009,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.12638481056020046,
+            "entropy": 0.6123214892412376
+          },
+          "position": 176.703
+        },
+        {
+          "id": "9:3098",
+          "type": "texture.change",
+          "time": 1788939266.456,
+          "observedTime": 1788939266.456,
+          "strength": 0.2052709997993012,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.1026354998996506,
+            "entropy": 0.39865584670286824
+          },
+          "position": 177.902
+        },
+        {
+          "id": "9:3120",
+          "type": "texture.change",
+          "time": 1788939267.676,
+          "observedTime": 1788939267.676,
+          "strength": 0.5679269398499238,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.2839634699249619,
+            "entropy": 0.6298903051893084
+          },
+          "position": 179.117
+        },
+        {
+          "id": "9:3149",
+          "type": "texture.change",
+          "time": 1788939269.196,
+          "observedTime": 1788939269.196,
+          "strength": 0.31712400707988997,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.15856200353994498,
+            "entropy": 0.4201447044957564
+          },
+          "position": 180.644
+        },
+        {
+          "id": "9:3180",
+          "type": "texture.change",
+          "time": 1788939270.796,
+          "observedTime": 1788939270.796,
+          "strength": 0.620410554522884,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.310205277261442,
+            "entropy": 0.5610398483647366
+          },
+          "position": 182.236
+        },
+        {
+          "id": "9:3203",
+          "type": "texture.change",
+          "time": 1788939272.064,
+          "observedTime": 1788939272.064,
+          "strength": 0.26820587562373,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.134102937811865,
+            "entropy": 0.5762743258892767
+          },
+          "position": 183.507
+        },
+        {
+          "id": "9:3224",
+          "type": "texture.change",
+          "time": 1788939273.336,
+          "observedTime": 1788939273.336,
+          "strength": 0.559775616922674,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.279887808461337,
+            "entropy": 0.5870913859959674
+          },
+          "position": 184.786
+        },
+        {
+          "id": "9:3245",
+          "type": "texture.change",
+          "time": 1788939274.537,
+          "observedTime": 1788939274.537,
+          "strength": 0.5776190965474897,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.28880954827374483,
+            "entropy": 0.6566432219817305
+          },
+          "position": 185.984
+        },
+        {
+          "id": "9:3268",
+          "type": "texture.change",
+          "time": 1788939275.737,
+          "observedTime": 1788939275.737,
+          "strength": 0.2181321096305342,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.1090660548152671,
+            "entropy": 0.42060769940487164
+          },
+          "position": 187.181
+        },
+        {
+          "id": "9:3291",
+          "type": "texture.change",
+          "time": 1788939276.957,
+          "observedTime": 1788939276.957,
+          "strength": 0.37847323385852905,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.18923661692926452,
+            "entropy": 0.5863269640578419
+          },
+          "position": 188.405
+        },
+        {
+          "id": "9:3315",
+          "type": "texture.change",
+          "time": 1788939278.197,
+          "observedTime": 1788939278.197,
+          "strength": 0.3391961215662116,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.1695980607831058,
+            "entropy": 0.6022030961130413
+          },
+          "position": 189.646
+        },
+        {
+          "id": "9:3343",
+          "type": "texture.change",
+          "time": 1788939279.737,
+          "observedTime": 1788939279.737,
+          "strength": 0.23343409919724678,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.11671704959862339,
+            "entropy": 0.6296215855000825
+          },
+          "position": 191.183
+        },
+        {
+          "id": "9:3368",
+          "type": "texture.change",
+          "time": 1788939280.996,
+          "observedTime": 1788939280.996,
+          "strength": 0.20546615033803461,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.10273307516901731,
+            "entropy": 0.4129818302303957
+          },
+          "position": 192.444
+        },
+        {
+          "id": "9:3393",
+          "type": "texture.change",
+          "time": 1788939282.257,
+          "observedTime": 1788939282.257,
+          "strength": 0.4793369946924091,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.23966849734620455,
+            "entropy": 0.6052152200992951
+          },
+          "position": 193.708
+        },
+        {
+          "id": "9:3419",
+          "type": "texture.change",
+          "time": 1788939283.63,
+          "observedTime": 1788939283.63,
+          "strength": 0.5801668949964474,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.2900834474982237,
+            "entropy": 0.5903731493007511
+          },
+          "position": 195.071
+        },
+        {
+          "id": "9:3444",
+          "type": "texture.change",
+          "time": 1788939284.877,
+          "observedTime": 1788939284.877,
+          "strength": 0.47727721298254044,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.23863860649127022,
+            "entropy": 0.7354999028598211
+          },
+          "position": 196.316
+        },
+        {
+          "id": "9:3465",
+          "type": "texture.change",
+          "time": 1788939286.079,
+          "observedTime": 1788939286.079,
+          "strength": 0.2543962460147917,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.12719812300739586,
+            "entropy": 0.5831359518713936
+          },
+          "position": 197.527
+        },
+        {
+          "id": "9:3492",
+          "type": "texture.change",
+          "time": 1788939287.357,
+          "observedTime": 1788939287.357,
+          "strength": 0.653385561119505,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.3266927805597525,
+            "entropy": 0.636996780206663
+          },
+          "position": 198.804
+        },
+        {
+          "id": "9:3514",
+          "type": "texture.change",
+          "time": 1788939288.56,
+          "observedTime": 1788939288.56,
+          "strength": 0.4026256901120848,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.2013128450560424,
+            "entropy": 0.5855526019220194
+          },
+          "position": 199.999
+        },
+        {
+          "id": "9:3539",
+          "type": "texture.change",
+          "time": 1788939289.898,
+          "observedTime": 1788939289.898,
+          "strength": 0.22271138544789104,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.11135569272394552,
+            "entropy": 0.5972217929614576
+          },
+          "position": 201.344
+        },
+        {
+          "id": "9:3572",
+          "type": "texture.change",
+          "time": 1788939291.517,
+          "observedTime": 1788939291.517,
+          "strength": 0.707582065745086,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.353791032872543,
+            "entropy": 0.5801817693589738
+          },
+          "position": 202.967
+        },
+        {
+          "id": "9:3594",
+          "type": "texture.change",
+          "time": 1788939292.757,
+          "observedTime": 1788939292.757,
+          "strength": 0.22362616042091843,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.11181308021045921,
+            "entropy": 0.6419431343551417
+          },
+          "position": 204.206
+        },
+        {
+          "id": "9:3620",
+          "type": "texture.change",
+          "time": 1788939293.958,
+          "observedTime": 1788939293.958,
+          "strength": 0.725021343481943,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.3625106717409715,
+            "entropy": 0.4553166585269928
+          },
+          "position": 205.403
+        },
+        {
+          "id": "9:3643",
+          "type": "texture.change",
+          "time": 1788939295.177,
+          "observedTime": 1788939295.177,
+          "strength": 0.38029271771310214,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.19014635885655107,
+            "entropy": 0.6046677225820165
+          },
+          "position": 206.622
+        },
+        {
+          "id": "9:3668",
+          "type": "texture.change",
+          "time": 1788939296.417,
+          "observedTime": 1788939296.417,
+          "strength": 0.551854000710547,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.2759270003552735,
+            "entropy": 0.6553511202258363
+          },
+          "position": 207.864
+        },
+        {
+          "id": "9:3691",
+          "type": "texture.change",
+          "time": 1788939297.638,
+          "observedTime": 1788939297.638,
+          "strength": 0.7369568990496909,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.36847844952484543,
+            "entropy": 0.4254113011534603
+          },
+          "position": 209.077
+        },
+        {
+          "id": "9:3717",
+          "type": "texture.change",
+          "time": 1788939298.879,
+          "observedTime": 1788939298.879,
+          "strength": 0.34878765861535754,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.17439382930767877,
+            "entropy": 0.5981452048472955
+          },
+          "position": 210.323
+        },
+        {
+          "id": "9:3739",
+          "type": "texture.change",
+          "time": 1788939300.137,
+          "observedTime": 1788939300.137,
+          "strength": 0.28545762910276595,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.14272881455138298,
+            "entropy": 0.3728624657246626
+          },
+          "position": 211.583
+        },
+        {
+          "id": "9:3764",
+          "type": "texture.change",
+          "time": 1788939301.397,
+          "observedTime": 1788939301.397,
+          "strength": 0.25885501901226426,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.12942750950613213,
+            "entropy": 0.6108200415105169
+          },
+          "position": 212.841
+        },
+        {
+          "id": "9:3790",
+          "type": "texture.change",
+          "time": 1788939302.637,
+          "observedTime": 1788939302.637,
+          "strength": 0.24847057570608766,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.12423528785304383,
+            "entropy": 0.5628852391588267
+          },
+          "position": 214.086
+        },
+        {
+          "id": "9:3815",
+          "type": "texture.change",
+          "time": 1788939303.925,
+          "observedTime": 1788939303.925,
+          "strength": 0.5286586293341191,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.26432931466705956,
+            "entropy": 0.6295595593757232
+          },
+          "position": 215.368
+        },
+        {
+          "id": "9:3841",
+          "type": "texture.change",
+          "time": 1788939305.237,
+          "observedTime": 1788939305.237,
+          "strength": 0.3706685039406328,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.1853342519703164,
+            "entropy": 0.4337373148315246
+          },
+          "position": 216.685
+        },
+        {
+          "id": "9:3864",
+          "type": "texture.change",
+          "time": 1788939306.439,
+          "observedTime": 1788939306.439,
+          "strength": 0.27590886689697225,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.13795443344848612,
+            "entropy": 0.6685966435262374
+          },
+          "position": 217.878
+        },
+        {
+          "id": "9:3889",
+          "type": "texture.change",
+          "time": 1788939307.757,
+          "observedTime": 1788939307.757,
+          "strength": 0.5974869076144234,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.2987434538072117,
+            "entropy": 0.48414035634753577
+          },
+          "position": 219.199
+        },
+        {
+          "id": "9:3902",
+          "type": "structure.change",
+          "time": 1788939308.466,
+          "observedTime": 1788939307.997,
+          "strength": 0.9528153182249464,
+          "confidence": 0.7834853613787311,
+          "evidence": {
+            "shapeDistance": 0.4929901004380933,
+            "textureDistance": 0.09552355418841196,
+            "widthDistance": 0.2018459258874361,
+            "levelDifferenceDb": 3.9983561633678235
+          },
+          "position": 219.908
+        },
+        {
+          "id": "9:3911",
+          "type": "dynamics.fall",
+          "time": 1788939309.018,
+          "observedTime": 1788939309.018,
+          "strength": 0.8380931293508491,
+          "confidence": 0.65,
+          "evidence": {
+            "momentaryDb": -16.117183835487307,
+            "shortTermDb": -9.412438800680514
+          },
+          "position": 220.465
+        },
+        {
+          "id": "9:3919",
+          "type": "texture.change",
+          "time": 1788939309.497,
+          "observedTime": 1788939309.497,
+          "strength": 1,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.5615334980878504,
+            "entropy": 0.41136017707278943
+          },
+          "position": 220.939
+        },
+        {
+          "id": "9:3941",
+          "type": "texture.change",
+          "time": 1788939311.037,
+          "observedTime": 1788939311.037,
+          "strength": 0.22025379899119124,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.11012689949559562,
+            "entropy": 0.40134183784204897
+          },
+          "position": 222.487
+        },
+        {
+          "id": "9:3965",
+          "type": "role.exit",
+          "time": 1788939313.457,
+          "observedTime": 1788939313.457,
+          "strength": 0.3,
+          "confidence": 0.6,
+          "evidence": {
+            "articulation": 0.6163855314101817,
+            "persistence": 0.9904738296044614
+          },
+          "role": "phrase",
+          "position": 224.897
+        },
+        {
+          "id": "9:3968",
+          "type": "role.exit",
+          "time": 1788939313.717,
+          "observedTime": 1788939313.717,
+          "strength": 0.3,
+          "confidence": 0.6,
+          "evidence": {
+            "articulation": 0.591358366205597,
+            "persistence": 0.9891691446017147
+          },
+          "role": "bed",
+          "position": 225.16
+        },
+        {
+          "id": "9:3970",
+          "type": "structure.change",
+          "time": 1788939314.013,
+          "observedTime": 1788939313.557,
+          "strength": 0.7964560393471056,
+          "confidence": 0.7287596137714869,
+          "evidence": {
+            "shapeDistance": 0.2063482289414259,
+            "textureDistance": 0.0330088203305684,
+            "widthDistance": 0.1529041951390247,
+            "levelDifferenceDb": 18.633683222514154
+          },
+          "position": 225.458
+        },
+        {
+          "id": "9:3972",
+          "type": "texture.change",
+          "time": 1788939315.417,
+          "observedTime": 1788939315.417,
+          "strength": 0.22960529360595872,
+          "confidence": 0.6,
+          "evidence": {
+            "spectralChange": 0.11480264680297936,
+            "entropy": 0.4028847738833478
+          },
+          "position": 226.862
+        },
+        {
+          "id": "9:3973",
+          "type": "sound.exit",
+          "time": 1788939316.577,
+          "observedTime": 1788939316.577,
+          "strength": 0.3,
+          "confidence": 0.9,
+          "evidence": {
+            "rms": 0.0003186719873391195
+          },
+          "position": 228.019
+        }
+      ],
+      "validSpectraDuringActiveAudio": true,
+      "analysisMsP99": 1.0001659393310547,
+      "renderMsP99": 3.000020980834961,
+      "limitations": "No manually labelled event truth. Counts and timelines are diagnostic, not precision/recall."
+    }
+  ]
+}

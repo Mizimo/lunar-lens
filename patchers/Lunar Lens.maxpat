@@ -986,6 +986,203 @@
       },
       {
         "box": {
+          "id": "context",
+          "maxclass": "newobj",
+          "numinlets": 2,
+          "numoutlets": 5,
+          "patching_rect": [
+            1180,
+            1520,
+            240,
+            22
+          ],
+          "varname": "context",
+          "text": "gen~ lens_context"
+        }
+      },
+      {
+        "box": {
+          "id": "spectral",
+          "maxclass": "newobj",
+          "numinlets": 3,
+          "numoutlets": 1,
+          "patching_rect": [
+            1470,
+            1520,
+            250,
+            22
+          ],
+          "varname": "spectral",
+          "text": "pfft~ lens_spectral 2048 4"
+        }
+      },
+      {
+        "box": {
+          "id": "context-trigger",
+          "maxclass": "newobj",
+          "numinlets": 1,
+          "numoutlets": 5,
+          "patching_rect": [
+            1180,
+            1610,
+            180,
+            22
+          ],
+          "text": "t b b b b b"
+        }
+      },
+      {
+        "box": {
+          "id": "context-pack",
+          "maxclass": "newobj",
+          "numinlets": 5,
+          "numoutlets": 1,
+          "patching_rect": [
+            1180,
+            1780,
+            190,
+            22
+          ],
+          "text": "pack f f f f f"
+        }
+      },
+      {
+        "box": {
+          "id": "context-tag",
+          "maxclass": "newobj",
+          "numinlets": 1,
+          "numoutlets": 1,
+          "patching_rect": [
+            1180,
+            1820,
+            190,
+            22
+          ],
+          "text": "prepend contextual"
+        }
+      },
+      {
+        "box": {
+          "id": "context-snap0",
+          "maxclass": "newobj",
+          "numinlets": 2,
+          "numoutlets": 1,
+          "patching_rect": [
+            1180,
+            1720,
+            95,
+            22
+          ],
+          "text": "snapshot~"
+        }
+      },
+      {
+        "box": {
+          "id": "context-snap1",
+          "maxclass": "newobj",
+          "numinlets": 2,
+          "numoutlets": 1,
+          "patching_rect": [
+            1280,
+            1720,
+            95,
+            22
+          ],
+          "text": "snapshot~"
+        }
+      },
+      {
+        "box": {
+          "id": "context-snap2",
+          "maxclass": "newobj",
+          "numinlets": 2,
+          "numoutlets": 1,
+          "patching_rect": [
+            1380,
+            1720,
+            95,
+            22
+          ],
+          "text": "snapshot~"
+        }
+      },
+      {
+        "box": {
+          "id": "context-snap3",
+          "maxclass": "newobj",
+          "numinlets": 2,
+          "numoutlets": 1,
+          "patching_rect": [
+            1480,
+            1720,
+            95,
+            22
+          ],
+          "text": "snapshot~"
+        }
+      },
+      {
+        "box": {
+          "id": "context-snap4",
+          "maxclass": "newobj",
+          "numinlets": 2,
+          "numoutlets": 1,
+          "patching_rect": [
+            1580,
+            1720,
+            95,
+            22
+          ],
+          "text": "snapshot~"
+        }
+      },
+      {
+        "box": {
+          "id": "spectral-tag",
+          "maxclass": "newobj",
+          "numinlets": 1,
+          "numoutlets": 1,
+          "patching_rect": [
+            1470,
+            1580,
+            180,
+            22
+          ],
+          "text": "prepend spectral"
+        }
+      },
+      {
+        "box": {
+          "id": "dsp-state",
+          "maxclass": "newobj",
+          "numinlets": 1,
+          "numoutlets": 6,
+          "patching_rect": [
+            1740,
+            1520,
+            130,
+            22
+          ],
+          "text": "dspstate~"
+        }
+      },
+      {
+        "box": {
+          "id": "sr-tag",
+          "maxclass": "newobj",
+          "numinlets": 1,
+          "numoutlets": 1,
+          "patching_rect": [
+            1740,
+            1580,
+            160,
+            22
+          ],
+          "text": "prepend audiorate"
+        }
+      },
+      {
+        "box": {
           "id": "vst",
           "maxclass": "newobj",
           "numinlets": 2,
@@ -2628,7 +2825,8 @@
           "destination": [
             "trig",
             0
-          ]
+          ],
+          "order": 2
         }
       },
       {
@@ -3516,6 +3714,380 @@
           "destination": [
             "pack",
             23
+          ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "file0",
+            0
+          ],
+          "destination": [
+            "context",
+            0
+          ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "file0",
+            0
+          ],
+          "destination": [
+            "spectral",
+            0
+          ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "live0",
+            0
+          ],
+          "destination": [
+            "context",
+            0
+          ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "live0",
+            0
+          ],
+          "destination": [
+            "spectral",
+            0
+          ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "file1",
+            0
+          ],
+          "destination": [
+            "context",
+            1
+          ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "file1",
+            0
+          ],
+          "destination": [
+            "spectral",
+            1
+          ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "live1",
+            0
+          ],
+          "destination": [
+            "context",
+            1
+          ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "live1",
+            0
+          ],
+          "destination": [
+            "spectral",
+            1
+          ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "poll",
+            0
+          ],
+          "destination": [
+            "context-trigger",
+            0
+          ],
+          "order": 1
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "context-pack",
+            0
+          ],
+          "destination": [
+            "context-tag",
+            0
+          ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "context-tag",
+            0
+          ],
+          "destination": [
+            "controller",
+            0
+          ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "context",
+            0
+          ],
+          "destination": [
+            "context-snap0",
+            0
+          ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "context-trigger",
+            0
+          ],
+          "destination": [
+            "context-snap0",
+            0
+          ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "context-snap0",
+            0
+          ],
+          "destination": [
+            "context-pack",
+            0
+          ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "context",
+            1
+          ],
+          "destination": [
+            "context-snap1",
+            0
+          ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "context-trigger",
+            1
+          ],
+          "destination": [
+            "context-snap1",
+            0
+          ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "context-snap1",
+            0
+          ],
+          "destination": [
+            "context-pack",
+            1
+          ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "context",
+            2
+          ],
+          "destination": [
+            "context-snap2",
+            0
+          ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "context-trigger",
+            2
+          ],
+          "destination": [
+            "context-snap2",
+            0
+          ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "context-snap2",
+            0
+          ],
+          "destination": [
+            "context-pack",
+            2
+          ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "context",
+            3
+          ],
+          "destination": [
+            "context-snap3",
+            0
+          ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "context-trigger",
+            3
+          ],
+          "destination": [
+            "context-snap3",
+            0
+          ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "context-snap3",
+            0
+          ],
+          "destination": [
+            "context-pack",
+            3
+          ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "context",
+            4
+          ],
+          "destination": [
+            "context-snap4",
+            0
+          ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "context-trigger",
+            4
+          ],
+          "destination": [
+            "context-snap4",
+            0
+          ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "context-snap4",
+            0
+          ],
+          "destination": [
+            "context-pack",
+            4
+          ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "poll",
+            0
+          ],
+          "destination": [
+            "spectral",
+            2
+          ],
+          "order": 0
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "spectral",
+            0
+          ],
+          "destination": [
+            "spectral-tag",
+            0
+          ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "spectral-tag",
+            0
+          ],
+          "destination": [
+            "controller",
+            0
+          ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "dsp-state",
+            1
+          ],
+          "destination": [
+            "sr-tag",
+            0
+          ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "sr-tag",
+            0
+          ],
+          "destination": [
+            "controller",
+            0
           ]
         }
       },

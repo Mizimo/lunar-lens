@@ -1,0 +1,237 @@
+{
+  "patcher": {
+    "fileversion": 1,
+    "appversion": {
+      "major": 9,
+      "minor": 1,
+      "revision": 4,
+      "architecture": "arm64",
+      "modernui": 1
+    },
+    "classnamespace": "dsp.gen",
+    "rect": [
+      80,
+      80,
+      980,
+      700
+    ],
+    "openinpresentation": 0,
+    "default_fontsize": 12,
+    "default_fontname": "Arial",
+    "bgcolor": [
+      0.025,
+      0.036,
+      0.06,
+      1
+    ],
+    "boxes": [
+      {
+        "box": {
+          "id": "code",
+          "maxclass": "codebox",
+          "numinlets": 2,
+          "numoutlets": 5,
+          "patching_rect": [
+            70,
+            100,
+            850,
+            480
+          ],
+          "code": "// Independent source measurements. Exponential time constants, not gated LUFS.\nHistory em(0); History es(0); History el(0); History er(0); History lr(0);\nHistory lastL(0); History lastR(0); History zc(0);\nL=dcblock(in1); R=dcblock(in2); power=(L*L+R*R)*0.5;\ncm=1-exp(-1/(samplerate*0.4)); cs=1-exp(-1/(samplerate*3));\nem=em+cm*(power-em); es=es+cs*(power-es);\nel=el+cm*(L*L-el); er=er+cm*(R*R-er); lr=lr+cm*(L*R-lr);\ncrossings=((L>=0)!=(lastL>=0))+((R>=0)!=(lastR>=0));\nzc=zc+cm*(crossings*0.5-zc); lastL=L; lastR=R;\nout1=sqrt(max(0,em)); out2=sqrt(max(0,es));\nout3=clamp(lr/sqrt(max(0.000000000001,el*er)),-1,1);\nout4=clamp((er-el)/max(0.000000000001,er+el),-1,1);\nout5=zc;\n"
+        }
+      },
+      {
+        "box": {
+          "id": "in0",
+          "maxclass": "newobj",
+          "numinlets": 0,
+          "numoutlets": 1,
+          "patching_rect": [
+            70,
+            35,
+            90,
+            22
+          ],
+          "text": "in 1"
+        }
+      },
+      {
+        "box": {
+          "id": "in1",
+          "maxclass": "newobj",
+          "numinlets": 0,
+          "numoutlets": 1,
+          "patching_rect": [
+            190,
+            35,
+            90,
+            22
+          ],
+          "text": "in 2"
+        }
+      },
+      {
+        "box": {
+          "id": "out0",
+          "maxclass": "newobj",
+          "numinlets": 1,
+          "numoutlets": 0,
+          "patching_rect": [
+            70,
+            620,
+            90,
+            22
+          ],
+          "text": "out 1"
+        }
+      },
+      {
+        "box": {
+          "id": "out1",
+          "maxclass": "newobj",
+          "numinlets": 1,
+          "numoutlets": 0,
+          "patching_rect": [
+            190,
+            620,
+            90,
+            22
+          ],
+          "text": "out 2"
+        }
+      },
+      {
+        "box": {
+          "id": "out2",
+          "maxclass": "newobj",
+          "numinlets": 1,
+          "numoutlets": 0,
+          "patching_rect": [
+            310,
+            620,
+            90,
+            22
+          ],
+          "text": "out 3"
+        }
+      },
+      {
+        "box": {
+          "id": "out3",
+          "maxclass": "newobj",
+          "numinlets": 1,
+          "numoutlets": 0,
+          "patching_rect": [
+            430,
+            620,
+            90,
+            22
+          ],
+          "text": "out 4"
+        }
+      },
+      {
+        "box": {
+          "id": "out4",
+          "maxclass": "newobj",
+          "numinlets": 1,
+          "numoutlets": 0,
+          "patching_rect": [
+            550,
+            620,
+            90,
+            22
+          ],
+          "text": "out 5"
+        }
+      }
+    ],
+    "lines": [
+      {
+        "patchline": {
+          "source": [
+            "in0",
+            0
+          ],
+          "destination": [
+            "code",
+            0
+          ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "in1",
+            0
+          ],
+          "destination": [
+            "code",
+            1
+          ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "code",
+            0
+          ],
+          "destination": [
+            "out0",
+            0
+          ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "code",
+            1
+          ],
+          "destination": [
+            "out1",
+            0
+          ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "code",
+            2
+          ],
+          "destination": [
+            "out2",
+            0
+          ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "code",
+            3
+          ],
+          "destination": [
+            "out3",
+            0
+          ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "code",
+            4
+          ],
+          "destination": [
+            "out4",
+            0
+          ]
+        }
+      }
+    ],
+    "autosave": 0
+  }
+}

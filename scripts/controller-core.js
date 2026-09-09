@@ -1,7 +1,11 @@
 autowatch=1;inlets=1;outlets=3;
-include("lens_protocol.js");include("lens_features.js");include("lens_visual.js");
-var self=this,analysis=new LensFeatures.Engine(),visual=new LensVisual.Engine();
-var P={master:.4,brightness:.55,sensitivity:1,trails:.25,detail:.55,bassWeight:1.2,focus:0,scene:0,palette:0,detector:false,detectorBand:8,impactLo:35,impactHi:160,impactSensitivity:1,impactGap:.16,freeze:false,black:false,fx:true,fxdepth:.85,monitor:false,loop:false,input:0,livegain:1,plugin:false};
+include("lens_protocol.js");include("lens_features.js");include("lens_measurements.js");include("lens_behaviours.js");include("lens_events.js");include("lens_interaction.js");include("lens_transition.js");include("lens_presentation.js");include("lens_visual.js");
+var initialized=false;
+var self=this,analysis=new LensFeatures.Engine(),measurements=new LensMeasurements.Engine(),events=new LensEvents.Engine();
+var interaction=new LensInteraction.Engine(),presentation=new LensPresentation.Engine(),visual=new LensVisual.Engine(interaction);
+var behaviours=new LensBehaviours.Engine(),roleMaskChanged=false;
+var audioSampleRate=44100,measured=null,perception=events.snapshot(),behaviourFrame=analysis.snapshot();
+var P={master:.4,brightness:.55,sensitivity:1,trails:.25,detail:.55,bassWeight:1.2,focus:0,scene:0,palette:0,detector:false,detectorBand:8,impactLo:35,impactHi:160,impactSensitivity:1,impactGap:.16,freeze:false,black:false,fx:true,fxdepth:.85,monitor:false,loop:false,input:0,livegain:1,plugin:false,role:0,roles:LensBehaviours.defaults(),transition:.85,eventAmount:.7,inspector:0};
 var file="",pendingFile="",loaded=false,running=false,paused=false,position=0,duration=0,samplerate=0,channels=2;
 var hw=false,identity=false,layout=false,connected=false,inputPort="none",outputPort="none",lastReply=0,lastQuery=0,lastLed={},midiStatus=0,midiData=[],sx=null;
 var enumerating=false,portLists={input:[],output:[]};
@@ -21,14 +25,15 @@ function rootPath(){return self.patcher.filepath.replace(/\/patchers\/[^\/]+$/,"
 function log(s){post("LENS: "+s+"\n");if(logPath){var f=new File(logPath,"write","TEXT");if(f.isopen){f.position=f.eof;f.writeline(s);f.close();}}}
 function status(s){message=s;uiDirty=true;log(s);}
 function init(){
+ if(initialized)return;initialized=true;
  ramp("master",P.master);ramp("monitor",0);ramp("file-gain",1);ramp("live-gain",0);ramp("mono",0);ramp("plugin-dry",1);ramp("plugin-wet",0);
  msg("analysis","impactLo",P.impactLo);msg("analysis","impactHi",P.impactHi);msg("vst","disable",1);msg("recorder","samptype","float32");msg("poll","int",1);refreshports();
- tickTask.interval=33;tickTask.repeat();status("READY · 五個聲音行為 · v1.2.1");
+ tickTask.interval=33;tickTask.repeat();status("READY · 五個聲音行為 · v1.3.0");
 }
 function openfile(){msg("file-dialog","bang");}
 function demo(){loadfile(rootPath()+"media/Lunar-Departure-demo.wav");}
 function loadfile(path){var a=arrayfromargs(arguments);path=a.join(" ");var check=new File(path,"read");if(!check.isopen){status("無法開啟音訊："+path);return;}check.close();
- stop();file="";loaded=false;duration=0;channels=0;pendingFile=path;analysis.reset();visual.clear();
+ stop();file="";loaded=false;duration=0;channels=0;pendingFile=path;resetAnalysis();visual.clear();
  msg("info","open",path);
 }
 function filechannels(n){channels=Number(n);if(channels<1||!pendingFile)return;
@@ -39,27 +44,28 @@ function fileduration(n){duration=Math.max(0,Number(n)/1000);}
 function filerate(n){samplerate=Number(n);}
 function fileposition(n){if(running||paused)position=Math.max(0,Number(n)/1000);}
 function play(){if(running)return;if(P.input===0&&!loaded){status("請先載入音訊，或按 DEMO。");return;}
- msg("dsp","start");running=true;analysis.reset();visual.clear();
+ msg("dsp","start");running=true;resetAnalysis();visual.clear();
  if(P.input===0){if(paused)msg("player","resume");else msg("player","int",1);}else ramp("live-gain",P.livegain);
  paused=false;status(P.input?"LIVE INPUT 分析中":"播放中 · 原速 1×");
 }
 function pause(){if(!running){play();return;}running=false;paused=true;if(P.input===0)msg("player","pause");else ramp("live-gain",0);releaseall();status("已暫停");}
-function stop(){running=false;paused=false;position=0;msg("player","int",0);ramp("live-gain",0);releaseall();analysis.reset();visual.clear();P.freeze=false;status("已停止");}
+function stop(){running=false;paused=false;position=0;msg("player","int",0);ramp("live-gain",0);releaseall();resetAnalysis();visual.clear();P.freeze=false;status("已停止");}
 function restart(){if(P.input===0&&loaded){P.freeze=false;seek(0);status("從頭播放 · 原速 1×");}else{stop();play();}}
 // sfplay~ also bangs after an explicit 0. A deferred halt from before a restart
 // must not finish the new playback. Position snapshots arrive every 100 ms.
 function fileended(){if(running&&P.input===0&&!P.loop&&position+.25>=duration){running=false;paused=false;position=duration;releaseall();status("播放完畢");}}
-function seek(fraction){if(!loaded||P.input!==0||duration<=0)return;releaseall();analysis.reset();visual.clear();position=LensFeatures.clamp(Number(fraction),0,.999)*duration;running=true;paused=false;msg("dsp","start");msg("player","seek",position*1000);}
+function seek(fraction){if(!loaded||P.input!==0||duration<=0)return;releaseall();resetAnalysis();visual.clear();position=LensFeatures.clamp(Number(fraction),0,.999)*duration;running=true;paused=false;msg("dsp","start");msg("player","seek",position*1000);}
 function param(name,v){if(P[name]===undefined)return;
  if(["fx","freeze","black","monitor","loop","plugin","detector"].indexOf(name)>=0)v=Number(v)!==0;
- else {v=Number(v);if(!isFinite(v))return;var ranges={sensitivity:[.35,2.5],bassWeight:[.6,1.8],scene:[0,5],focus:[0,5],palette:[0,6],detectorBand:[0,8],livegain:[0,4],impactLo:[20,160],impactHi:[70,400],impactSensitivity:[.4,2.5],impactGap:[.08,.4]},r=ranges[name]||[0,1];v=LensFeatures.clamp(v,r[0],r[1]);if(["scene","focus","input","palette","detectorBand"].indexOf(name)>=0)v=Math.round(v);}
+ else {v=Number(v);if(!isFinite(v))return;var ranges={transition:[0,3],role:[0,4],inspector:[0,2],sensitivity:[.35,2.5],bassWeight:[.6,1.8],scene:[0,5],focus:[0,5],palette:[0,6],detectorBand:[0,8],livegain:[0,4],impactLo:[20,160],impactHi:[70,400],impactSensitivity:[.4,2.5],impactGap:[.08,.4]},r=ranges[name]||[0,1];v=LensFeatures.clamp(v,r[0],r[1]);if(["scene","focus","input","palette","detectorBand","role","inspector"].indexOf(name)>=0)v=Math.round(v);}
  if(name==="impactLo")v=Math.min(v,P.impactHi-25);
  if(name==="impactHi")v=Math.max(v,P.impactLo+25);
- if(name==="input"&&v!==P.input){stop();analysis.reset();visual.clear();P.monitor=false;ramp("monitor",0);ramp("file-gain",v?0:1);}
+ if(name==="input"&&v!==P.input){stop();resetAnalysis();visual.clear();P.monitor=false;ramp("monitor",0);ramp("file-gain",v?0:1);}
  if(name==="plugin"&&v&&!pluginReady){status("先選擇並載入效果器，再啟用。 ");return;}
  P[name]=v;
  uiDirty=true;
  if(name==="impactLo"||name==="impactHi"){msg("analysis",name,v);analysis.resetImpact();visual.impacts=[];}
+ if(name==="impactSensitivity")P.roles[0].sensitivity=v;
  if(name==="master")ramp("master",v);
  if(name==="monitor"){ramp("monitor",v?1:0);if(v)msg("dsp","start");}
  if(name==="loop")msg("player","loop",v?1:0);
@@ -70,20 +76,43 @@ function param(name,v){if(P[name]===undefined)return;
 }
 function blackout(){param("black",P.black?0:1);}
 function audio(){param("monitor",P.monitor?0:1);}
-function releaseall(){visual.held={};msg("fx","amount",0);}
-function clear(){releaseall();visual.clear();P.freeze=false;status("已清除殘影與按壓狀態");}
+function releaseall(){interaction.releaseAll();msg("fx","amount",0);}
+function clear(){releaseall();visual.clear();presentation.clear();P.freeze=false;status("已清除殘影與按壓狀態");}
 function features(){
  var a=arrayfromargs(arguments),t=now(),before=analysis.counts[0];lastFeatures=t;
- analysis.step(running?a:[],t,P.sensitivity,P.impactSensitivity,P.impactGap);
+ analyse(running?a:[],t);
  analysisMs=(now()-t)*1000;
  // Dispatch the low attack on arrival, then restart the regular 33 ms tail clock.
  // A hit must not wait in an unrelated animation timer's queue for one more frame.
  if(analysis.counts[0]>before){render();tickTask.cancel();tickTask.repeat(-1,33);}
 }
+function resetAnalysis(){analysis.reset();behaviours.reset();measurements.reset();events.reset();presentation.clear();measured=null;perception=events.snapshot();behaviourFrame=analysis.snapshot();}
+function spectral(){measurements.spectrum(arrayfromargs(arguments),now());}
+function contextual(){measurements.contextual(arrayfromargs(arguments),now());}
+function audiorate(n){if(Number(n)>8000)audioSampleRate=Number(n);}
+function analyse(a,t){
+ var f=analysis.step(a,t,P.sensitivity,P.impactSensitivity,P.impactGap);
+ measured=measurements.step(a,t,audioSampleRate,f.active);
+ behaviourFrame=behaviours.step(f,a,P.roles,t);
+ if(roleMaskChanged){visual.lastCounts=behaviourFrame.counts.slice();events.lastCounts=behaviourFrame.counts.slice();roleMaskChanged=false;}
+ perception=events.step(measured,behaviourFrame,t);
+}
+function roleedit(i){param("role",i);param("inspector",0);param("detector",1);}
+function roleparam(name,value){
+ var r=P.roles[P.role],v=Number(value),range={sensitivity:[.4,2.5],gain:[0,2],width:[.5,1.8],release:[.3,3]}[name];
+ if(!range||!isFinite(v))return;r[name]=LensFeatures.clamp(v,range[0],range[1]);
+ if(P.role===0&&name==="sensitivity")param("impactSensitivity",r[name]);uiDirty=true;
+}
+function roleband(i){
+ if(P.role===0)return;i=Math.round(Number(i));if(i<0||i>7)return;
+ var bands=P.roles[P.role].bands,index=bands.indexOf(i);
+ if(index>=0)bands.splice(index,1);else bands.push(i);bands.sort(function(a,b){return a-b;});roleMaskChanged=true;uiDirty=true;
+}
+function rolereset(){P.roles[P.role]=LensBehaviours.defaults()[P.role];roleMaskChanged=true;if(P.role===0)detectorreset();uiDirty=true;}
 function metervalue(v){meter=Number(v);}
-function pad(note,velocity){note=Number(note);velocity=Number(velocity);if(velocity<=0){padup(note);return;}if(!visual.touch(note,velocity)){cc(note,velocity);return;}message="觸點 "+(note%10)+" · "+Math.floor(note/10)+"／按壓聚光，鬆開釋放";render();}
-function padup(note){visual.release(Number(note));}
-function pressure(note,value){visual.pressure(Number(note),Number(value));}
+function pad(note,velocity){note=Number(note);velocity=Number(velocity);if(velocity<=0){padup(note);return;}if(!interaction.touch(note,velocity)){cc(note,velocity);return;}message="觸點 "+(note%10)+" · "+Math.floor(note/10)+"／按壓聚光，鬆開釋放";render();}
+function padup(note){interaction.release(Number(note));}
+function pressure(note,value){interaction.pressure(Number(note),Number(value));}
 function cc(n,v){if(v<=0)return;
  if(n>=101&&n<=108)n-=100;buttonUntil[n]=now()+.18;if(n>=1&&n<=8)buttonUntil[n+100]=buttonUntil[n];
  if(n===91)pause();else if(n===92)stop();else if(n===93)restart();else if(n===94)blackout();
@@ -94,13 +123,13 @@ function cc(n,v){if(v<=0)return;
  else if(n===7)param("bassWeight",P.bassWeight>1.5?.8:P.bassWeight+.4);else if(n===8)defaults();
 }
 function palettecycle(){param("palette",(P.palette+1)%7);}
-function inspectband(i){param("detectorBand",i);param("detector",1);}
-function detectorreset(){param("impactLo",35);param("impactHi",160);param("impactSensitivity",1);param("impactGap",.16);}
-function defaults(){var d={brightness:.55,sensitivity:1,trails:.25,detail:.55,bassWeight:1.2,focus:0,scene:0,palette:0,detector:false,freeze:false,black:false,fx:true,fxdepth:.85};for(var k in d)param(k,d[k]);clear();status("視覺與觸控效果已恢復預設，播放與音量保持原狀。");}
+function inspectband(i){param("detectorBand",i);param("inspector",2);param("detector",1);}
+function detectorreset(){param("impactLo",35);param("impactHi",160);param("impactSensitivity",1);param("impactGap",.16);P.roles[0].sensitivity=1;}
+function defaults(){var d={brightness:.55,sensitivity:1,trails:.25,detail:.55,bassWeight:1.2,focus:0,scene:0,palette:0,detector:false,transition:.85,eventAmount:.7,freeze:false,black:false,fx:true,fxdepth:.85};for(var k in d)param(k,d[k]);clear();status("視覺與觸控效果已恢復預設，播放與音量保持原狀。");}
 function render(){
  var t=now(),dt=lastFrame?LensFeatures.clamp(t-lastFrame,.001,.1):.05;lastFrame=t;
- if(t-lastFeatures>.15)analysis.step([],t,P.sensitivity);
- var f=analysis.snapshot(),leds=visual.step(f,dt,P),g=visual.gesture();
+ if(t-lastFeatures>.15)analyse([],t);
+ var f=behaviourFrame,display=presentation.step(f,perception,dt,P.eventAmount),leds=visual.step(display,dt,P),g=interaction.gesture();
  var computed=now();
  fxparam("amount",P.fx&&g.count?(.25+g.strength*.75)*P.fxdepth*.95:0);fxparam("pressure",g.strength);fxparam("tone",g.y);fxparam("distance",g.x);
  var fxSent=now();
@@ -113,7 +142,7 @@ function render(){
   if(uiDict){uiDict.parse(packet);outlet(0,"dictionary",uiDict.name);}else outlet(0,"state",packet);
  }
  if(capture&&capture.isopen){
-  pendingCapture={time:t,position:position,running:running,features:f,raw:analysis.raw,leds:leds,gesture:g,params:P,featureTime:lastFeatures,analysisMs:analysisMs,renderMs:(now()-t)*1000,computeMs:(computed-t)*1000,fxMs:(fxSent-computed)*1000,uiMs:(now()-fxSent)*1000,uiProfile:uiProfile};
+  pendingCapture={time:t,position:position,running:running,features:f,measurements:measured,perception:perception,transition:visual.transition.snapshot(),raw:analysis.raw,leds:leds,gesture:g,params:P,featureTime:lastFeatures,analysisMs:analysisMs,renderMs:(now()-t)*1000,computeMs:(computed-t)*1000,fxMs:(fxSent-computed)*1000,uiMs:(now()-fxSent)*1000,uiProfile:uiProfile};
   // Max can defer messages returning to the same JS object. Flush from the
   // snapshot reply, rather than accidentally storing the PREVIOUS frame position.
   if(running&&P.input===0)msg("capture-position","bang");else frameposition(position*1000);
@@ -122,7 +151,7 @@ function render(){
 }
 var tickTask=new Task(render,this);
 function frameposition(ms){if(!pendingCapture)return;pendingCapture.position=Math.max(0,Number(ms)/1000);if(capture&&capture.isopen){capture.writeline(JSON.stringify(pendingCapture));if(++captureFrames>60000)capturestop();}pendingCapture=null;}
-function snapshot(leds){return {params:P,features:analysis.snapshot(),leds:leds||visual.frame,gesture:visual.gesture(),file:file.split("/").pop(),loaded:loaded,running:running,paused:paused,position:position,duration:duration,samplerate:samplerate,channels:channels,connected:connected,requested:hw,inputPort:inputPort,outputPort:outputPort,message:message,rec:rec,meter:meter,plugin:pluginName,pluginReady:pluginReady,frame:frameNo};}
+function snapshot(leds){return {params:P,features:behaviourFrame,measurements:measured,perception:perception,transition:visual.transition.snapshot(),leds:leds||visual.frame,gesture:interaction.gesture(),file:file.split("/").pop(),loaded:loaded,running:running,paused:paused,position:position,duration:duration,samplerate:samplerate,channels:channels,connected:connected,requested:hw,inputPort:inputPort,outputPort:outputPort,message:message,rec:rec,meter:meter,plugin:pluginName,pluginReady:pluginReady,frame:frameNo};}
 function sendFrame(leds){var entries=[],i,n,c,old;for(i=0;i<64;i++){n=MoonProtocol.pad(i%8,Math.floor(i/8));c=leds.slice(i*3,i*3+3);old=lastLed[n];if(!old||c.join()!=old.join()){entries.push([n].concat(c));lastLed[n]=c;}}
  var edge=[[91,running],[92,!running],[93,0],[94,P.black],[95,P.freeze],[96,P.fx],[97,P.trails>.65],[98,0],[89,P.scene===0],[79,P.scene===1],[69,P.scene===2],[59,P.scene===3],[49,P.scene===4],[39,P.scene===5],[29,P.palette!==0],[19,P.detector],[1,P.focus===0],[2,P.focus===1],[3,P.focus===2],[4,P.focus===3],[5,P.focus===4],[6,P.focus===5],[7,0],[8,0]];
  for(i=1;i<=8;i++)edge.push([100+i,i<=6?P.focus===i-1:0]);
@@ -179,4 +208,7 @@ function trace(v){traceOn=Number(v)!==0;}
 function checkpoint(){log("CHECK "+JSON.stringify({state:snapshot(),raw:analysis.raw,time:now()}));}
 function capturefile(path){capturestop();capture=new File(String(path),"write","TEXT");captureFrames=0;if(capture.isopen){capture.eof=0;capture.position=0;}}
 function capturestop(){pendingCapture=null;if(capture){capture.close();capture=null;}}
-function notifydeleted(){tickTask.cancel();recordOpenTask.cancel();recordTask.cancel();pluginTask.cancel();routeTask.cancel();capturestop();disconnect();if(rec)msg("recorder","int",0);}
+function notifydeleted(){bootTask.cancel();tickTask.cancel();recordOpenTask.cancel();recordTask.cancel();pluginTask.cancel();routeTask.cancel();capturestop();disconnect();if(rec)msg("recorder","int",0);}
+
+// Reinitialise a development autowatch reload as well as a fresh patch load.
+var bootTask=new Task(init,this);bootTask.schedule(500);

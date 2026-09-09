@@ -68,9 +68,10 @@ test('Both native JSUI panels paint finite controls; pointer actions dispatch an
  const u={mgraphics:graphics,post:e=>{throw Error(e);},outlet:(...a)=>{if(a[1]!=='uiperf')events.push(a);}};vm.createContext(u);vm.runInContext(fs.readFileSync(__dirname+'/../code/lens_ui.js','utf8'),u);
  c.render();u.state(JSON.stringify(c.snapshot()));u.paint();assert.equal(u.hit.filter(h=>h.args[0]==='scene').length,6);assert.equal(u.hit.filter(h=>h.cmd==='pad').length,64);
  const h=u.hit.find(h=>h.cmd==='pad');u.onclick(h.x+4,h.y+4);u.ondrag(h.x+4,h.y-30,1);u.ondrag(h.x,h.y,0);assert.equal(events[0][1],'pad');assert.equal(events.at(-1)[1],'padup');
- c.P.detector=true;u.state(JSON.stringify(c.snapshot()));u.paint();for(const name of ['impactLo','impactHi','impactSensitivity','impactGap']){
+ c.P.detector=true;u.state(JSON.stringify(c.snapshot()));u.paint();for(const name of ['impactLo','impactHi','impactGap']){
   const h=u.hit.find(h=>h.args[0]===name);assert(h);u.onclick(h.x+h.w,h.y+4);assert.equal(events.at(-1)[2],name);assert.equal(events.at(-1)[3],h.hi);
  }
+ const sensitivity=u.hit.find(h=>h.cmd==='roleparam'&&h.args[0]==='sensitivity');assert(sensitivity);u.onclick(sensitivity.x+sensitivity.w,sensitivity.y+4);assert.equal(events.at(-1)[1],'roleparam');
 });
 test('The independent fast preview maps all 64 cells and releases mouse pressure',()=>{
  const events=[],g={mgraphics:new Proxy({},{get:()=>()=>{}}),arrayfromargs:a=>Array.from(a),outlet:(...a)=>events.push(a)};

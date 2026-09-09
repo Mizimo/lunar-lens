@@ -26,7 +26,7 @@ function paint(){
  var paintStart=new Date().getTime();
  rect(0,0,1180,830,C.bg);hit=[];
  text("LUNAR LENS",28,46,29);text("重量、延續、碎裂，各自成形。",30,72,12,C.dim);
- text("AUDIO → FORM → TOUCH",849,43,13,C.cyan);text("Max · Launchpad Pro MK3 · 1.2.1",849,66,11,C.dim);
+ text("MEASURE → EVENT → FORM",849,43,13,C.cyan);text("Max · Launchpad Pro MK3 · 1.3.0",849,66,11,C.dim);
  if(!S){text("正在建立音訊分析與燈光引擎…",28,150,16,C.cyan);return;}
  var p=S.params,f=S.features,i,x,y;
  button("載入音訊",28,96,93,"openfile");button("DEMO",129,96,66,"demo");
@@ -45,9 +45,9 @@ function paint(){
  button("檔案",28,269,76,"param",["input",0],p.input===0);
  button("即時輸入 1/2",112,269,131,"param",["input",1],p.input===1);
 
- text("聲音角色 / 按右側獨看",28,364,11,C.dim);button("全層",238,346,54,"param",["focus",0],p.focus===0);
+ text("聲音行為 / 各自調整",28,364,11,C.dim);button("全層",238,346,54,"param",["focus",0],p.focus===0);
  var labels=["低頻衝擊","地基  BODY","前景  PHRASE","鋪陳  BED","細節  DETAIL"],colors=[C.cyan,C.gold,[.93,.4,.63,1],C.violet,[.78,.87,.96,1]];
- for(i=0;i<5;i++){y=389+i*36;text(labels[i],28,y,11,C.dim);var states={rest:"休止",attack:"起音",release:"退去",moving:"活動",sustain:"延續"};text(states[(f.behaviour||{states:[]}).states[i]]||"",181,y,10,colors[i]);rect(28,y+11,183,4,C.line,2);rect(28,y+11,Math.max(1,(f.roles[i]||0)*183),4,colors[i],2);button("獨看",238,y-15,54,"param",["focus",p.focus===i+1?0:i+1],p.focus===i+1,colors[i]);}
+ for(i=0;i<5;i++){y=389+i*36;text(labels[i],28,y,11,C.dim);var states={rest:"休止",attack:"起音",release:"退去",moving:"活動",sustain:"延續"};text(states[(f.behaviour||{states:[]}).states[i]]||"",181,y,10,colors[i]);rect(28,y+11,183,4,C.line,2);rect(28,y+11,Math.max(1,(f.roles[i]||0)*183),4,colors[i],2);button("調",211,y-15,28,"roleedit",[i],p.detector&&p.role===i);button("看",246,y-15,46,"param",["focus",p.focus===i+1?0:i+1],p.focus===i+1,colors[i]);}
  text("力度  "+f.db.toFixed(1)+" dBFS",28,575,12);text("峰均比 "+f.crest.toFixed(1)+" dB",179,575,10,C.dim);
  text("8 起音",28,601,9,C.dim);
  for(i=0;i<8;i++){
@@ -72,7 +72,7 @@ function paint(){
  var paletteNames=["隨構圖","琥珀冰川","月夜紫羅蘭","翡翠珊瑚","鈷藍熔岩","蘭花青檸","桃紅電光"];
  text("COMPOSITION",810,173,10,C.dim);button(paletteNames[p.palette||0],933,152,113,"palettecycle",[],p.palette>0,C.gold);button("VST / AU",1056,152,96,"pluginpanel",[],p.plugin,C.gold);
  if(!p.detector){for(i=0;i<6;i++)button(scenes[i],810,190+i*29,342,"param",["scene",i],p.scene===i,i===0?C.cyan:C.violet);
- slider("低頻重量",p.bassWeight,810,375,342,"param",["bassWeight"],.6,1.8,p.bassWeight.toFixed(2)+"×");
+ slider("構圖轉場",p.transition,810,375,342,"param",["transition"],0,3,p.transition.toFixed(2)+" s");
  slider("光線亮度",p.brightness,810,417,342,"param",["brightness"],0,1);
  slider("殘影長度",p.trails,810,459,342,"param",["trails"],0,1,undefined,C.violet);
  slider("感應靈敏度",p.sensitivity,810,501,342,"param",["sensitivity"],.35,2.5,p.sensitivity.toFixed(2)+"×");
@@ -84,25 +84,63 @@ function paint(){
  text(p.fx?"濾色、空間、壓力顆粒":"鬆開回到原音",979,638,10,C.dim);
  slider("效果深度",p.fxdepth,810,670,342,"param",["fxdepth"],0,1,undefined,C.gold);
  }else{
-  text("分頻起音 / 低頻範圍",810,213,17,C.cyan);
-  text("8 段各自偵測；以下範圍控制低頻衝擊。",810,239,11,C.dim);
-  slider("下限 / Hz",p.impactLo,810,278,342,"param",["impactLo"],20,160,Math.round(p.impactLo)+" Hz");
-  slider("上限 / Hz",p.impactHi,810,330,342,"param",["impactHi"],70,400,Math.round(p.impactHi)+" Hz");
-  slider("觸發靈敏度",p.impactSensitivity,810,382,342,"param",["impactSensitivity"],.4,2.5,p.impactSensitivity.toFixed(2)+"×");
-  slider("最短間隔",p.impactGap,810,434,342,"param",["impactGap"],.08,.4,Math.round(p.impactGap*1000)+" ms");
-  var selected=p.detectorBand===undefined?8:p.detectorBand;
-  for(i=0;i<9;i++)button(i===8?"LOW":String(i+1),810+i*38,471,i===8?38:31,"param",["detectorBand",i],selected===i);
-  var names=["30–70","70–140","140–280","280–600","600–1500","1500–3500","3500–7500","7500–16000"],imp=selected===8?f.impact:(f.bandDynamics||[])[selected];
-  imp=imp||{rise:0,threshold:0,count:0};
-  text((selected===8?"可調低頻":names[selected]+" Hz")+"  ·  次數 "+(imp.count||0)+"  ·  力度 "+Math.round((imp.strength||0)*100)+"%",810,526,13);
-  text("上升量 "+imp.rise.toFixed(3)+"  ·  門檻 "+imp.threshold.toFixed(3),810,552,12,C.dim);
-  text(selected===8?"能量比 "+imp.ratio.toFixed(2)+" / 1.35 · 起音也需過門檻":"亮柱是能量，上方短閃是各段起音。",810,581,11,C.dim);
-  text("低頻：1.1 判斷 · 其餘八段保留獨立動態。",810,604,11,C.dim);
-  button("恢復偵測",810,624,155,"detectorreset");
-  button("返回構圖",979,624,173,"param",["detector",0],true);
+  button("行為調整",810,190,105,"param",["inspector",0],p.inspector===0);
+  button("事件與測量",923,190,116,"param",["inspector",1],p.inspector===1);
+  button("原始診斷",1047,190,105,"param",["inspector",2],p.inspector===2);
+  if(p.inspector===0){
+   var shortNames=["IMPACT","BODY","PHRASE","BED","DETAIL"];
+   for(i=0;i<5;i++)button(shortNames[i],810+i*69,232,i===2?68:65,"roleedit",[i],p.role===i,colors[i]);
+   var rs=p.roles[p.role];text(labels[p.role]+" · 獨立參數",810,288,16,colors[p.role]);
+   slider(p.role===0?"起音靈敏度":"行為響應",p.role===0?p.impactSensitivity:rs.sensitivity,810,321,342,"roleparam",["sensitivity"],.4,2.5,(p.role===0?p.impactSensitivity:rs.sensitivity).toFixed(2)+"×");
+   slider("視覺份量",rs.gain,810,363,342,"roleparam",["gain"],0,2,rs.gain.toFixed(2)+"×");
+   slider("形體寬度",rs.width,810,405,342,"roleparam",["width"],.5,1.8,rs.width.toFixed(2)+"×");
+   slider("延續 / 殘影",rs.release,810,447,342,"roleparam",["release"],.3,3,rs.release.toFixed(2)+"×");
+   if(p.role===0){
+    slider("分析下限",p.impactLo,810,495,161,"param",["impactLo"],20,160,Math.round(p.impactLo)+" Hz");
+    slider("分析上限",p.impactHi,991,495,161,"param",["impactHi"],70,400,Math.round(p.impactHi)+" Hz");
+    slider("重觸間隔",p.impactGap,810,540,342,"param",["impactGap"],.08,.4,Math.round(p.impactGap*1000)+" ms");
+    text("能量比 "+(f.impact.ratio||0).toFixed(2)+" / 1.35 · 原起音保護保留",810,589,11,C.dim);
+   }else{
+    text("分析音域 / 點選納入，重疊頻帶可複選",810,501,11,C.dim);
+    var bandLabels=["30","70","140","280","600","1.5k","3.5k","7.5k"];
+    for(i=0;i<8;i++)button(bandLabels[i],810+i*43,517,39,"roleband",[i],rs.bands.indexOf(i)>=0,colors[p.role]);
+    text("標示頻帶下限 Hz；最高延伸至 16 kHz。",810,567,10,C.dim);
+    text("粗音域選擇影響本行為，播放 EQ 不變。",810,590,11,C.dim);
+   }
+   button("只還原這個行為",810,620,167,"rolereset");button("獨看 / 比較",985,620,167,"param",["focus",p.focus===p.role+1?0:p.role+1],p.focus===p.role+1,colors[p.role]);
+  }else if(p.inspector===1){
+   var mm=S.measurements,pp=S.perception||{events:[],state:{}},st=pp.state||{};
+   text("音訊 → 測量 → 事件",810,254,17,C.cyan);
+   if(mm){
+    text(mm.spectrum.valid?"FFT 2048 · 形狀分析運行中":"FFT 等待新音訊",810,280,11,C.dim);
+    text("頻譜重心  "+Math.round(mm.spectrum.centroidHz)+" Hz",810,313,13);
+    text("展寬  "+Math.round(mm.spectrum.spreadHz)+" Hz",1000,313,11,C.dim);
+    text("平坦度  "+mm.spectrum.flatness.toFixed(3)+" · 分散度  "+mm.spectrum.entropy.toFixed(2),810,341,12);
+    text("能量 0.4s / 3s  "+mm.level.momentaryDb.toFixed(1)+" / "+mm.level.shortTermDb.toFixed(1)+" dBFS",810,369,12);
+    text("左右相關  "+mm.space.correlation.toFixed(2)+" · 偏移  "+mm.space.balance.toFixed(2),810,397,12);
+   }
+   text("起音密度  "+(st.densityHz||0).toFixed(1)+" /s · 結構變化  "+Math.round((st.structureNovelty||0)*100)+"%",810,430,12,C.gold);
+   var typeNames={onset:"起音","role.enter":"行為進入","role.exit":"行為退去","sound.enter":"聲音進入","sound.exit":"聲音消失","structure.change":"結構變化候選","texture.change":"音色變化","dynamics.rise":"能量累積","dynamics.fall":"能量釋放"};
+   var recent=pp.events.filter(function(e){return e.type!=="onset";}).slice(-4);
+   for(i=0;i<recent.length;i++){var event=recent[recent.length-1-i];text((typeNames[event.type]||event.type)+(event.role?" · "+event.role:""),810,467+i*27,12,C.cyan);text(Math.round(event.strength*100)+" / "+Math.round(event.confidence*100)+"%",1075,467+i*27,11,C.dim);}
+   text("右側：強度 / 啟發式信心；不是段落真值。",810,583,10,C.dim);
+   slider("事件視覺份量",p.eventAmount,810,622,342,"param",["eventAmount"],0,1);
+  }else{
+   text("原始頻帶診斷",810,261,17,C.cyan);
+   text("這裡檢查測量；五個行為請在行為調整頁操作。",810,289,10,C.dim);
+   var selected=p.detectorBand===undefined?8:p.detectorBand;
+   for(i=0;i<9;i++)button(i===8?"LOW":String(i+1),810+i*38,320,i===8?38:31,"param",["detectorBand",i],selected===i);
+   var names=["30–70","70–140","140–280","280–600","600–1500","1500–3500","3500–7500","7500–16000"],imp=selected===8?f.impact:(f.bandDynamics||[])[selected];
+   imp=imp||{rise:0,threshold:0,count:0};
+   text((selected===8?"IMPACT 可調探針":names[selected]+" Hz")+" · "+(imp.count||0)+" 次",810,395,14);
+   text("起音量 "+imp.rise.toFixed(3)+" / 門檻 "+imp.threshold.toFixed(3),810,438,12,C.dim);
+   text("最近一次力度 "+Math.round((imp.strength||0)*100)+"%",810,481,12,C.dim);
+   text(selected===8?"能量比 "+(imp.ratio||0).toFixed(2)+" / 1.35":"亮柱是能量；柱上短閃是該頻帶起音。",810,524,12,C.dim);
+  }
+  button("返回構圖",810,670,342,"param",["detector",0],true);
  }
- button(p.detector?"返回構圖":"分頻起音設定",28,315,128,"param",["detector",p.detector?0:1],p.detector);
- text(Math.round(p.impactLo)+"–"+Math.round(p.impactHi)+" Hz",170,334,11,C.dim);
+ button(p.detector?"返回構圖":"行為 / 事件",28,315,128,"param",["detector",p.detector?0:1],p.detector);
+ text(S.transition&&S.transition.active?"轉場中 "+Math.round(S.transition.progress*100)+"%":"五個行為獨立控制",170,334,10,C.dim);
  line(28,708,1152,708,C.line);
  text("MIDI IN",28,732,10,C.dim);text("LED OUT",335,732,10,C.dim);
  // Native MIDI menus occupy y743, above this JSUI.

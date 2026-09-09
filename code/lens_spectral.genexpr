@@ -1,0 +1,33 @@
+// pfft~ 2048 / overlap 4. Stereo power avoids antiphase cancellation.
+// Six dimensionless descriptors, latched together at a frame boundary.
+Data previous(1024);
+History mass(0); History moment(0); History moment2(0); History logarithms(0);
+History plogp(0); History squareSum(0); History oldSquareSum(0); History dot(0);
+History maximum(0); History count(0); History frameCount(0);
+History centroid(0); History spread(0); History flatness(0); History novelty(0);
+History concentration(0); History entropy(0);
+index=clamp(floor(in5),0,1023);
+if(index==0){
+ if(count>0 && mass>0.000000000001){
+  centroid=moment/mass;
+  spread=sqrt(max(0,moment2/mass-centroid*centroid));
+  flatness=clamp(exp(logarithms/count)/(mass/count),0,1);
+  novelty=oldSquareSum>0.000000000001 ? clamp(1-dot/sqrt(max(0.000000000001,squareSum*oldSquareSum)),0,1) : 0;
+  concentration=maximum/mass;
+  entropy=clamp((log(mass)-plogp/mass)/log(max(2,count)),0,1);
+ } else {centroid=0;spread=0;flatness=0;novelty=0;concentration=0;entropy=0;}
+ mass=0;moment=0;moment2=0;logarithms=0;plogp=0;
+ squareSum=0;oldSquareSum=0;dot=0;maximum=0;count=0;frameCount=frameCount+1;
+}
+// Ignore DC; include the entire remaining non-redundant spectrum.
+power=(in1*in1+in2*in2+in3*in3+in4*in4)*0.5;
+old=peek(previous,index); poke(previous,power,index);
+if(index>0){
+ f=index/1024; mass=mass+power;moment=moment+power*f;moment2=moment2+power*f*f;
+ logarithms=logarithms+log(max(0.00000000000000000001,power));
+ plogp=plogp+power*log(max(0.00000000000000000001,power));
+ squareSum=squareSum+power*power;oldSquareSum=oldSquareSum+old*old;dot=dot+old*power;
+ maximum=max(maximum,power);count=count+1;
+}
+out1=centroid;out2=spread;out3=flatness;out4=novelty;
+out5=concentration;out6=entropy;out7=frameCount;

@@ -18,7 +18,7 @@ def grid(d,a,x,y,w):
 titles=['重力／沉積','天體／公轉','織光／經緯','門廊／縱深','雙生／呼應','拼光／碎片']
 palettes=['琥珀冰川','月夜紫羅蘭','翡翠珊瑚','鈷藍熔岩','蘭花青檸','桃紅電光']
 selected=json.loads((root/'tmp/visual-review-selected.json').read_text());im=Image.new('RGB',(1200,1100),'#080e18');d=ImageDraw.Draw(im)
-text(d,(32,22),'LUNAR LENS  1.2.1',30,'#edf4fc');text(d,(32,66),'同一音訊，同一時刻。六種空間構成，各自保留五個聲音行為。',18)
+text(d,(32,22),'LUNAR LENS  1.3.0',30,'#edf4fc');text(d,(32,66),'同一音訊，同一時刻。六種空間構成，各自保留五個聲音行為。',18)
 for i,t in enumerate(titles):
  x=32+(i%3)*396;y=112+(i//3)*330
  text(d,(x,y),f'0{i+1}  '+t,21,'#d6e4f2');text(d,(x+216,y+4),palettes[i],14);grid(d,selected['grids'][i],x,y+32,280)
@@ -35,7 +35,7 @@ for n in range(fps*duration):
  t=start+n/fps
  while idx+1<len(rows) and rows[idx+1]['time']<=origin+t:idx+=1
  row=rows[idx];im=Image.new('RGB',(1200,840),'#080e18');d=ImageDraw.Draw(im)
- text(d,(32,20),'LUNAR LENS  1.2.1 / 同一聲音，六種空間',27,'#edf4fc')
+ text(d,(32,20),'LUNAR LENS  1.3.0 / 同一聲音，六種空間',27,'#edf4fc')
  label='低頻＋短和弦＋打擊' if t<34 else '移除低頻：剩中頻短和弦' if t<38 else '只剩高頻短音' if t<42 else '停止後退暗'
  text(d,(32,62),label,18);text(d,(1040,26),f'{t:05.2f} s',21)
  for i,name in enumerate(titles):

@@ -17,6 +17,15 @@ write('patchers/lens_screen.js',read('code/lens_ui.js'));
 write('patchers/lens_grid.js',read('code/lens_grid.js'));
 write('code/lens_analysis.genexpr',analysisSource());
 gen('lens_analysis.gendsp','lens_analysis.genexpr',2,24);gen('lens_fx.gendsp','lens_fx.genexpr',2,2);
+gen('lens_context.gendsp','lens_context.genexpr',2,5);gen('lens_spectral.gendsp','lens_spectral.genexpr',5,7);
+// Spectral descriptors are a separate, slower measurement bus, polled as one list.
+const spectral=patch([100,100,980,600]);
+box(spectral,'left','fftin~ 1',20,20,120,1,3);box(spectral,'right','fftin~ 2',180,20,120,1,3);
+box(spectral,'shape','gen~ lens_spectral',20,90,280,5,7);
+wire(spectral,'left',0,'shape',0);wire(spectral,'left',1,'shape',1);wire(spectral,'right',0,'shape',2);wire(spectral,'right',1,'shape',3);wire(spectral,'left',2,'shape',4);
+box(spectral,'poll','in 3',380,20,90,0,1);box(spectral,'trigger','t b b b b b b b',380,90,190,1,7);wire(spectral,'poll',0,'trigger',0);
+box(spectral,'pack','pack f f f f f f f',20,230,260,7,1);box(spectral,'out','out 1',20,280,90,1,0);
+for(let i=0;i<7;i++){box(spectral,'snap'+i,'snapshot~',20+i*120,160,100,2,1);wire(spectral,'shape',i,'snap'+i,0);wire(spectral,'trigger',i,'snap'+i,0);wire(spectral,'snap'+i,0,'pack',i);}wire(spectral,'pack',0,'out',0);save('lens_spectral.maxpat',spectral);
 const p=patch(undefined,true);
 box(p,'ui',null,10,10,1180,1,1,{maxclass:'v8ui',filename:'lens_screen.js',varname:'ui',background:1,patching_rect:[10,10,1180,830],presentation:1,presentation_rect:[0,0,1180,830]});
 box(p,'controller','v8 lens_runtime.js',20,880,220,1,3,{varname:'controller'});wire(p,'ui',0,'controller',0);
@@ -48,6 +57,16 @@ for(let c=0;c<2;c++){
 box(p,'poll','qmetro 20',20,1610,100,2,1,{varname:'poll'});box(p,'trig','t '+Array(24).fill('b').join(' '),20,1650,1020,1,24);wire(p,'poll',0,'trig',0);
 box(p,'pack','pack '+Array(24).fill('f').join(' '),20,1780,1020,24,1);box(p,'featuretag','prepend features',20,1820,160);wire(p,'pack',0,'featuretag',0);wire(p,'featuretag',0,'controller',0);
 for(let i=0;i<24;i++){box(p,'snap'+i,'snapshot~',20+i*88,1720,80,2,1);wire(p,'analysis',i,'snap'+i,0);wire(p,'trig',i,'snap'+i,0);wire(p,'snap'+i,0,'pack',i);}
+box(p,'context','gen~ lens_context',1180,1520,240,2,5,{varname:'context'});
+box(p,'spectral','pfft~ lens_spectral 2048 4',1470,1520,250,3,1,{varname:'spectral'});
+for(let c=0;c<2;c++)for(const source of ['file'+c,'live'+c])for(const dest of ['context','spectral'])wire(p,source,0,dest,c);
+box(p,'context-trigger','t b b b b b',1180,1610,180,1,5);wire(p,'poll',0,'context-trigger',0);
+box(p,'context-pack','pack f f f f f',1180,1780,190,5,1);box(p,'context-tag','prepend contextual',1180,1820,190);wire(p,'context-pack',0,'context-tag',0);wire(p,'context-tag',0,'controller',0);
+for(let i=0;i<5;i++){box(p,'context-snap'+i,'snapshot~',1180+i*100,1720,95,2,1);wire(p,'context',i,'context-snap'+i,0);wire(p,'context-trigger',i,'context-snap'+i,0);wire(p,'context-snap'+i,0,'context-pack',i);}
+wire(p,'poll',0,'spectral',2);box(p,'spectral-tag','prepend spectral',1470,1580,180);wire(p,'spectral',0,'spectral-tag',0);wire(p,'spectral-tag',0,'controller',0);
+// Context and spectral replies precede the unmodified detector frame.
+for(const entry of p.lines){const l=entry.patchline;if(l.source[0]==='poll')l.order=l.destination[0]==='trig'?2:l.destination[0]==='spectral'?0:1;}
+box(p,'dsp-state','dspstate~',1740,1520,130,1,6);box(p,'sr-tag','prepend audiorate',1740,1580,160);wire(p,'dsp-state',1,'sr-tag',0);wire(p,'sr-tag',0,'controller',0);
 box(p,'vst','vst~ 2 2 @autosave 0',550,1870,240,2,8,{varname:'vst'});box(p,'plugin-dry','line~ 1.',400,1930,100,2,2,{varname:'plugin-dry'});box(p,'plugin-wet','line~ 0.',750,1930,100,2,2,{varname:'plugin-wet'});
 box(p,'vsttag','prepend plugininfo',850,1870,170);wire(p,'vst',3,'vsttag',0);wire(p,'vsttag',0,'controller',0);
 box(p,'master','line~ 0.4',700,2050,120,2,2,{varname:'master'});box(p,'monitor','line~ 0.',950,2120,100,2,2,{varname:'monitor'});

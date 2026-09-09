@@ -1,0 +1,13 @@
+// Independent source measurements. Exponential time constants, not gated LUFS.
+History em(0); History es(0); History el(0); History er(0); History lr(0);
+History lastL(0); History lastR(0); History zc(0);
+L=dcblock(in1); R=dcblock(in2); power=(L*L+R*R)*0.5;
+cm=1-exp(-1/(samplerate*0.4)); cs=1-exp(-1/(samplerate*3));
+em=em+cm*(power-em); es=es+cs*(power-es);
+el=el+cm*(L*L-el); er=er+cm*(R*R-er); lr=lr+cm*(L*R-lr);
+crossings=((L>=0)!=(lastL>=0))+((R>=0)!=(lastR>=0));
+zc=zc+cm*(crossings*0.5-zc); lastL=L; lastR=R;
+out1=sqrt(max(0,em)); out2=sqrt(max(0,es));
+out3=clamp(lr/sqrt(max(0.000000000001,el*er)),-1,1);
+out4=clamp((er-el)/max(0.000000000001,er+el),-1,1);
+out5=zc;

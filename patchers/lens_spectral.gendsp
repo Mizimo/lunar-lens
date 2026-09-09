@@ -1,0 +1,372 @@
+{
+  "patcher": {
+    "fileversion": 1,
+    "appversion": {
+      "major": 9,
+      "minor": 1,
+      "revision": 4,
+      "architecture": "arm64",
+      "modernui": 1
+    },
+    "classnamespace": "dsp.gen",
+    "rect": [
+      80,
+      80,
+      980,
+      700
+    ],
+    "openinpresentation": 0,
+    "default_fontsize": 12,
+    "default_fontname": "Arial",
+    "bgcolor": [
+      0.025,
+      0.036,
+      0.06,
+      1
+    ],
+    "boxes": [
+      {
+        "box": {
+          "id": "code",
+          "maxclass": "codebox",
+          "numinlets": 5,
+          "numoutlets": 7,
+          "patching_rect": [
+            70,
+            100,
+            850,
+            480
+          ],
+          "code": "// pfft~ 2048 / overlap 4. Stereo power avoids antiphase cancellation.\n// Six dimensionless descriptors, latched together at a frame boundary.\nData previous(1024);\nHistory mass(0); History moment(0); History moment2(0); History logarithms(0);\nHistory plogp(0); History squareSum(0); History oldSquareSum(0); History dot(0);\nHistory maximum(0); History count(0); History frameCount(0);\nHistory centroid(0); History spread(0); History flatness(0); History novelty(0);\nHistory concentration(0); History entropy(0);\nindex=clamp(floor(in5),0,1023);\nif(index==0){\n if(count>0 && mass>0.000000000001){\n  centroid=moment/mass;\n  spread=sqrt(max(0,moment2/mass-centroid*centroid));\n  flatness=clamp(exp(logarithms/count)/(mass/count),0,1);\n  novelty=oldSquareSum>0.000000000001 ? clamp(1-dot/sqrt(max(0.000000000001,squareSum*oldSquareSum)),0,1) : 0;\n  concentration=maximum/mass;\n  entropy=clamp((log(mass)-plogp/mass)/log(max(2,count)),0,1);\n } else {centroid=0;spread=0;flatness=0;novelty=0;concentration=0;entropy=0;}\n mass=0;moment=0;moment2=0;logarithms=0;plogp=0;\n squareSum=0;oldSquareSum=0;dot=0;maximum=0;count=0;frameCount=frameCount+1;\n}\n// Ignore DC; include the entire remaining non-redundant spectrum.\npower=(in1*in1+in2*in2+in3*in3+in4*in4)*0.5;\nold=peek(previous,index); poke(previous,power,index);\nif(index>0){\n f=index/1024; mass=mass+power;moment=moment+power*f;moment2=moment2+power*f*f;\n logarithms=logarithms+log(max(0.00000000000000000001,power));\n plogp=plogp+power*log(max(0.00000000000000000001,power));\n squareSum=squareSum+power*power;oldSquareSum=oldSquareSum+old*old;dot=dot+old*power;\n maximum=max(maximum,power);count=count+1;\n}\nout1=centroid;out2=spread;out3=flatness;out4=novelty;\nout5=concentration;out6=entropy;out7=frameCount;\n"
+        }
+      },
+      {
+        "box": {
+          "id": "in0",
+          "maxclass": "newobj",
+          "numinlets": 0,
+          "numoutlets": 1,
+          "patching_rect": [
+            70,
+            35,
+            90,
+            22
+          ],
+          "text": "in 1"
+        }
+      },
+      {
+        "box": {
+          "id": "in1",
+          "maxclass": "newobj",
+          "numinlets": 0,
+          "numoutlets": 1,
+          "patching_rect": [
+            190,
+            35,
+            90,
+            22
+          ],
+          "text": "in 2"
+        }
+      },
+      {
+        "box": {
+          "id": "in2",
+          "maxclass": "newobj",
+          "numinlets": 0,
+          "numoutlets": 1,
+          "patching_rect": [
+            310,
+            35,
+            90,
+            22
+          ],
+          "text": "in 3"
+        }
+      },
+      {
+        "box": {
+          "id": "in3",
+          "maxclass": "newobj",
+          "numinlets": 0,
+          "numoutlets": 1,
+          "patching_rect": [
+            430,
+            35,
+            90,
+            22
+          ],
+          "text": "in 4"
+        }
+      },
+      {
+        "box": {
+          "id": "in4",
+          "maxclass": "newobj",
+          "numinlets": 0,
+          "numoutlets": 1,
+          "patching_rect": [
+            550,
+            35,
+            90,
+            22
+          ],
+          "text": "in 5"
+        }
+      },
+      {
+        "box": {
+          "id": "out0",
+          "maxclass": "newobj",
+          "numinlets": 1,
+          "numoutlets": 0,
+          "patching_rect": [
+            70,
+            620,
+            90,
+            22
+          ],
+          "text": "out 1"
+        }
+      },
+      {
+        "box": {
+          "id": "out1",
+          "maxclass": "newobj",
+          "numinlets": 1,
+          "numoutlets": 0,
+          "patching_rect": [
+            190,
+            620,
+            90,
+            22
+          ],
+          "text": "out 2"
+        }
+      },
+      {
+        "box": {
+          "id": "out2",
+          "maxclass": "newobj",
+          "numinlets": 1,
+          "numoutlets": 0,
+          "patching_rect": [
+            310,
+            620,
+            90,
+            22
+          ],
+          "text": "out 3"
+        }
+      },
+      {
+        "box": {
+          "id": "out3",
+          "maxclass": "newobj",
+          "numinlets": 1,
+          "numoutlets": 0,
+          "patching_rect": [
+            430,
+            620,
+            90,
+            22
+          ],
+          "text": "out 4"
+        }
+      },
+      {
+        "box": {
+          "id": "out4",
+          "maxclass": "newobj",
+          "numinlets": 1,
+          "numoutlets": 0,
+          "patching_rect": [
+            550,
+            620,
+            90,
+            22
+          ],
+          "text": "out 5"
+        }
+      },
+      {
+        "box": {
+          "id": "out5",
+          "maxclass": "newobj",
+          "numinlets": 1,
+          "numoutlets": 0,
+          "patching_rect": [
+            670,
+            620,
+            90,
+            22
+          ],
+          "text": "out 6"
+        }
+      },
+      {
+        "box": {
+          "id": "out6",
+          "maxclass": "newobj",
+          "numinlets": 1,
+          "numoutlets": 0,
+          "patching_rect": [
+            790,
+            620,
+            90,
+            22
+          ],
+          "text": "out 7"
+        }
+      }
+    ],
+    "lines": [
+      {
+        "patchline": {
+          "source": [
+            "in0",
+            0
+          ],
+          "destination": [
+            "code",
+            0
+          ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "in1",
+            0
+          ],
+          "destination": [
+            "code",
+            1
+          ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "in2",
+            0
+          ],
+          "destination": [
+            "code",
+            2
+          ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "in3",
+            0
+          ],
+          "destination": [
+            "code",
+            3
+          ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "in4",
+            0
+          ],
+          "destination": [
+            "code",
+            4
+          ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "code",
+            0
+          ],
+          "destination": [
+            "out0",
+            0
+          ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "code",
+            1
+          ],
+          "destination": [
+            "out1",
+            0
+          ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "code",
+            2
+          ],
+          "destination": [
+            "out2",
+            0
+          ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "code",
+            3
+          ],
+          "destination": [
+            "out3",
+            0
+          ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "code",
+            4
+          ],
+          "destination": [
+            "out4",
+            0
+          ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "code",
+            5
+          ],
+          "destination": [
+            "out5",
+            0
+          ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "code",
+            6
+          ],
+          "destination": [
+            "out6",
+            0
+          ]
+        }
+      }
+    ],
+    "autosave": 0
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "purpose": "Native measurement units and stereo calibration; not event precision/recall",
+  "sampleRate": 48000,
+  "frames": 729,
+  "passed": true,
+  "results": {
+    "sineCentroidHz": 1000.0001346894101,
+    "sineFlatness": 1.5523041037618575e-13,
+    "sineMomentaryDb": -23.011622909658126,
+    "monoCorrelation": 1,
+    "antiphaseCorrelation": -0.9985391650157853,
+    "antiphaseCentroidHz": 1000.0001346894101,
+    "leftOnlyBalance": -0.998540168097356,
+    "noiseFlatness": 0.7654188312538479,
+    "noiseEntropy": 0.9673964204632668,
+    "noiseCentroidHz": 11995.01088361592,
+    "sineZeroCrossingRate": 0.041631252015832995
+  }
+}

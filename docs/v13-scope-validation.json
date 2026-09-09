@@ -1,0 +1,12 @@
+{
+  "baseline": "v1.2.1",
+  "unchangedFiles": {
+    "code/lens_features.js": "22de992692825a45fd474d7c4b7a9b5c4f6acaaab6ee4fb99ad24f83670a41c7",
+    "scripts/analysis-source.mjs": "e03c8b094611e77c413a84a00ad7fe64c87411866a718873898bdfd233ae5677",
+    "patchers/lens_analysis.gendsp": "845d008779a0fea04be82120904c5a281bc908dc3e6d018d5a4e586432871581",
+    "code/lens_fx.genexpr": "d4b1c4227676b7953f67e59cddc6bceff6f59ce0f73f793384b72680491bff14",
+    "patchers/lens_fx.gendsp": "8dee70dba943812f0569d7cc5ef3b64f1bba4745cd6132477ff1663f96304843",
+    "code/lens_protocol.js": "7275dbb568f5855226cc9ef514a321f490584d4918c9b5f36102ee862a3edeea"
+  },
+  "nativeSongBuildsMatchCurrent": true
+}

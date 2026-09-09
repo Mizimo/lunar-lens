@@ -24,7 +24,7 @@ elapsed=0
 while elapsed<duration+3:
  wait=min(40,duration+3-elapsed);time.sleep(wait);elapsed+=wait;print('Elapsed %.1f s'%elapsed,flush=True)
 send('capturestop');send('checkpoint');time.sleep(.2)
-files=['patchers/Lunar Lens.maxpat','patchers/lens_runtime.js','patchers/lens_screen.js','patchers/lens_grid.js','patchers/lens_analysis.gendsp','patchers/lens_fx.gendsp']
+files=sorted(str(p.relative_to(root)) for p in (root/'patchers').iterdir() if p.is_file())
 evidence={'sourceName':source.name,'sourceDurationSeconds':duration,'runtimeHashes':{f:hashlib.sha256((root/f).read_bytes()).hexdigest() for f in files}}
 (root/('tmp/'+name+'-final-build.json')).write_text(json.dumps(evidence,ensure_ascii=False,indent=2)+'\n')
 print('Full song complete.',flush=True)
