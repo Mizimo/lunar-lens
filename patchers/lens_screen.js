@@ -18,7 +18,7 @@ function text(t,x,y,size,c){
 }
 function line(x,y,x2,y2,c){col(c);mgraphics.set_line_width(1);mgraphics.move_to(x,y);mgraphics.line_to(x2,y2);mgraphics.stroke();}
 function area(x,y,w,h,cmd,args,type,lo,hi){hit.push({x:x,y:y,w:w,h:h,cmd:cmd,args:args||[],type:type||"button",lo:lo,hi:hi});}
-function button(label,x,y,w,cmd,args,on,color){rect(x,y,w,29,on?(color||C.cyan):C.panel,4);text(label,x+9,y+19,11,on?C.bg:C.text);area(x,y,w,29,cmd,args);}
+function button(label,x,y,w,cmd,args,on,color,height){height=height||29;rect(x,y,w,height,on?(color||C.cyan):C.panel,4);text(label,x+9,y+height*.66,11,on?C.bg:C.text);area(x,y,w,height,cmd,args);}
 function slider(label,v,x,y,w,cmd,args,lo,hi,display,color){text(label,x,y,11,C.dim);text(display===undefined?Math.round(v*100)+"%":display,x+w-50,y,11);rect(x,y+12,w,3,C.line,1);rect(x,y+12,Math.max(2,(v-lo)/(hi-lo)*w),3,color||C.cyan,1);rect(x+(v-lo)/(hi-lo)*w-3,y+8,6,11,color||C.cyan,2);area(x,y+3,w,26,cmd,args,"slider",lo,hi);}
 function state(json){try{var begin=new Date().getTime();S=JSON.parse(json);var parsed=new Date().getTime();mgraphics.redraw();outlet(0,"uiperf",parsed-begin,new Date().getTime()-parsed,paintMs);}catch(e){post("LENS UI "+e+"\n");}}
 function time(t){t=Math.max(0,Math.floor(t||0));return Math.floor(t/60)+":"+(t%60<10?"0":"")+t%60;}
@@ -26,7 +26,7 @@ function paint(){
  var paintStart=new Date().getTime();
  rect(0,0,1180,830,C.bg);hit=[];
  text("LUNAR LENS",28,46,29);text("重量、延續、碎裂，各自成形。",30,72,12,C.dim);
- text("MEASURE → EVENT → FORM",849,43,13,C.cyan);text("Max · Launchpad Pro MK3 · 1.3.0",849,66,11,C.dim);
+ text("MEASURE → EVENT → FORM",849,43,13,C.cyan);text("Max · Launchpad Pro MK3 · 1.4.0",849,66,11,C.dim);
  if(!S){text("正在建立音訊分析與燈光引擎…",28,150,16,C.cyan);return;}
  var p=S.params,f=S.features,i,x,y;
  button("載入音訊",28,96,93,"openfile");button("DEMO",129,96,66,"demo");
@@ -59,7 +59,7 @@ function paint(){
  text("PULSE",28,649,10,C.dim);text(f.confidence>.48&&f.bpm?Math.round(f.bpm)+" BPM":"聆聽中",90,650,15,f.confidence>.48?C.cyan:C.dim);
  text("信心 "+Math.round(f.confidence*100)+"%",213,649,10,C.dim);
  text("寬度 "+Math.round(f.width*100)+"% · 起音 "+f.count,28,681,11,C.dim);
- var scenes=["重力 / 沉積","天體 / 公轉","織光 / 經緯","門廊 / 縱深","雙生 / 呼應","拼光 / 碎片"];
+ var scenes=["重力 / 沉積","天體 / 公轉","織光 / 經緯","門廊 / 縱深","雙生 / 呼應","拼光 / 碎片","聲場 / 三域"];
  text(scenes[p.scene],336,173,14,C.cyan);text(p.freeze?"背景已凍結":p.focus?"獨看："+labels[p.focus-1]:"五個聲音行為",581,172,11,C.dim);
  rect(320,190,448,448,[.012,.019,.034,1],12);
  for(y=0;y<8;y++)for(x=0;x<8;x++){
@@ -71,7 +71,7 @@ function paint(){
  slider("進度 · 拖曳後播放",S.duration?S.position/S.duration:0,333,685,419,"seek",[],0,1,time(S.position));
  var paletteNames=["隨構圖","琥珀冰川","月夜紫羅蘭","翡翠珊瑚","鈷藍熔岩","蘭花青檸","桃紅電光"];
  text("COMPOSITION",810,173,10,C.dim);button(paletteNames[p.palette||0],933,152,113,"palettecycle",[],p.palette>0,C.gold);button("VST / AU",1056,152,96,"pluginpanel",[],p.plugin,C.gold);
- if(!p.detector){for(i=0;i<6;i++)button(scenes[i],810,190+i*29,342,"param",["scene",i],p.scene===i,i===0?C.cyan:C.violet);
+ if(!p.detector){for(i=0;i<7;i++)button(scenes[i],810,190+i*24,342,"param",["scene",i],p.scene===i,i===0?C.cyan:C.violet,23);
  slider("構圖轉場",p.transition,810,375,342,"param",["transition"],0,3,p.transition.toFixed(2)+" s");
  slider("光線亮度",p.brightness,810,417,342,"param",["brightness"],0,1);
  slider("殘影長度",p.trails,810,459,342,"param",["trails"],0,1,undefined,C.violet);
@@ -84,9 +84,10 @@ function paint(){
  text(p.fx?"濾色、空間、壓力顆粒":"鬆開回到原音",979,638,10,C.dim);
  slider("效果深度",p.fxdepth,810,670,342,"param",["fxdepth"],0,1,undefined,C.gold);
  }else{
-  button("行為調整",810,190,105,"param",["inspector",0],p.inspector===0);
-  button("事件與測量",923,190,116,"param",["inspector",1],p.inspector===1);
-  button("原始診斷",1047,190,105,"param",["inspector",2],p.inspector===2);
+  button("行為",810,190,72,"param",["inspector",0],p.inspector===0);
+  button("事件",888,190,72,"param",["inspector",1],p.inspector===1);
+  button("原始",966,190,72,"param",["inspector",2],p.inspector===2);
+  button("聲場頻譜",1044,190,108,"param",["inspector",3],p.inspector===3);
   if(p.inspector===0){
    var shortNames=["IMPACT","BODY","PHRASE","BED","DETAIL"];
    for(i=0;i<5;i++)button(shortNames[i],810+i*69,232,i===2?68:65,"roleedit",[i],p.role===i,colors[i]);
@@ -125,6 +126,29 @@ function paint(){
    for(i=0;i<recent.length;i++){var event=recent[recent.length-1-i];text((typeNames[event.type]||event.type)+(event.role?" · "+event.role:""),810,467+i*27,12,C.cyan);text(Math.round(event.strength*100)+" / "+Math.round(event.confidence*100)+"%",1075,467+i*27,11,C.dim);}
    text("右側：強度 / 啟發式信心；不是段落真值。",810,583,10,C.dim);
    slider("事件視覺份量",p.eventAmount,810,622,342,"param",["eventAmount"],0,1);
+  }else if(p.inspector===3){
+   var ss=S.measurements&&S.measurements.stereoSpectrum,valid=ss&&ss.valid&&S.measurements.active;
+   text("中高頻：左 / 聚中 / 右",810,252,17,C.cyan);
+   text("電平接近 + 高度同相才聚中；低頻保持整體",810,279,11,C.dim);
+   var peak=0;if(valid)for(i=6;i<16;i++)for(var ch=0;ch<3;ch++)peak=Math.max(peak,ss.bands[i].power[ch]);
+   var channelColors=[C.cyan,C.gold,[.93,.4,.63,1]],channelLabels=["L 左側","C 聚中線索","R 右側"];
+   for(ch=0;ch<3;ch++){
+    x=810+ch*116;text(channelLabels[ch],x,309,11,channelColors[ch]);rect(x,323,110,93,C.panel,3);
+    for(i=6;i<16;i++){
+     var v=valid&&peak>1e-12?Math.sqrt(ss.bands[i].power[ch]/peak):0;
+     rect(x+3+(i-6)*10.4,411-v*81,8,Math.max(0,v*81),channelColors[ch],1);
+    }
+    text("280 Hz        16k",x,434,9,C.dim);
+   }
+   var names=["IMPACT","BODY","PHRASE","BED","DETAIL"],mapping=S.spatial;
+   for(i=0;i<5;i++){
+    y=465+i*21;text(names[i],810,y,10,C.dim);rect(883,y-9,269,8,C.panel,2);var offset=883;
+    if(i<2){text("整體重量 / 不分左右",891,y,10,C.dim);continue;}
+    if(valid&&mapping&&mapping.valid)for(ch=0;ch<3;ch++){var width=mapping.roles[i][ch]*269;rect(offset,y-9,width,8,channelColors[ch],1);offset+=width;}
+   }
+   slider("聲場位置",p.spatialAmount,810,588,160,"param",["spatialAmount"],0,1);
+   slider("側向細節",p.spatialContrast,991,588,161,"param",["spatialContrast"],0,1,undefined,C.gold);
+   button("查看聲場／三域 · 低頻完整基座",810,627,342,"param",["scene",6],p.scene===6,C.violet);
   }else{
    text("原始頻帶診斷",810,261,17,C.cyan);
    text("這裡檢查測量；五個行為請在行為調整頁操作。",810,289,10,C.dim);
@@ -140,7 +164,7 @@ function paint(){
   button("返回構圖",810,670,342,"param",["detector",0],true);
  }
  button(p.detector?"返回構圖":"行為 / 事件",28,315,128,"param",["detector",p.detector?0:1],p.detector);
- text(S.transition&&S.transition.active?"轉場中 "+Math.round(S.transition.progress*100)+"%":"五個行為獨立控制",170,334,10,C.dim);
+ button("左 / 中 / 右",164,315,128,"spacepanel",[],p.detector&&p.inspector===3,C.gold);
  line(28,708,1152,708,C.line);
  text("MIDI IN",28,732,10,C.dim);text("LED OUT",335,732,10,C.dim);
  // Native MIDI menus occupy y743, above this JSUI.

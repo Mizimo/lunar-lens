@@ -1,0 +1,36 @@
+{
+  "version": "1.4.0",
+  "sourceName": "02 鍵っ子.flac",
+  "captureDurationSeconds": 75.0310001373291,
+  "sourcePositionRange": [
+    0,
+    155.02800066599568
+  ],
+  "frames": 2332,
+  "activeFrames": 2300,
+  "meanFrameMs": 32.18833124724543,
+  "p99FrameMs": 49.00002479553223,
+  "maxFrameMs": 56.999921798706055,
+  "computeP99Ms": 1.0001659393310547,
+  "measurementValidThroughoutActiveAudio": true,
+  "rgbValid": true,
+  "monitorOnFrames": 2330,
+  "centreMethod": "balanced-phase-agreement",
+  "midHighSharesMedian": [
+    0.37787593404673525,
+    0.10647420302809214,
+    0.4350549166367891
+  ],
+  "runtimeMatchesNativeCalibration": true,
+  "unchangedFromV13": [
+    "code/lens_features.js",
+    "code/lens_analysis.genexpr",
+    "patchers/lens_analysis.gendsp",
+    "code/lens_events.js",
+    "code/lens_fx.genexpr",
+    "patchers/lens_fx.gendsp",
+    "code/lens_protocol.js"
+  ],
+  "passed": true,
+  "scope": "Final native 75-second observation, including user interaction; not a complete-song or listening-accuracy test. No physical LED latency measurement."
+}

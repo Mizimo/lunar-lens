@@ -1,0 +1,19 @@
+{
+  "version": "1.4.0",
+  "label": "kagikko14",
+  "activeFrames": 6648,
+  "validFrames": 6648,
+  "passed": true,
+  "overallSharesMedian": [
+    0.1516561145780239,
+    0.6858465852638409,
+    0.15253903010591544
+  ],
+  "globallyBalancedFrames": 3380,
+  "balancedFramesWithOppositeRegisters": 2145,
+  "foregroundVsBedSpatialDifferenceFrames": 3752,
+  "computeP99Ms": 1.0001659393310547,
+  "analysisP99Ms": 1.0001659393310547,
+  "interpretation": "Opposite registers: overall residual balance within 5%, yet two bands above 1% total power lean more than 20% in opposite directions. Foreground vs bed: L1 distance > 0.24. These report observable spatial differences, not correct instrument or stem separation.",
+  "validationStage": "Before final stricter centre definition and intact low-frequency layout; retained only as development evidence"
+}

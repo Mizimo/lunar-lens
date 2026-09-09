@@ -1,11 +1,11 @@
 {
   "name": "lunar-lens",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "private": true,
   "description": "Track-independent Max / Launchpad Pro MK3 audio-reactive light instrument",
   "scripts": {
     "build": "node scripts/build.mjs",
-    "test": "node tests/validate.cjs && node tests/roles.cjs && node tests/behaviour.cjs && node tests/dynamics.cjs && node tests/low-rollback.cjs && node tests/events.cjs",
+    "test": "node tests/validate.cjs && node tests/roles.cjs && node tests/behaviour.cjs && node tests/dynamics.cjs && node tests/low-rollback.cjs && node tests/events.cjs && node tests/stereo.cjs",
     "package": "node scripts/package.mjs"
   }
 }

@@ -1,0 +1,116 @@
+{
+  "version": "1.4.0",
+  "sourceName": "Blossoms Bring an Old Friend_spotdown.org.mp3",
+  "sourceDurationSeconds": 193.316281,
+  "runtimeHashes": {
+    "patchers/Lunar Lens.maxpat": "33124a59bc744b2643aedf0a64086107290143902b635e7418ee7a93f8d9d2b6",
+    "patchers/lens_analysis.gendsp": "845d008779a0fea04be82120904c5a281bc908dc3e6d018d5a4e586432871581",
+    "patchers/lens_context.gendsp": "83dd8968434258771f146a1596f0910581c456cb67b5bcf95c83dd3621fad8c0",
+    "patchers/lens_fx.gendsp": "8dee70dba943812f0569d7cc5ef3b64f1bba4745cd6132477ff1663f96304843",
+    "patchers/lens_grid.js": "b72ad1c60aebae9380fc10879392d3d95636f98d955248bd7efba702fa36a635",
+    "patchers/lens_runtime.js": "a291da616269c5ec5e0e14ffcc2eaeb715dba636d06e37d698ff280871227585",
+    "patchers/lens_screen.js": "a7cf8bf0c71e1cc3e861098306acaef75d6fc4ed52a33e6c1401e8e975cc5ce5",
+    "patchers/lens_spectral.gendsp": "214ce7357eb06c5d6e9bbd3b968b00c420c63e1319a9cf4e6d0e3b3409388078",
+    "patchers/lens_spectral.maxpat": "e2118921c4c29686ae200d60e28af5fc069f1530fd982d7901c269042f06feb0"
+  },
+  "durationSeconds": 193.31628117913831,
+  "frames": 6050,
+  "activeFrames": 5933,
+  "meanFrameMs": 32.45081832968986,
+  "p99FrameMs": 44.519987106322766,
+  "maxFrameMs": 92.00000762939453,
+  "roleMedian": [
+    0.04522551535345676,
+    0.5205992520145639,
+    0.4052937620590769,
+    0.34384322856672606,
+    0.08236254856984325
+  ],
+  "roleP95": [
+    0.7142322362132448,
+    0.6951498462270445,
+    0.6571045088864563,
+    0.4188569314637232,
+    0.4744213704797161
+  ],
+  "roleCorrelation": [
+    [
+      1.0,
+      0.16226318780480747,
+      0.10661571905905645,
+      0.08509469564428977,
+      0.03836311026051634
+    ],
+    [
+      0.16226318780480747,
+      0.9999999999999998,
+      0.1968082579822878,
+      0.2842205250120942,
+      0.04207753302862279
+    ],
+    [
+      0.10661571905905645,
+      0.1968082579822878,
+      1.0,
+      0.27065811052960215,
+      0.23405416352586214
+    ],
+    [
+      0.08509469564428977,
+      0.2842205250120942,
+      0.27065811052960215,
+      1.0,
+      0.2333124154537646
+    ],
+    [
+      0.03836311026051634,
+      0.04207753302862279,
+      0.23405416352586214,
+      0.2333124154537646,
+      1.0
+    ]
+  ],
+  "eventCounts": [
+    224,
+    1356,
+    889
+  ],
+  "monitorOffThroughout": false,
+  "endStopped": true,
+  "endBlack": true,
+  "rgbValid": true,
+  "maxSimultaneouslyLitCells": 56,
+  "monitorOnPositionRange": [
+    8.862666666666225,
+    193.31628117913831
+  ],
+  "maxPlaybackFrameMs": 92.00000762939453,
+  "perBandEventCounts": [
+    335,
+    786,
+    1130,
+    1220,
+    1313,
+    1311,
+    820,
+    531
+  ],
+  "onsetStrengthP10P50P90": [
+    [
+      0.5648836714994228,
+      0.7835305759299136,
+      0.9051470231335529
+    ],
+    [
+      0.26063184795937355,
+      0.400955041355149,
+      0.6349885335170893
+    ],
+    [
+      0.09509259789518072,
+      0.2252096097333377,
+      0.6681415539077622
+    ]
+  ],
+  "validationStage": "Before final stricter centre definition and intact low-frequency layout; retained only as development evidence"
+}

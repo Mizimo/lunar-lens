@@ -262,11 +262,12 @@ if(typeof module!=="undefined")module.exports=LensFeatures;
 /* Measurement boundary: physical units and freshness, no visual decisions.
    Raw v1.2.1 detector inputs remain untouched and are not normalised here. */
 var LensMeasurements=(function(){
+ var edges=[30,50,70,100,140,200,280,410,600,950,1500,2300,3500,5100,7500,11000,16000];
  function clamp(x,a,b){return Math.max(a,Math.min(b,x));}
  function number(x,fallback){return typeof x==='number'&&isFinite(x)?x:fallback;}
  function db(x){return 20*Math.log(Math.max(.00001,x))/Math.LN10;}
  function Engine(){this.reset();}
- Engine.prototype.reset=function(){this.spectral=null;this.context=null;this.result=null;this.lastSerial=-1;this.freshAt=-10;};
+ Engine.prototype.reset=function(){this.spectral=null;this.context=null;this.result=null;this.lastSerial=-1;this.freshAt=-10;this.spatialSlow=[];this.lastTime=0;};
  Engine.prototype.spectrum=function(a,t){
   if(a.length<7||!a.every(function(x){return typeof x==='number'&&isFinite(x);}))return;
   if(a[6]!==this.lastSerial){this.freshAt=t;this.lastSerial=a[6];}
@@ -279,17 +280,31 @@ var LensMeasurements=(function(){
   var sr=number(sampleRate,44100),bands=[],sum=0,i;
   for(i=0;i<8;i++){bands[i]=Math.pow(Math.max(0,number(a[i],0)),2);sum+=bands[i];}
   var shape=bands.map(function(v){return v/Math.max(.00000001,sum);});
-  this.result={schemaVersion:1,time:t,sampleRate:sr,active:!!active,
+  var dt=this.lastTime?clamp(t-this.lastTime,.001,.2):.02;this.lastTime=t;
+  var spatialValid=!!valid&&s.length>=55,spatial=[],spatialTotal=0,totals=[0,0,0];
+  for(i=0;i<16;i++){
+   var values=[],steady=[],movement=[];
+   for(var ch=0;ch<3;ch++){
+    var ix=i*3+ch,p=spatialValid?Math.max(0,s[7+ix]):0,prior=this.spatialSlow[ix];
+    if(prior===undefined)prior=p;
+    this.spatialSlow[ix]=prior+(p-prior)*(1-Math.exp(-dt/.65));
+    values[ch]=p;steady[ch]=Math.min(p,this.spatialSlow[ix]);movement[ch]=Math.max(0,p-this.spatialSlow[ix]);
+    totals[ch]+=p;spatialTotal+=p;
+   }
+   spatial.push({loHz:edges[i],hiHz:Math.min(edges[i+1],sr*.5),power:values,steadyPower:steady,movingPower:movement});
+  }
+  this.result={schemaVersion:2,time:t,sampleRate:sr,active:!!active,
    spectrum:{valid:!!valid,frame:s[6],age:Math.max(0,t-this.freshAt),windowSamples:2048,hopSamples:512,
     centroidHz:s[0]*sr*.5,spreadHz:s[1]*sr*.5,flatness:s[2],change:s[3],concentration:s[4],entropy:s[5]},
    level:{valid:!!cv,rmsFast:Math.max(0,number(a[8],0)),momentaryDb:db(c[0]),shortTermDb:db(c[1]),
     crestDb:clamp(db(Math.max(.00001,number(a[9],0)))-db(Math.max(.00001,number(a[8],0))),0,40)},
    space:{valid:!!cv,correlation:clamp(c[2],-1,1),balance:clamp(c[3],-1,1),
     sideRatio:clamp(number(a[11],0)/Math.max(.00001,number(a[10],0)+number(a[11],0)),0,1)},
+   stereoSpectrum:{valid:spatialValid,edgesHz:edges.slice(),bands:spatial,totalPower:spatialTotal,totals:totals,smoothingMs:80,centreMethod:"balanced-phase-agreement",units:"relative FFT power"},
    waveform:{zeroCrossingRate:clamp(c[4],0,1),valid:!!cv},bandPowerShape:shape};
   return this.result;
  };
- return {Engine:Engine};
+ return {Engine:Engine,edges:edges};
 })();
 if(typeof module!=="undefined")module.exports=LensMeasurements;
 
@@ -510,9 +525,41 @@ if(typeof module!=="undefined")module.exports=LensTransition;
 /* Translation boundary: event semantics -> visual envelopes. No audio sampling.
    Events are consumed once by ID even when rendering and measurement clocks differ. */
 var LensPresentation=(function(){
+ function clamp(x,a,b){return Math.max(a,Math.min(b,x));}
+ function spatial(measured,settings){
+  var s=measured&&measured.stereoSpectrum,p=settings||{},contrast=clamp(p.spatialContrast===undefined?.65:p.spatialContrast,0,1),valid=!!(s&&s.valid&&measured.active),roles=[],rows=[],lowSpectrum=[],peak=0;
+  for(var role=0;role<5;role++){
+   var cfg=(p.roles||[])[role]||{bands:[[0,1],[0,1,2],[3,4,5],[3,4,5],[6,7]][role]},sum=[0,0,0];
+   if(valid)for(var i=0;i<s.bands.length;i++){
+    var b=s.bands[i],weight=role===0?Math.max(0,Math.min(b.hiHz,p.impactHi||160)-Math.max(b.loHz,p.impactLo||35))/(b.hiHz-b.loHz):(cfg.bands.indexOf(Math.floor(i/2))>=0?1:0);
+    for(var ch=0;ch<3;ch++){
+     // Articulated foreground favours changing energy; held background favours persistence.
+     // These are temporal weights, never vocal/pad or instrument classification.
+     var energy=role===2?b.power[ch]*.18+b.movingPower[ch]*.82:role===3?b.steadyPower[ch]:b.power[ch];
+     sum[ch]+=weight*energy;
+    }
+   }
+   var total=sum[0]+sum[1]+sum[2];roles.push(total>1e-12?sum.map(function(v){return v/total;}):[0,1,0]);
+  }
+  for(i=0;i<8;i++){
+   rows[i]=[0,0,0];if(valid)for(ch=0;ch<3;ch++){rows[i][ch]=s.bands[i*2].power[ch]+s.bands[i*2+1].power[ch];peak=Math.max(peak,rows[i][ch]);}
+  }
+  var displayRoles=roles.map(function(shares,role){
+   if(role<2)return [0,1,0];
+   var strength=contrast*(role===2||role===3?1:.45),weights=shares.map(function(v,ch){return ch===1?v:Math.pow(v,1-strength*.5);}),sum=weights[0]+weights[1]+weights[2];
+   return weights.map(function(v){return v/Math.max(1e-12,sum);});
+  });
+  for(i=0;i<3;i++)lowSpectrum[i]=peak>1e-12?Math.sqrt((rows[i][0]+rows[i][1]+rows[i][2])/peak):0;
+  for(i=0;i<8;i++)for(ch=0;ch<3;ch++){
+   var ratio=peak>1e-12?rows[i][ch]/peak:0,strength=contrast*(i>=3&&i<=5?1:.45);
+   // Visual compression only; diagnostic power and role proportions stay raw.
+   rows[i][ch]=Math.pow(ratio,ch===1?.5:.5-strength*.22);
+  }
+  return {valid:valid,roles:roles,displayRoles:displayRoles,contrast:contrast,spectrum:rows,lowSpectrum:lowSpectrum,amount:valid?clamp(p.spatialAmount===undefined?.85:p.spatialAmount,0,1):0};
+ }
  function Engine(){this.clear();}
  Engine.prototype.clear=function(){this.epoch=-1;this.seen={};this.reframe=0;this.entry=0;this.texture=0;this.release=0;this.direction=0;};
- Engine.prototype.step=function(features,perception,dt,amount){
+ Engine.prototype.step=function(features,perception,dt,amount,measured,settings){
   var q=perception||{epoch:0,state:{},events:[]},i,e;
   if(q.epoch!==this.epoch){this.clear();this.epoch=q.epoch;}
   this.reframe*=Math.exp(-dt/1.2);this.entry*=Math.exp(-dt/.35);this.texture*=Math.exp(-dt/.2);this.release*=Math.exp(-dt/.65);
@@ -527,15 +574,16 @@ var LensPresentation=(function(){
   var f=Object.assign({},features),s=q.state||{},a=amount===undefined?.7:amount;
   f.eventVisual={reframe:this.reframe*a,entry:this.entry*a,texture:this.texture*a,release:this.release*a,direction:this.direction,
    density:(s.density||0)*a,spread:(s.spread||0)*a,pan:(s.stereoBalance||0)*a,trend:(s.trend||0)*a};
+  f.spatial=spatial(measured,settings);
   return f;
  };
- return {Engine:Engine};
+ return {Engine:Engine,spatial:spatial};
 })();
 if(typeof module!=="undefined")module.exports=LensPresentation;
 
 
 /* bundled lens_visual.js */
-/* Five sound behaviours, six genuinely different spatial grammars.
+/* Five sound behaviours, seven different spatial grammars.
    No score, title, transport position, instrument label or free-running beat. */
 if(typeof module!=="undefined"){
  var LensInteraction=require('./lens_interaction.js'),LensTransition=require('./lens_transition.js');
@@ -547,7 +595,22 @@ var LensVisual=(function(){
  function edge(d,w){return Math.exp(-d*d/(w*w));}
  function zeros(){var a=[];for(var i=0;i<64;i++)a.push(0);return a;}
  function empty(){return [zeros(),zeros(),zeros(),zeros(),zeros()];}
- var names=["重力／沉積","天體／公轉","織光／經緯","門廊／縱深","雙生／呼應","拼光／碎片"];
+ // Resample inside the source, never clamp edges into long false streaks.
+ function sample(layer,x,y){if(x<-.5||x>7.5)return 0;var l=Math.floor(x),f=x-l;return (l>=0&&l<8?layer[y*8+l]:0)*(1-f)+(l+1>=0&&l+1<8?layer[y*8+l+1]:0)*f;}
+ function project(layer,x,y,anchor,scale){
+  if(scale>=1)return sample(layer,3.5+(x-anchor)/scale,y);
+  // Area integration prevents a narrow moving phrase disappearing between LEDs.
+  var a=3.5+(x-.5-anchor)/scale,b=3.5+(x+.5-anchor)/scale,sum=0;
+  for(var cell=Math.max(0,Math.floor(a+.5));cell<=Math.min(7,Math.floor(b+.5));cell++)sum+=layer[y*8+cell]*Math.max(0,Math.min(b,cell+.5)-Math.max(a,cell-.5));
+  return sum/(b-a);
+ }
+ function spatialSample(layer,x,y,width,shares,amount,separation){
+  var base=sample(layer,3.5+(x-3.5)/width,y);if(!amount)return base;
+  var value=0,sep=separation||0,anchors=[1.25-.3*sep,3.5,5.75+.3*sep],sizes=[.48-.14*sep,.76-.22*sep,.48-.14*sep];
+  for(var ch=0;ch<3;ch++)value+=shares[ch]*project(layer,x,y,anchors[ch],width*sizes[ch])/sizes[ch];
+  return base*(1-amount)+value*amount;
+ }
+ var names=["重力／沉積","天體／公轉","織光／經緯","門廊／縱深","雙生／呼應","拼光／碎片","聲場／三域"];
  var paletteNames=["琥珀冰川","月夜紫羅蘭","翡翠珊瑚","鈷藍熔岩","蘭花青檸","桃紅電光"];
  // impact / foundation / phrase / bed / detail; bounded palettes, never hue-cycling.
  var palettes=[
@@ -558,12 +621,12 @@ var LensVisual=(function(){
   [[1,.30,.71],[.48,.14,.93],[.72,1,.13],[.03,.57,.53],[1,.78,.37]],
   [[1,.84,.20],[1,.19,.37],[.12,.89,.81],[.36,.18,.85],[.75,.95,.99]]
  ];
- function palette(scene,choice){return palettes[choice?clamp(choice-1,0,5):clamp(scene,0,5)];}
+ function palette(scene,choice){return palettes[choice?clamp(choice-1,0,5):scene===6?0:clamp(scene,0,5)];}
  function Engine(interaction){this.input=interaction||new LensInteraction.Engine();this.transition=new LensTransition.Engine();this.time=0;this.motion=0;this.serial=0;this.clear();}
  Engine.prototype.clear=function(){
   this.input.clear();this.transition.clear();this.impacts=[];this.particles=[];this.lastCounts=[0,0,0];
   this.trails=empty();this.layers=empty();this.frame=[];this.midHistory=[];this.flash=0;
-  this.phraseClock=0;this.bedClock=0;this.turn=0;this.lastScene=-1;
+  this.spatial=null;this.phraseClock=0;this.bedClock=0;this.turn=0;this.lastScene=-1;
  };
  // Compatibility accessors for existing standalone renderers; state lives in input.
  Object.defineProperty(Engine.prototype,"held",{get:function(){return this.input.held;},set:function(v){this.input.held=v;}});
@@ -574,8 +637,9 @@ var LensVisual=(function(){
  Engine.prototype.gesture=function(){return this.input.gesture();};
  Engine.prototype.step=function(f,dt,p){
   dt=clamp(dt,.001,.1);this.time+=dt;var g=this.gesture(),i,j,k,x,y,pt;
-  var ev=f.eventVisual||{},roleSettings=p.roles||[];
-  var scene=clamp(p.scene||0,0,5),counts=f.counts||[0,0,0],hits=f.transients||[0,0,0];
+  var ev=f.eventVisual||{},roleSettings=p.roles||[],spatial=f.spatial||{valid:false,amount:0,roles:[]};
+  if(!p.freeze||!this.spatial)this.spatial=spatial;else spatial=this.spatial;
+  var scene=clamp(p.scene||0,0,6),counts=f.counts||[0,0,0],hits=f.transients||[0,0,0];
   var body=f.body===undefined?f.bands[0]:f.body,b=f.behaviour;
   var phrase=b?(b.phrase||0):f.bands[1],bed=b?(b.bed||0):0,art=b?(b.articulation||0):.6,contour=f.midContour===undefined?.5:f.midContour;
   var dynamics=f.bandDynamics||[],bassAttack=0,midAttack=0,register=0;
@@ -610,7 +674,7 @@ var LensVisual=(function(){
    for(i=this.impacts.length-1;i>=0;i--){if(this.impacts[i].fresh)this.impacts[i].fresh=false;else this.impacts[i].t+=dt;if(this.impacts[i].t>.52)this.impacts.splice(i,1);}
    for(i=this.particles.length-1;i>=0;i--){pt=this.particles[i];pt.t+=dt;pt.life=Math.max(0,1-pt.t/pt.duration);if(pt.life<=0)this.particles.splice(i,1);}
    var next=empty(),cx=3.5+(g.count?(g.x*7-3.5)*g.strength*.55:0),cy=3.5+(g.count?(g.y*7-3.5)*g.strength*.4:0);
-   cx+=(ev.pan||0)*.7;
+   if(!spatial.valid)cx+=(ev.pan||0)*.7;
    var spread=1+(f.width||0)*.25+(ev.reframe||0)*.16,pc=this.phraseClock+(ev.entry||0)*.35,
     bc=this.bedClock+(ev.reframe||0)*.6,turn=this.turn,flash=this.flash;
    for(y=0;y<8;y++)for(x=0;x<8;x++){
@@ -689,6 +753,27 @@ var LensVisual=(function(){
     next[2][idx]=fore*phrase*(.64+flash*.3)*(1+(ev.entry||0)*.22);
     next[3][idx]=bedShape*bed*.55*(1-clamp(fore*phrase,0,.6))*(1-(ev.release||0)*.35)*(1-(ev.reframe||0)*.65*edge(x-((ev.direction||0)?4.5:2.5),.9));
     next[4][idx]=detail*(1+(ev.texture||0)*.25);
+    if(scene===6){
+     // Three separated lanes, eight registers from bottom (low) to top (high).
+     // One shared power reference across all lanes. No random particle placement.
+     var channel=x<2?0:x>=3&&x<5?1:x>=6?2:-1,level=channel>=0&&spatial.valid?spatial.spectrum[y][channel]:0;
+     var rowRole=y<3?1:y<6?2:4;
+     for(var layer=0;layer<5;layer++)next[layer][idx]=0;
+     next[rowRole][idx]=level*Math.max(0,f.slow||0)*.85;
+     if(rowRole===2){
+      var midLevel=next[2][idx],midTotal=Math.max(.001,phrase+bed);
+      next[2][idx]=midLevel*phrase/midTotal;next[3][idx]=midLevel*bed/midTotal;
+     }
+     if(y<3){
+      // The low register remains one continuous mass, regardless of its stereo input.
+      var lowLevel=spatial.valid&&spatial.lowSpectrum?spatial.lowSpectrum[y]:0;
+      next[1][idx]=lowLevel*Math.max(0,f.slow||0)*.85*clamp((1+low*2.5-Math.abs(x-3.5))/.8,0,1);
+      // Impact timing and weight are unchanged; no left/centre/right copies.
+      if(y===0)for(i=0;i<this.impacts.length;i++){
+       var pulse=this.impacts[i];next[0][idx]+=edge(x-3.5,2.2)*Math.sqrt(pulse.p)*Math.exp(-pulse.t/.055)*weight;
+      }
+     }
+    }
    }
    var tau=[.035,.09+p.trails*.25,.045+p.trails*.11,.18+p.trails*.30,.020+p.trails*.025];
    for(j=0;j<5;j++)for(i=0;i<64;i++){next[j][i]=Math.max(next[j][i],this.trails[j][i]*Math.exp(-dt/(tau[j]*((roleSettings[j]||{}).release||1))));if(next[j][i]<.0001)next[j][i]=0;}
@@ -700,9 +785,13 @@ var LensVisual=(function(){
   for(y=0;y<8;y++)for(x=0;x<8;x++){
    var idx=y*8+x,c=[0,0,0],attack=[0,0,0],local=0;
    for(j=0;j<5;j++){
-    var settings=roleSettings[j]||{},wide=(settings.width||1)*(j===3?1+(ev.spread||0)*.35:1),sx=clamp(3.5+(x-3.5)/wide,0,7),left=Math.floor(sx),right=Math.min(7,left+1);
-    var sample=this.layers[j][y*8+left]*(1-(sx-left))+this.layers[j][y*8+right]*(sx-left);
-    var value=focus&&focus!==j+1?0:sample*scales[j]*(settings.gain===undefined?1:settings.gain);local+=value;
+    var settings=roleSettings[j]||{},wide=(settings.width||1)*(j===3?1+(ev.spread||0)*.35:1);
+    var sampled=spatialSample(this.layers[j],x,y,wide,(spatial.displayRoles||spatial.roles||[])[j]||[0,1,0],j<2?0:spatial.amount||0,j===2||j===3?spatial.contrast||0:0);
+    if(scene===6&&j>=2){
+     var lane=x<2?0:x>=3&&x<5?1:x>=6?2:-1,anchor=[.5,3.5,6.5][lane];
+     sampled=lane<0?0:sample(this.layers[j],anchor+(x-anchor)/wide,y);
+    }
+    var value=focus&&focus!==j+1?0:sampled*scales[j]*(settings.gain===undefined?1:settings.gain);local+=value;
     for(k=0;k<3;k++)if(j===0)attack[k]+=value*colours[j][k];else c[k]+=value*colours[j][k];
    }
    for(k=0;k<3;k++){c[k]/=Math.max(1,Math.pow(local,.65));attack[k]/=Math.max(1,Math.pow(local,.65));}
@@ -727,7 +816,7 @@ var self=this,analysis=new LensFeatures.Engine(),measurements=new LensMeasuremen
 var interaction=new LensInteraction.Engine(),presentation=new LensPresentation.Engine(),visual=new LensVisual.Engine(interaction);
 var behaviours=new LensBehaviours.Engine(),roleMaskChanged=false;
 var audioSampleRate=44100,measured=null,perception=events.snapshot(),behaviourFrame=analysis.snapshot();
-var P={master:.4,brightness:.55,sensitivity:1,trails:.25,detail:.55,bassWeight:1.2,focus:0,scene:0,palette:0,detector:false,detectorBand:8,impactLo:35,impactHi:160,impactSensitivity:1,impactGap:.16,freeze:false,black:false,fx:true,fxdepth:.85,monitor:false,loop:false,input:0,livegain:1,plugin:false,role:0,roles:LensBehaviours.defaults(),transition:.85,eventAmount:.7,inspector:0};
+var P={master:.4,brightness:.55,sensitivity:1,trails:.25,detail:.55,bassWeight:1.2,focus:0,scene:0,palette:0,detector:false,detectorBand:8,impactLo:35,impactHi:160,impactSensitivity:1,impactGap:.16,freeze:false,black:false,fx:true,fxdepth:.85,monitor:false,loop:false,input:0,livegain:1,plugin:false,role:0,roles:LensBehaviours.defaults(),transition:.85,eventAmount:.7,spatialAmount:.85,spatialContrast:.65,inspector:0};
 var file="",pendingFile="",loaded=false,running=false,paused=false,position=0,duration=0,samplerate=0,channels=2;
 var hw=false,identity=false,layout=false,connected=false,inputPort="none",outputPort="none",lastReply=0,lastQuery=0,lastLed={},midiStatus=0,midiData=[],sx=null;
 var enumerating=false,portLists={input:[],output:[]};
@@ -750,7 +839,7 @@ function init(){
  if(initialized)return;initialized=true;
  ramp("master",P.master);ramp("monitor",0);ramp("file-gain",1);ramp("live-gain",0);ramp("mono",0);ramp("plugin-dry",1);ramp("plugin-wet",0);
  msg("analysis","impactLo",P.impactLo);msg("analysis","impactHi",P.impactHi);msg("vst","disable",1);msg("recorder","samptype","float32");msg("poll","int",1);refreshports();
- tickTask.interval=33;tickTask.repeat();status("READY · 五個聲音行為 · v1.3.0");
+ tickTask.interval=33;tickTask.repeat();status("READY · 五個聲音行為 · v1.4.0");
 }
 function openfile(){msg("file-dialog","bang");}
 function demo(){loadfile(rootPath()+"media/Lunar-Departure-demo.wav");}
@@ -779,7 +868,7 @@ function fileended(){if(running&&P.input===0&&!P.loop&&position+.25>=duration){r
 function seek(fraction){if(!loaded||P.input!==0||duration<=0)return;releaseall();resetAnalysis();visual.clear();position=LensFeatures.clamp(Number(fraction),0,.999)*duration;running=true;paused=false;msg("dsp","start");msg("player","seek",position*1000);}
 function param(name,v){if(P[name]===undefined)return;
  if(["fx","freeze","black","monitor","loop","plugin","detector"].indexOf(name)>=0)v=Number(v)!==0;
- else {v=Number(v);if(!isFinite(v))return;var ranges={transition:[0,3],role:[0,4],inspector:[0,2],sensitivity:[.35,2.5],bassWeight:[.6,1.8],scene:[0,5],focus:[0,5],palette:[0,6],detectorBand:[0,8],livegain:[0,4],impactLo:[20,160],impactHi:[70,400],impactSensitivity:[.4,2.5],impactGap:[.08,.4]},r=ranges[name]||[0,1];v=LensFeatures.clamp(v,r[0],r[1]);if(["scene","focus","input","palette","detectorBand","role","inspector"].indexOf(name)>=0)v=Math.round(v);}
+ else {v=Number(v);if(!isFinite(v))return;var ranges={transition:[0,3],role:[0,4],inspector:[0,3],sensitivity:[.35,2.5],bassWeight:[.6,1.8],scene:[0,6],focus:[0,5],palette:[0,6],detectorBand:[0,8],livegain:[0,4],impactLo:[20,160],impactHi:[70,400],impactSensitivity:[.4,2.5],impactGap:[.08,.4]},r=ranges[name]||[0,1];v=LensFeatures.clamp(v,r[0],r[1]);if(["scene","focus","input","palette","detectorBand","role","inspector"].indexOf(name)>=0)v=Math.round(v);}
  if(name==="impactLo")v=Math.min(v,P.impactHi-25);
  if(name==="impactHi")v=Math.max(v,P.impactLo+25);
  if(name==="input"&&v!==P.input){stop();resetAnalysis();visual.clear();P.monitor=false;ramp("monitor",0);ramp("file-gain",v?0:1);}
@@ -845,13 +934,14 @@ function cc(n,v){if(v<=0)return;
  else if(n===7)param("bassWeight",P.bassWeight>1.5?.8:P.bassWeight+.4);else if(n===8)defaults();
 }
 function palettecycle(){param("palette",(P.palette+1)%7);}
+function spacepanel(){param("detector",1);param("inspector",3);}
 function inspectband(i){param("detectorBand",i);param("inspector",2);param("detector",1);}
 function detectorreset(){param("impactLo",35);param("impactHi",160);param("impactSensitivity",1);param("impactGap",.16);P.roles[0].sensitivity=1;}
-function defaults(){var d={brightness:.55,sensitivity:1,trails:.25,detail:.55,bassWeight:1.2,focus:0,scene:0,palette:0,detector:false,transition:.85,eventAmount:.7,freeze:false,black:false,fx:true,fxdepth:.85};for(var k in d)param(k,d[k]);clear();status("視覺與觸控效果已恢復預設，播放與音量保持原狀。");}
+function defaults(){var d={brightness:.55,sensitivity:1,trails:.25,detail:.55,bassWeight:1.2,focus:0,scene:0,palette:0,detector:false,transition:.85,eventAmount:.7,spatialAmount:.85,spatialContrast:.65,freeze:false,black:false,fx:true,fxdepth:.85};for(var k in d)param(k,d[k]);clear();status("視覺與觸控效果已恢復預設，播放與音量保持原狀。");}
 function render(){
  var t=now(),dt=lastFrame?LensFeatures.clamp(t-lastFrame,.001,.1):.05;lastFrame=t;
  if(t-lastFeatures>.15)analyse([],t);
- var f=behaviourFrame,display=presentation.step(f,perception,dt,P.eventAmount),leds=visual.step(display,dt,P),g=interaction.gesture();
+ var f=behaviourFrame,display=presentation.step(f,perception,dt,P.eventAmount,measured,P),leds=visual.step(display,dt,P),g=interaction.gesture();
  var computed=now();
  fxparam("amount",P.fx&&g.count?(.25+g.strength*.75)*P.fxdepth*.95:0);fxparam("pressure",g.strength);fxparam("tone",g.y);fxparam("distance",g.x);
  var fxSent=now();
@@ -873,7 +963,7 @@ function render(){
 }
 var tickTask=new Task(render,this);
 function frameposition(ms){if(!pendingCapture)return;pendingCapture.position=Math.max(0,Number(ms)/1000);if(capture&&capture.isopen){capture.writeline(JSON.stringify(pendingCapture));if(++captureFrames>60000)capturestop();}pendingCapture=null;}
-function snapshot(leds){return {params:P,features:behaviourFrame,measurements:measured,perception:perception,transition:visual.transition.snapshot(),leds:leds||visual.frame,gesture:interaction.gesture(),file:file.split("/").pop(),loaded:loaded,running:running,paused:paused,position:position,duration:duration,samplerate:samplerate,channels:channels,connected:connected,requested:hw,inputPort:inputPort,outputPort:outputPort,message:message,rec:rec,meter:meter,plugin:pluginName,pluginReady:pluginReady,frame:frameNo};}
+function snapshot(leds){return {params:P,spatial:visual.spatial,features:behaviourFrame,measurements:measured,perception:perception,transition:visual.transition.snapshot(),leds:leds||visual.frame,gesture:interaction.gesture(),file:file.split("/").pop(),loaded:loaded,running:running,paused:paused,position:position,duration:duration,samplerate:samplerate,channels:channels,connected:connected,requested:hw,inputPort:inputPort,outputPort:outputPort,message:message,rec:rec,meter:meter,plugin:pluginName,pluginReady:pluginReady,frame:frameNo};}
 function sendFrame(leds){var entries=[],i,n,c,old;for(i=0;i<64;i++){n=MoonProtocol.pad(i%8,Math.floor(i/8));c=leds.slice(i*3,i*3+3);old=lastLed[n];if(!old||c.join()!=old.join()){entries.push([n].concat(c));lastLed[n]=c;}}
  var edge=[[91,running],[92,!running],[93,0],[94,P.black],[95,P.freeze],[96,P.fx],[97,P.trails>.65],[98,0],[89,P.scene===0],[79,P.scene===1],[69,P.scene===2],[59,P.scene===3],[49,P.scene===4],[39,P.scene===5],[29,P.palette!==0],[19,P.detector],[1,P.focus===0],[2,P.focus===1],[3,P.focus===2],[4,P.focus===3],[5,P.focus===4],[6,P.focus===5],[7,0],[8,0]];
  for(i=1;i<=8;i++)edge.push([100+i,i<=6?P.focus===i-1:0]);

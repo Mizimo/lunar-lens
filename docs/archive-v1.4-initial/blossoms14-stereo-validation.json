@@ -1,0 +1,19 @@
+{
+  "version": "1.4.0",
+  "label": "blossoms14",
+  "activeFrames": 5905,
+  "validFrames": 5905,
+  "passed": true,
+  "overallSharesMedian": [
+    0.21618492747168638,
+    0.5531422777944792,
+    0.21805275494412368
+  ],
+  "globallyBalancedFrames": 2212,
+  "balancedFramesWithOppositeRegisters": 1297,
+  "foregroundVsBedSpatialDifferenceFrames": 3568,
+  "computeP99Ms": 1.0001659393310547,
+  "analysisP99Ms": 1.0001659393310547,
+  "interpretation": "Opposite registers: overall residual balance within 5%, yet two bands above 1% total power lean more than 20% in opposite directions. Foreground vs bed: L1 distance > 0.24. These report observable spatial differences, not correct instrument or stem separation.",
+  "validationStage": "Before final stricter centre definition and intact low-frequency layout; retained only as development evidence"
+}

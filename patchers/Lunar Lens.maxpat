@@ -1183,6 +1183,21 @@
       },
       {
         "box": {
+          "id": "spectral-rate",
+          "maxclass": "newobj",
+          "numinlets": 1,
+          "numoutlets": 1,
+          "patching_rect": [
+            1740,
+            1620,
+            160,
+            22
+          ],
+          "text": "prepend hostRate"
+        }
+      },
+      {
+        "box": {
           "id": "vst",
           "maxclass": "newobj",
           "numinlets": 2,
@@ -4088,6 +4103,30 @@
           "destination": [
             "controller",
             0
+          ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "dsp-state",
+            1
+          ],
+          "destination": [
+            "spectral-rate",
+            0
+          ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "spectral-rate",
+            0
+          ],
+          "destination": [
+            "spectral",
+            2
           ]
         }
       },

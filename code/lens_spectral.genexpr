@@ -1,5 +1,9 @@
 // pfft~ 2048 / overlap 4. Stereo power avoids antiphase cancellation.
-// Six dimensionless descriptors, latched together at a frame boundary.
+// Descriptors plus 16 L / shared-centre / R power distributions.
+// All values are latched together. This is a phase-aware estimate, not stems.
+Param hostRate(44100);
+Data spatialSum(48); Data spatialFrame(48);
+Data leftHistory(1024); Data rightHistory(1024); Data crossHistory(1024);
 Data previous(1024);
 History mass(0); History moment(0); History moment2(0); History logarithms(0);
 History plogp(0); History squareSum(0); History oldSquareSum(0); History dot(0);
@@ -8,6 +12,9 @@ History centroid(0); History spread(0); History flatness(0); History novelty(0);
 History concentration(0); History entropy(0);
 index=clamp(floor(in5),0,1023);
 if(index==0){
+ for(slot=0;slot<48;slot=slot+1){
+  poke(spatialFrame,peek(spatialSum,slot),slot);poke(spatialSum,0,slot);
+ }
  if(count>0 && mass>0.000000000001){
   centroid=moment/mass;
   spread=sqrt(max(0,moment2/mass-centroid*centroid));
@@ -31,3 +38,75 @@ if(index>0){
 }
 out1=centroid;out2=spread;out3=flatness;out4=novelty;
 out5=concentration;out6=entropy;out7=frameCount;
+
+// Smooth each complex bin's power and signed real cross-power over 80 ms.
+// Splitting BEFORE summing a frequency band retains simultaneous opposite pans.
+alpha=1-exp(-512/(max(8000,hostRate)*0.08));
+lp=peek(leftHistory,index);rp=peek(rightHistory,index);cp=peek(crossHistory,index);
+lp=lp+alpha*(in1*in1+in2*in2-lp);
+rp=rp+alpha*(in3*in3+in4*in4-rp);
+cp=cp+alpha*(in1*in3+in2*in4-cp);
+poke(leftHistory,lp,index);poke(rightHistory,rp,index);poke(crossHistory,cp,index);
+coherence=clamp(cp/sqrt(max(0.00000000000000000001,lp*rp)),0,1);
+// "Both channels contain energy" is insufficient evidence of a centre image.
+// Require near-balanced power AND strongly positive, temporally averaged phase agreement.
+balanceRatio=min(lp,rp)/max(0.00000000000000000001,max(lp,rp));
+phaseGate=clamp((coherence-0.85)/0.13,0,1);phaseGate=phaseGate*phaseGate*(3-2*phaseGate);
+levelGate=clamp((balanceRatio-0.70)/0.25,0,1);levelGate=levelGate*levelGate*(3-2*levelGate);
+common=min(lp,rp)*phaseGate*levelGate;
+hz=index*hostRate/2048;
+band=hz<50 ? 0 : hz<70 ? 1 : hz<100 ? 2 : hz<140 ? 3 : hz<200 ? 4 : hz<280 ? 5 : hz<410 ? 6 : hz<600 ? 7 : hz<950 ? 8 : hz<1500 ? 9 : hz<2300 ? 10 : hz<3500 ? 11 : hz<5100 ? 12 : hz<7500 ? 13 : hz<11000 ? 14 : hz<16000 ? 15 : 16;
+if(index>0 && hz>=30 && band<16){
+ slot=band*3;
+ poke(spatialSum,peek(spatialSum,slot)+max(0,lp-common),slot);
+ poke(spatialSum,peek(spatialSum,slot+1)+2*common,slot+1);
+ poke(spatialSum,peek(spatialSum,slot+2)+max(0,rp-common),slot+2);
+}
+out8=peek(spatialFrame,0);
+out9=peek(spatialFrame,1);
+out10=peek(spatialFrame,2);
+out11=peek(spatialFrame,3);
+out12=peek(spatialFrame,4);
+out13=peek(spatialFrame,5);
+out14=peek(spatialFrame,6);
+out15=peek(spatialFrame,7);
+out16=peek(spatialFrame,8);
+out17=peek(spatialFrame,9);
+out18=peek(spatialFrame,10);
+out19=peek(spatialFrame,11);
+out20=peek(spatialFrame,12);
+out21=peek(spatialFrame,13);
+out22=peek(spatialFrame,14);
+out23=peek(spatialFrame,15);
+out24=peek(spatialFrame,16);
+out25=peek(spatialFrame,17);
+out26=peek(spatialFrame,18);
+out27=peek(spatialFrame,19);
+out28=peek(spatialFrame,20);
+out29=peek(spatialFrame,21);
+out30=peek(spatialFrame,22);
+out31=peek(spatialFrame,23);
+out32=peek(spatialFrame,24);
+out33=peek(spatialFrame,25);
+out34=peek(spatialFrame,26);
+out35=peek(spatialFrame,27);
+out36=peek(spatialFrame,28);
+out37=peek(spatialFrame,29);
+out38=peek(spatialFrame,30);
+out39=peek(spatialFrame,31);
+out40=peek(spatialFrame,32);
+out41=peek(spatialFrame,33);
+out42=peek(spatialFrame,34);
+out43=peek(spatialFrame,35);
+out44=peek(spatialFrame,36);
+out45=peek(spatialFrame,37);
+out46=peek(spatialFrame,38);
+out47=peek(spatialFrame,39);
+out48=peek(spatialFrame,40);
+out49=peek(spatialFrame,41);
+out50=peek(spatialFrame,42);
+out51=peek(spatialFrame,43);
+out52=peek(spatialFrame,44);
+out53=peek(spatialFrame,45);
+out54=peek(spatialFrame,46);
+out55=peek(spatialFrame,47);

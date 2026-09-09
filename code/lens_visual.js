@@ -1,4 +1,4 @@
-/* Five sound behaviours, six genuinely different spatial grammars.
+/* Five sound behaviours, seven different spatial grammars.
    No score, title, transport position, instrument label or free-running beat. */
 if(typeof module!=="undefined"){
  var LensInteraction=require('./lens_interaction.js'),LensTransition=require('./lens_transition.js');
@@ -10,7 +10,22 @@ var LensVisual=(function(){
  function edge(d,w){return Math.exp(-d*d/(w*w));}
  function zeros(){var a=[];for(var i=0;i<64;i++)a.push(0);return a;}
  function empty(){return [zeros(),zeros(),zeros(),zeros(),zeros()];}
- var names=["重力／沉積","天體／公轉","織光／經緯","門廊／縱深","雙生／呼應","拼光／碎片"];
+ // Resample inside the source, never clamp edges into long false streaks.
+ function sample(layer,x,y){if(x<-.5||x>7.5)return 0;var l=Math.floor(x),f=x-l;return (l>=0&&l<8?layer[y*8+l]:0)*(1-f)+(l+1>=0&&l+1<8?layer[y*8+l+1]:0)*f;}
+ function project(layer,x,y,anchor,scale){
+  if(scale>=1)return sample(layer,3.5+(x-anchor)/scale,y);
+  // Area integration prevents a narrow moving phrase disappearing between LEDs.
+  var a=3.5+(x-.5-anchor)/scale,b=3.5+(x+.5-anchor)/scale,sum=0;
+  for(var cell=Math.max(0,Math.floor(a+.5));cell<=Math.min(7,Math.floor(b+.5));cell++)sum+=layer[y*8+cell]*Math.max(0,Math.min(b,cell+.5)-Math.max(a,cell-.5));
+  return sum/(b-a);
+ }
+ function spatialSample(layer,x,y,width,shares,amount,separation){
+  var base=sample(layer,3.5+(x-3.5)/width,y);if(!amount)return base;
+  var value=0,sep=separation||0,anchors=[1.25-.3*sep,3.5,5.75+.3*sep],sizes=[.48-.14*sep,.76-.22*sep,.48-.14*sep];
+  for(var ch=0;ch<3;ch++)value+=shares[ch]*project(layer,x,y,anchors[ch],width*sizes[ch])/sizes[ch];
+  return base*(1-amount)+value*amount;
+ }
+ var names=["重力／沉積","天體／公轉","織光／經緯","門廊／縱深","雙生／呼應","拼光／碎片","聲場／三域"];
  var paletteNames=["琥珀冰川","月夜紫羅蘭","翡翠珊瑚","鈷藍熔岩","蘭花青檸","桃紅電光"];
  // impact / foundation / phrase / bed / detail; bounded palettes, never hue-cycling.
  var palettes=[
@@ -21,12 +36,12 @@ var LensVisual=(function(){
   [[1,.30,.71],[.48,.14,.93],[.72,1,.13],[.03,.57,.53],[1,.78,.37]],
   [[1,.84,.20],[1,.19,.37],[.12,.89,.81],[.36,.18,.85],[.75,.95,.99]]
  ];
- function palette(scene,choice){return palettes[choice?clamp(choice-1,0,5):clamp(scene,0,5)];}
+ function palette(scene,choice){return palettes[choice?clamp(choice-1,0,5):scene===6?0:clamp(scene,0,5)];}
  function Engine(interaction){this.input=interaction||new LensInteraction.Engine();this.transition=new LensTransition.Engine();this.time=0;this.motion=0;this.serial=0;this.clear();}
  Engine.prototype.clear=function(){
   this.input.clear();this.transition.clear();this.impacts=[];this.particles=[];this.lastCounts=[0,0,0];
   this.trails=empty();this.layers=empty();this.frame=[];this.midHistory=[];this.flash=0;
-  this.phraseClock=0;this.bedClock=0;this.turn=0;this.lastScene=-1;
+  this.spatial=null;this.phraseClock=0;this.bedClock=0;this.turn=0;this.lastScene=-1;
  };
  // Compatibility accessors for existing standalone renderers; state lives in input.
  Object.defineProperty(Engine.prototype,"held",{get:function(){return this.input.held;},set:function(v){this.input.held=v;}});
@@ -37,8 +52,9 @@ var LensVisual=(function(){
  Engine.prototype.gesture=function(){return this.input.gesture();};
  Engine.prototype.step=function(f,dt,p){
   dt=clamp(dt,.001,.1);this.time+=dt;var g=this.gesture(),i,j,k,x,y,pt;
-  var ev=f.eventVisual||{},roleSettings=p.roles||[];
-  var scene=clamp(p.scene||0,0,5),counts=f.counts||[0,0,0],hits=f.transients||[0,0,0];
+  var ev=f.eventVisual||{},roleSettings=p.roles||[],spatial=f.spatial||{valid:false,amount:0,roles:[]};
+  if(!p.freeze||!this.spatial)this.spatial=spatial;else spatial=this.spatial;
+  var scene=clamp(p.scene||0,0,6),counts=f.counts||[0,0,0],hits=f.transients||[0,0,0];
   var body=f.body===undefined?f.bands[0]:f.body,b=f.behaviour;
   var phrase=b?(b.phrase||0):f.bands[1],bed=b?(b.bed||0):0,art=b?(b.articulation||0):.6,contour=f.midContour===undefined?.5:f.midContour;
   var dynamics=f.bandDynamics||[],bassAttack=0,midAttack=0,register=0;
@@ -73,7 +89,7 @@ var LensVisual=(function(){
    for(i=this.impacts.length-1;i>=0;i--){if(this.impacts[i].fresh)this.impacts[i].fresh=false;else this.impacts[i].t+=dt;if(this.impacts[i].t>.52)this.impacts.splice(i,1);}
    for(i=this.particles.length-1;i>=0;i--){pt=this.particles[i];pt.t+=dt;pt.life=Math.max(0,1-pt.t/pt.duration);if(pt.life<=0)this.particles.splice(i,1);}
    var next=empty(),cx=3.5+(g.count?(g.x*7-3.5)*g.strength*.55:0),cy=3.5+(g.count?(g.y*7-3.5)*g.strength*.4:0);
-   cx+=(ev.pan||0)*.7;
+   if(!spatial.valid)cx+=(ev.pan||0)*.7;
    var spread=1+(f.width||0)*.25+(ev.reframe||0)*.16,pc=this.phraseClock+(ev.entry||0)*.35,
     bc=this.bedClock+(ev.reframe||0)*.6,turn=this.turn,flash=this.flash;
    for(y=0;y<8;y++)for(x=0;x<8;x++){
@@ -152,6 +168,27 @@ var LensVisual=(function(){
     next[2][idx]=fore*phrase*(.64+flash*.3)*(1+(ev.entry||0)*.22);
     next[3][idx]=bedShape*bed*.55*(1-clamp(fore*phrase,0,.6))*(1-(ev.release||0)*.35)*(1-(ev.reframe||0)*.65*edge(x-((ev.direction||0)?4.5:2.5),.9));
     next[4][idx]=detail*(1+(ev.texture||0)*.25);
+    if(scene===6){
+     // Three separated lanes, eight registers from bottom (low) to top (high).
+     // One shared power reference across all lanes. No random particle placement.
+     var channel=x<2?0:x>=3&&x<5?1:x>=6?2:-1,level=channel>=0&&spatial.valid?spatial.spectrum[y][channel]:0;
+     var rowRole=y<3?1:y<6?2:4;
+     for(var layer=0;layer<5;layer++)next[layer][idx]=0;
+     next[rowRole][idx]=level*Math.max(0,f.slow||0)*.85;
+     if(rowRole===2){
+      var midLevel=next[2][idx],midTotal=Math.max(.001,phrase+bed);
+      next[2][idx]=midLevel*phrase/midTotal;next[3][idx]=midLevel*bed/midTotal;
+     }
+     if(y<3){
+      // The low register remains one continuous mass, regardless of its stereo input.
+      var lowLevel=spatial.valid&&spatial.lowSpectrum?spatial.lowSpectrum[y]:0;
+      next[1][idx]=lowLevel*Math.max(0,f.slow||0)*.85*clamp((1+low*2.5-Math.abs(x-3.5))/.8,0,1);
+      // Impact timing and weight are unchanged; no left/centre/right copies.
+      if(y===0)for(i=0;i<this.impacts.length;i++){
+       var pulse=this.impacts[i];next[0][idx]+=edge(x-3.5,2.2)*Math.sqrt(pulse.p)*Math.exp(-pulse.t/.055)*weight;
+      }
+     }
+    }
    }
    var tau=[.035,.09+p.trails*.25,.045+p.trails*.11,.18+p.trails*.30,.020+p.trails*.025];
    for(j=0;j<5;j++)for(i=0;i<64;i++){next[j][i]=Math.max(next[j][i],this.trails[j][i]*Math.exp(-dt/(tau[j]*((roleSettings[j]||{}).release||1))));if(next[j][i]<.0001)next[j][i]=0;}
@@ -163,9 +200,13 @@ var LensVisual=(function(){
   for(y=0;y<8;y++)for(x=0;x<8;x++){
    var idx=y*8+x,c=[0,0,0],attack=[0,0,0],local=0;
    for(j=0;j<5;j++){
-    var settings=roleSettings[j]||{},wide=(settings.width||1)*(j===3?1+(ev.spread||0)*.35:1),sx=clamp(3.5+(x-3.5)/wide,0,7),left=Math.floor(sx),right=Math.min(7,left+1);
-    var sample=this.layers[j][y*8+left]*(1-(sx-left))+this.layers[j][y*8+right]*(sx-left);
-    var value=focus&&focus!==j+1?0:sample*scales[j]*(settings.gain===undefined?1:settings.gain);local+=value;
+    var settings=roleSettings[j]||{},wide=(settings.width||1)*(j===3?1+(ev.spread||0)*.35:1);
+    var sampled=spatialSample(this.layers[j],x,y,wide,(spatial.displayRoles||spatial.roles||[])[j]||[0,1,0],j<2?0:spatial.amount||0,j===2||j===3?spatial.contrast||0:0);
+    if(scene===6&&j>=2){
+     var lane=x<2?0:x>=3&&x<5?1:x>=6?2:-1,anchor=[.5,3.5,6.5][lane];
+     sampled=lane<0?0:sample(this.layers[j],anchor+(x-anchor)/wide,y);
+    }
+    var value=focus&&focus!==j+1?0:sampled*scales[j]*(settings.gain===undefined?1:settings.gain);local+=value;
     for(k=0;k<3;k++)if(j===0)attack[k]+=value*colours[j][k];else c[k]+=value*colours[j][k];
    }
    for(k=0;k<3;k++){c[k]/=Math.max(1,Math.pow(local,.65));attack[k]/=Math.max(1,Math.pow(local,.65));}

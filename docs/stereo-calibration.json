@@ -1,0 +1,100 @@
+{
+  "version": "1.4.0",
+  "purpose": "Native known spatial placement and silence checks; not stem separation or music accuracy",
+  "sampleRate": 48000,
+  "frames": 1426,
+  "passed": true,
+  "results": {
+    "mono": [
+      4.739237095477152e-13,
+      0.9999999999990522,
+      4.739237095477152e-13
+    ],
+    "left": [
+      0.9999999999999881,
+      0.0,
+      1.1889188248827697e-14
+    ],
+    "right": [
+      1.3584952820836313e-14,
+      0.0,
+      0.9999999999999865
+    ],
+    "antiphase": [
+      0.49999999999999706,
+      0.0,
+      0.5000000000000029
+    ],
+    "split": [
+      0.3200020787224884,
+      0.3599933285545573,
+      0.3200045898655455
+    ],
+    "swapped": [
+      0.320004585375153,
+      0.35999331667189527,
+      0.3200021003298296
+    ],
+    "same_register": [
+      0.32010037106894434,
+      0.3596669608019494,
+      0.3201703537648291
+    ],
+    "diffuse": [
+      0.4977701950617438,
+      0.0,
+      0.5022298049382561
+    ],
+    "partial_pan": [
+      0.7677438289466653,
+      0.0,
+      0.23225617105333476
+    ],
+    "quadrature": [
+      0.4999999999999319,
+      0.0,
+      0.5000000000000682
+    ],
+    "splitLow": [
+      0.9999999997317242,
+      0.0,
+      2.6827586232750095e-10
+    ],
+    "splitMiddle": [
+      1.423146866298442e-05,
+      0.9999857435280642,
+      2.3683740280516254e-08
+    ],
+    "splitHigh": [
+      3.746768608216899e-09,
+      6.75987267093352e-10,
+      0.9999999955777341
+    ],
+    "swappedLow": [
+      2.7096553755235864e-10,
+      0.0,
+      0.9999999997290344
+    ],
+    "swappedHigh": [
+      0.9999999955352515,
+      6.949185005595497e-10,
+      3.794129132162743e-09
+    ],
+    "sameRegister": [
+      0.32012699634937847,
+      0.3596167426516069,
+      0.32019403356476006
+    ]
+  },
+  "runtimeHashes": {
+    "patchers/Lunar Lens.maxpat": "33124a59bc744b2643aedf0a64086107290143902b635e7418ee7a93f8d9d2b6",
+    "patchers/lens_analysis.gendsp": "845d008779a0fea04be82120904c5a281bc908dc3e6d018d5a4e586432871581",
+    "patchers/lens_context.gendsp": "83dd8968434258771f146a1596f0910581c456cb67b5bcf95c83dd3621fad8c0",
+    "patchers/lens_fx.gendsp": "8dee70dba943812f0569d7cc5ef3b64f1bba4745cd6132477ff1663f96304843",
+    "patchers/lens_grid.js": "b72ad1c60aebae9380fc10879392d3d95636f98d955248bd7efba702fa36a635",
+    "patchers/lens_runtime.js": "71a716b2fae4dccc51582cafa6e7dfddc7dfa66b9bf8df7adbfb8ef5b24ff717",
+    "patchers/lens_screen.js": "984d4793d850a2daa7d1c753ce33551a360e4c29793580cb0a4e5737abe5d3d0",
+    "patchers/lens_spectral.gendsp": "56d6f9ce8f616a198b6d023f94472bda133732e4d464a9397b65151c9d27c121",
+    "patchers/lens_spectral.maxpat": "e2118921c4c29686ae200d60e28af5fc069f1530fd982d7901c269042f06feb0"
+  }
+}
