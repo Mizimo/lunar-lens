@@ -1,0 +1,261 @@
+{
+  "version": "1.0.0",
+  "touchDurationSeconds": 10.442666666666666,
+  "touchPeakDbFS": -22.77473258972168,
+  "alignmentSamples": 14336,
+  "relativeDryError": 0.006953103002160788,
+  "relativeHeldEffectError": 0.24124127626419067,
+  "relativeReleasedError": 0.003740569343790412,
+  "heldComparisonSeconds": [
+    4.196000000000163,
+    6.4959999999995945
+  ],
+  "pressureStrength": [
+    0.10846456692913385,
+    0.5,
+    0.9431102362204724,
+    0
+  ],
+  "plugin": "FabFilter Pro-R 2 VST3",
+  "pluginDurationSeconds": 4.021333333333334,
+  "pluginPeakDbFS": -24.318584442138672,
+  "pluginBypassRestored": true,
+  "monitorOffThroughout": true,
+  "allAudioFinite": true,
+  "checks": {
+    "lightPressure": {
+      "running": true,
+      "paused": false,
+      "position": 3.3960000000001065,
+      "duration": 48,
+      "gesture": {
+        "count": 1,
+        "strength": 0.10846456692913385,
+        "x": 0.42857142857142855,
+        "y": 0.42857142857142855
+      },
+      "pluginReady": false
+    },
+    "fullPressure": {
+      "running": true,
+      "paused": false,
+      "position": 3.7960000000001517,
+      "duration": 48,
+      "gesture": {
+        "count": 1,
+        "strength": 0.5,
+        "x": 0.42857142857142855,
+        "y": 0.42857142857142855
+      },
+      "pluginReady": false
+    },
+    "twoTouches": {
+      "running": true,
+      "paused": false,
+      "position": 6.595999999999617,
+      "duration": 48,
+      "gesture": {
+        "count": 2,
+        "strength": 0.9431102362204724,
+        "x": 0.4956913259981513,
+        "y": 0.4956913259981513
+      },
+      "pluginReady": false
+    },
+    "released": {
+      "running": true,
+      "paused": false,
+      "position": 9.996000000000075,
+      "duration": 48,
+      "gesture": {
+        "count": 0,
+        "strength": 0,
+        "x": 0.5,
+        "y": 0.5
+      },
+      "pluginReady": false
+    },
+    "paused": {
+      "running": false,
+      "paused": true,
+      "position": 10.165333333333486,
+      "duration": 48,
+      "gesture": {
+        "count": 0,
+        "strength": 0,
+        "x": 0.5,
+        "y": 0.5
+      },
+      "pluginReady": false
+    },
+    "pauseHeld": {
+      "running": false,
+      "paused": true,
+      "position": 10.165333333333486,
+      "duration": 48,
+      "gesture": {
+        "count": 0,
+        "strength": 0,
+        "x": 0.5,
+        "y": 0.5
+      },
+      "pluginReady": false
+    },
+    "seekQuarter": {
+      "running": true,
+      "paused": false,
+      "position": 12.358666666666666,
+      "duration": 48,
+      "gesture": {
+        "count": 0,
+        "strength": 0,
+        "x": 0.5,
+        "y": 0.5
+      },
+      "pluginReady": false
+    },
+    "blackout": {
+      "running": true,
+      "paused": false,
+      "position": 12.658666666666669,
+      "duration": 48,
+      "gesture": {
+        "count": 1,
+        "strength": 0.5,
+        "x": 0.14285714285714285,
+        "y": 0.14285714285714285
+      },
+      "pluginReady": false
+    },
+    "frozenTouch": {
+      "running": true,
+      "paused": false,
+      "position": 12.958666666666675,
+      "duration": 48,
+      "gesture": {
+        "count": 2,
+        "strength": 0.9096456692913386,
+        "x": 0.27152440720932386,
+        "y": 0.27152440720932386
+      },
+      "pluginReady": false
+    },
+    "bodyFocus": {
+      "running": true,
+      "paused": false,
+      "position": 13.15866666666667,
+      "duration": 48,
+      "gesture": {
+        "count": 0,
+        "strength": 0,
+        "x": 0.5,
+        "y": 0.5
+      },
+      "pluginReady": false
+    },
+    "bassWeight": {
+      "running": true,
+      "paused": false,
+      "position": 13.35866666666666,
+      "duration": 48,
+      "gesture": {
+        "count": 0,
+        "strength": 0,
+        "x": 0.5,
+        "y": 0.5
+      },
+      "pluginReady": false
+    },
+    "restored": {
+      "running": true,
+      "paused": false,
+      "position": 13.558666666666648,
+      "duration": 48,
+      "gesture": {
+        "count": 0,
+        "strength": 0,
+        "x": 0.5,
+        "y": 0.5
+      },
+      "pluginReady": false
+    },
+    "restart": {
+      "running": true,
+      "paused": false,
+      "position": 0.2093333333333337,
+      "duration": 48,
+      "gesture": {
+        "count": 0,
+        "strength": 0,
+        "x": 0.5,
+        "y": 0.5
+      },
+      "pluginReady": false
+    },
+    "stop": {
+      "running": false,
+      "paused": false,
+      "position": 0,
+      "duration": 48,
+      "gesture": {
+        "count": 0,
+        "strength": 0,
+        "x": 0.5,
+        "y": 0.5
+      },
+      "pluginReady": false
+    },
+    "pluginReady": {
+      "running": false,
+      "paused": false,
+      "position": 0,
+      "duration": 48,
+      "gesture": {
+        "count": 0,
+        "strength": 0,
+        "x": 0.5,
+        "y": 0.5
+      },
+      "pluginReady": true
+    },
+    "pluginEnabled": {
+      "running": true,
+      "paused": false,
+      "position": 3.5306666666667885,
+      "duration": 48,
+      "gesture": {
+        "count": 0,
+        "strength": 0,
+        "x": 0.5,
+        "y": 0.5
+      },
+      "pluginReady": true
+    },
+    "pluginBypassed": {
+      "running": true,
+      "paused": false,
+      "position": 3.730666666666811,
+      "duration": 48,
+      "gesture": {
+        "count": 0,
+        "strength": 0,
+        "x": 0.5,
+        "y": 0.5
+      },
+      "pluginReady": true
+    },
+    "readyForUser": {
+      "running": false,
+      "paused": false,
+      "position": 0,
+      "duration": 197.04453514739228,
+      "gesture": {
+        "count": 0,
+        "strength": 0,
+        "x": 0.5,
+        "y": 0.5
+      },
+      "pluginReady": true
+    }
+  }
+}

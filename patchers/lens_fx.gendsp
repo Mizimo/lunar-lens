@@ -1,0 +1,156 @@
+{
+  "patcher": {
+    "fileversion": 1,
+    "appversion": {
+      "major": 9,
+      "minor": 1,
+      "revision": 4,
+      "architecture": "arm64",
+      "modernui": 1
+    },
+    "classnamespace": "dsp.gen",
+    "rect": [
+      80,
+      80,
+      980,
+      700
+    ],
+    "openinpresentation": 0,
+    "default_fontsize": 12,
+    "default_fontname": "Arial",
+    "bgcolor": [
+      0.025,
+      0.036,
+      0.06,
+      1
+    ],
+    "boxes": [
+      {
+        "box": {
+          "id": "code",
+          "maxclass": "codebox",
+          "numinlets": 2,
+          "numoutlets": 2,
+          "patching_rect": [
+            70,
+            100,
+            850,
+            480
+          ],
+          "code": "// Optional touch effect. Dry path is unchanged when amount == 0.\nParam amount(0); Param tone(0.5); Param distance(0.5); Param pressure(0);\nHistory wet(0); History smtone(0.5); History dL(0); History dR(0); History d2L(0); History d2R(0);\nHistory force(0); History clock(0); History holdL(0); History holdR(0);\nDelay echoL(96000); Delay echoR(96000);\nDelay a1(16000); Delay a2(16000); Delay a3(16000); Delay a4(16000);\nHistory f1(0); History f2(0); History f3(0); History f4(0);\nwet=wet+(clamp(amount,0,0.9)-wet)*(1-exp(-1/(samplerate*0.06)));\nforce=force+(clamp(pressure,0,1)-force)*(1-exp(-1/(samplerate*0.06)));\nsmtone=smtone+(clamp(tone,0,1)-smtone)*0.0006;\ncutoff=160+pow(smtone,2)*14000;\ncoef=1-exp(-twopi*cutoff/samplerate);\ndL=dL+coef*(in1-dL); dR=dR+coef*(in2-dR);\nd2L=d2L+coef*(dL-d2L); d2R=d2R+coef*(dR-d2R);\nclock=clock+1;\nif(clock>=1+floor(force*clamp(distance,0,1)*7)){\n clock=0; quantum=pow(2,14-7*force*clamp(distance,0,1));\n holdL=round(d2L*quantum)/quantum; holdR=round(d2R*quantum)/quantum;\n}\nel=echoL.read(min(95000,samplerate*0.31)); er=echoR.read(min(95000,samplerate*0.43));\nechoL.write((dL+er*0.38)*0.85); echoR.write((dR+el*0.38)*0.85);\nr1=a1.read(min(15900,samplerate*0.0371)); r2=a2.read(min(15900,samplerate*0.0437));\nr3=a3.read(min(15900,samplerate*0.0533)); r4=a4.read(min(15900,samplerate*0.0611));\nf1=f1+0.2*(r1-f1); f2=f2+0.2*(r2-f2); f3=f3+0.2*(r3-f3); f4=f4+0.2*(r4-f4);\ng=0.73+clamp(distance,0,1)*0.12;\na1.write(dL*0.22+(f1+f2+f3+f4)*0.5*g);\na2.write(dR*0.22+(f1-f2+f3-f4)*0.5*g);\na3.write(dL*0.18+(f1+f2-f3-f4)*0.5*g);\na4.write(dR*0.18+(f1-f2-f3+f4)*0.5*g);\n// A clear timbral crossfade. The existing master ceiling remains downstream.\nout1=in1*(1-wet)+wet*(holdL*.95+el*.45+(r1+r3)*.5);\nout2=in2*(1-wet)+wet*(holdR*.95+er*.45+(r2+r4)*.5);\n"
+        }
+      },
+      {
+        "box": {
+          "id": "in0",
+          "maxclass": "newobj",
+          "numinlets": 0,
+          "numoutlets": 1,
+          "patching_rect": [
+            70,
+            35,
+            90,
+            22
+          ],
+          "text": "in 1"
+        }
+      },
+      {
+        "box": {
+          "id": "in1",
+          "maxclass": "newobj",
+          "numinlets": 0,
+          "numoutlets": 1,
+          "patching_rect": [
+            190,
+            35,
+            90,
+            22
+          ],
+          "text": "in 2"
+        }
+      },
+      {
+        "box": {
+          "id": "out0",
+          "maxclass": "newobj",
+          "numinlets": 1,
+          "numoutlets": 0,
+          "patching_rect": [
+            70,
+            620,
+            90,
+            22
+          ],
+          "text": "out 1"
+        }
+      },
+      {
+        "box": {
+          "id": "out1",
+          "maxclass": "newobj",
+          "numinlets": 1,
+          "numoutlets": 0,
+          "patching_rect": [
+            190,
+            620,
+            90,
+            22
+          ],
+          "text": "out 2"
+        }
+      }
+    ],
+    "lines": [
+      {
+        "patchline": {
+          "source": [
+            "in0",
+            0
+          ],
+          "destination": [
+            "code",
+            0
+          ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "in1",
+            0
+          ],
+          "destination": [
+            "code",
+            1
+          ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "code",
+            0
+          ],
+          "destination": [
+            "out0",
+            0
+          ]
+        }
+      },
+      {
+        "patchline": {
+          "source": [
+            "code",
+            1
+          ],
+          "destination": [
+            "out1",
+            0
+          ]
+        }
+      }
+    ],
+    "autosave": 0
+  }
+}

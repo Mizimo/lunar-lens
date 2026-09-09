@@ -1,0 +1,25 @@
+{
+  "touchDuration": 10.72,
+  "touchPeakDbFS": -19.055097579956055,
+  "alignmentSamples": 18432,
+  "relativeDryError": 0.008655001409351826,
+  "relativeHeldEffectError": 0.2221570909023285,
+  "relativeReleasedError": 0.012802223674952984,
+  "touchCounts": [
+    1,
+    2,
+    0,
+    0
+  ],
+  "pressureStrength": [
+    0.5,
+    0.9431102362204724,
+    0,
+    0
+  ],
+  "plugin": "FabFilter Pro-R 2 VST3",
+  "pluginDuration": 4.469333333333333,
+  "pluginPeakDbFS": -19.893400192260742,
+  "pluginBypassRestored": true,
+  "allFinite": true
+}

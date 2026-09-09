@@ -1,0 +1,32 @@
+// Optional touch effect. Dry path is unchanged when amount == 0.
+Param amount(0); Param tone(0.5); Param distance(0.5); Param pressure(0);
+History wet(0); History smtone(0.5); History dL(0); History dR(0); History d2L(0); History d2R(0);
+History force(0); History clock(0); History holdL(0); History holdR(0);
+Delay echoL(96000); Delay echoR(96000);
+Delay a1(16000); Delay a2(16000); Delay a3(16000); Delay a4(16000);
+History f1(0); History f2(0); History f3(0); History f4(0);
+wet=wet+(clamp(amount,0,0.9)-wet)*(1-exp(-1/(samplerate*0.06)));
+force=force+(clamp(pressure,0,1)-force)*(1-exp(-1/(samplerate*0.06)));
+smtone=smtone+(clamp(tone,0,1)-smtone)*0.0006;
+cutoff=160+pow(smtone,2)*14000;
+coef=1-exp(-twopi*cutoff/samplerate);
+dL=dL+coef*(in1-dL); dR=dR+coef*(in2-dR);
+d2L=d2L+coef*(dL-d2L); d2R=d2R+coef*(dR-d2R);
+clock=clock+1;
+if(clock>=1+floor(force*clamp(distance,0,1)*7)){
+ clock=0; quantum=pow(2,14-7*force*clamp(distance,0,1));
+ holdL=round(d2L*quantum)/quantum; holdR=round(d2R*quantum)/quantum;
+}
+el=echoL.read(min(95000,samplerate*0.31)); er=echoR.read(min(95000,samplerate*0.43));
+echoL.write((dL+er*0.38)*0.85); echoR.write((dR+el*0.38)*0.85);
+r1=a1.read(min(15900,samplerate*0.0371)); r2=a2.read(min(15900,samplerate*0.0437));
+r3=a3.read(min(15900,samplerate*0.0533)); r4=a4.read(min(15900,samplerate*0.0611));
+f1=f1+0.2*(r1-f1); f2=f2+0.2*(r2-f2); f3=f3+0.2*(r3-f3); f4=f4+0.2*(r4-f4);
+g=0.73+clamp(distance,0,1)*0.12;
+a1.write(dL*0.22+(f1+f2+f3+f4)*0.5*g);
+a2.write(dR*0.22+(f1-f2+f3-f4)*0.5*g);
+a3.write(dL*0.18+(f1+f2-f3-f4)*0.5*g);
+a4.write(dR*0.18+(f1-f2-f3+f4)*0.5*g);
+// A clear timbral crossfade. The existing master ceiling remains downstream.
+out1=in1*(1-wet)+wet*(holdL*.95+el*.45+(r1+r3)*.5);
+out2=in2*(1-wet)+wet*(holdR*.95+er*.45+(r2+r4)*.5);

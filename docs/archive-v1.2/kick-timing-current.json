@@ -1,0 +1,414 @@
+{
+  "label": "current",
+  "expected": 42,
+  "matched": 42,
+  "totalLowEvents": 42,
+  "unmatchedLowEventTimes": [],
+  "eventDelayMs": {
+    "min": 3.666666666706675,
+    "median": 15.833333335385724,
+    "p95": 40.950000000885105,
+    "max": 48.000000000456566
+  },
+  "firstVisibleMs": {
+    "min": 3.666666666706675,
+    "median": 15.833333335385724,
+    "p95": 40.950000000885105,
+    "max": 48.000000000456566
+  },
+  "brightestFrameMs": {
+    "min": 3.666666666706675,
+    "median": 15.833333335385724,
+    "p95": 40.950000000885105,
+    "max": 48.000000000456566
+  },
+  "matches": [
+    {
+      "time": 1.0,
+      "amplitude": 0.13,
+      "context": "isolated",
+      "eventDelayMs": 12.000000000011335,
+      "firstVisibleMs": 12.000000000011335,
+      "brightestFrameMs": 12.000000000011335,
+      "peakRGBSum": 796
+    },
+    {
+      "time": 1.5030000000000001,
+      "amplitude": 0.23,
+      "context": "isolated",
+      "eventDelayMs": 10.333333333317096,
+      "firstVisibleMs": 10.333333333317096,
+      "brightestFrameMs": 10.333333333317096,
+      "peakRGBSum": 780
+    },
+    {
+      "time": 2.0060000000000002,
+      "amplitude": 0.38,
+      "context": "isolated",
+      "eventDelayMs": 19.333333333287683,
+      "firstVisibleMs": 19.333333333287683,
+      "brightestFrameMs": 19.333333333287683,
+      "peakRGBSum": 780
+    },
+    {
+      "time": 2.509,
+      "amplitude": 0.13,
+      "context": "isolated",
+      "eventDelayMs": 7.0000000000063345,
+      "firstVisibleMs": 7.0000000000063345,
+      "brightestFrameMs": 7.0000000000063345,
+      "peakRGBSum": 780
+    },
+    {
+      "time": 3.012,
+      "amplitude": 0.23,
+      "context": "isolated",
+      "eventDelayMs": 5.333333333396695,
+      "firstVisibleMs": 5.333333333396695,
+      "brightestFrameMs": 5.333333333396695,
+      "peakRGBSum": 780
+    },
+    {
+      "time": 3.515,
+      "amplitude": 0.38,
+      "context": "isolated",
+      "eventDelayMs": 25.00000000012248,
+      "firstVisibleMs": 25.00000000012248,
+      "brightestFrameMs": 25.00000000012248,
+      "peakRGBSum": 792
+    },
+    {
+      "time": 4.018,
+      "amplitude": 0.13,
+      "context": "isolated",
+      "eventDelayMs": 12.666666666845572,
+      "firstVisibleMs": 12.666666666845572,
+      "brightestFrameMs": 12.666666666845572,
+      "peakRGBSum": 780
+    },
+    {
+      "time": 4.521,
+      "amplitude": 0.23,
+      "context": "isolated",
+      "eventDelayMs": 11.000000000086274,
+      "firstVisibleMs": 11.000000000086274,
+      "brightestFrameMs": 11.000000000086274,
+      "peakRGBSum": 784
+    },
+    {
+      "time": 5.024,
+      "amplitude": 0.38,
+      "context": "isolated",
+      "eventDelayMs": 19.999999999970264,
+      "firstVisibleMs": 19.999999999970264,
+      "brightestFrameMs": 19.999999999970264,
+      "peakRGBSum": 780
+    },
+    {
+      "time": 5.527,
+      "amplitude": 0.13,
+      "context": "isolated",
+      "eventDelayMs": 7.666666666525046,
+      "firstVisibleMs": 7.666666666525046,
+      "brightestFrameMs": 7.666666666525046,
+      "peakRGBSum": 804
+    },
+    {
+      "time": 6.03,
+      "amplitude": 0.23,
+      "context": "isolated",
+      "eventDelayMs": 37.99999999973647,
+      "firstVisibleMs": 37.99999999973647,
+      "brightestFrameMs": 37.99999999973647,
+      "peakRGBSum": 792
+    },
+    {
+      "time": 6.533,
+      "amplitude": 0.38,
+      "context": "isolated",
+      "eventDelayMs": 4.333333332963818,
+      "firstVisibleMs": 4.333333332963818,
+      "brightestFrameMs": 4.333333332963818,
+      "peakRGBSum": 796
+    },
+    {
+      "time": 7.036,
+      "amplitude": 0.13,
+      "context": "isolated",
+      "eventDelayMs": 13.333333332847808,
+      "firstVisibleMs": 13.333333332847808,
+      "brightestFrameMs": 13.333333332847808,
+      "peakRGBSum": 780
+    },
+    {
+      "time": 7.539,
+      "amplitude": 0.23,
+      "context": "isolated",
+      "eventDelayMs": 43.66666666606012,
+      "firstVisibleMs": 43.66666666606012,
+      "brightestFrameMs": 43.66666666606012,
+      "peakRGBSum": 792
+    },
+    {
+      "time": 8.042,
+      "amplitude": 0.38,
+      "context": "held bass",
+      "eventDelayMs": 20.666666665951183,
+      "firstVisibleMs": 20.666666665951183,
+      "brightestFrameMs": 20.666666665951183,
+      "peakRGBSum": 804
+    },
+    {
+      "time": 8.545,
+      "amplitude": 0.13,
+      "context": "held bass",
+      "eventDelayMs": 29.66666666609541,
+      "firstVisibleMs": 29.66666666609541,
+      "brightestFrameMs": 29.66666666609541,
+      "peakRGBSum": 788
+    },
+    {
+      "time": 9.048,
+      "amplitude": 0.23,
+      "context": "held bass",
+      "eventDelayMs": 17.333333332985035,
+      "firstVisibleMs": 17.333333332985035,
+      "brightestFrameMs": 17.333333332985035,
+      "peakRGBSum": 752
+    },
+    {
+      "time": 9.551,
+      "amplitude": 0.38,
+      "context": "held bass",
+      "eventDelayMs": 4.99999999987466,
+      "firstVisibleMs": 4.99999999987466,
+      "brightestFrameMs": 4.99999999987466,
+      "peakRGBSum": 792
+    },
+    {
+      "time": 10.054,
+      "amplitude": 0.13,
+      "context": "held bass",
+      "eventDelayMs": 14.000000000107704,
+      "firstVisibleMs": 14.000000000107704,
+      "brightestFrameMs": 14.000000000107704,
+      "peakRGBSum": 788
+    },
+    {
+      "time": 10.557,
+      "amplitude": 0.23,
+      "context": "held bass",
+      "eventDelayMs": 23.00000000033897,
+      "firstVisibleMs": 23.00000000033897,
+      "brightestFrameMs": 23.00000000033897,
+      "peakRGBSum": 792
+    },
+    {
+      "time": 11.06,
+      "amplitude": 0.38,
+      "context": "held bass",
+      "eventDelayMs": 21.333333333901194,
+      "firstVisibleMs": 21.333333333901194,
+      "brightestFrameMs": 21.333333333901194,
+      "peakRGBSum": 792
+    },
+    {
+      "time": 11.563,
+      "amplitude": 0.13,
+      "context": "held bass",
+      "eventDelayMs": 41.00000000080506,
+      "firstVisibleMs": 41.00000000080506,
+      "brightestFrameMs": 41.00000000080506,
+      "peakRGBSum": 784
+    },
+    {
+      "time": 12.066,
+      "amplitude": 0.23,
+      "context": "held bass",
+      "eventDelayMs": 7.333333334351266,
+      "firstVisibleMs": 7.333333334351266,
+      "brightestFrameMs": 7.333333334351266,
+      "peakRGBSum": 792
+    },
+    {
+      "time": 12.569,
+      "amplitude": 0.38,
+      "context": "held bass",
+      "eventDelayMs": 16.33333333458431,
+      "firstVisibleMs": 16.33333333458431,
+      "brightestFrameMs": 16.33333333458431,
+      "peakRGBSum": 792
+    },
+    {
+      "time": 13.072,
+      "amplitude": 0.13,
+      "context": "held bass",
+      "eventDelayMs": 25.33333333481913,
+      "firstVisibleMs": 25.33333333481913,
+      "brightestFrameMs": 25.33333333481913,
+      "peakRGBSum": 788
+    },
+    {
+      "time": 13.575,
+      "amplitude": 0.23,
+      "context": "held bass",
+      "eventDelayMs": 23.666666668379577,
+      "firstVisibleMs": 23.666666668379577,
+      "brightestFrameMs": 23.666666668379577,
+      "peakRGBSum": 792
+    },
+    {
+      "time": 14.078,
+      "amplitude": 0.38,
+      "context": "held bass",
+      "eventDelayMs": 11.333333335269202,
+      "firstVisibleMs": 11.333333335269202,
+      "brightestFrameMs": 11.333333335269202,
+      "peakRGBSum": 792
+    },
+    {
+      "time": 14.581,
+      "amplitude": 0.13,
+      "context": "held bass",
+      "eventDelayMs": 19.00000000216906,
+      "firstVisibleMs": 19.00000000216906,
+      "brightestFrameMs": 19.00000000216906,
+      "peakRGBSum": 680
+    },
+    {
+      "time": 15.084,
+      "amplitude": 0.23,
+      "context": "bass and chord",
+      "eventDelayMs": 40.00000000240611,
+      "firstVisibleMs": 40.00000000240611,
+      "brightestFrameMs": 40.00000000240611,
+      "peakRGBSum": 792
+    },
+    {
+      "time": 15.587,
+      "amplitude": 0.38,
+      "context": "bass and chord",
+      "eventDelayMs": 6.333333335954094,
+      "firstVisibleMs": 6.333333335954094,
+      "brightestFrameMs": 6.333333335954094,
+      "peakRGBSum": 792
+    },
+    {
+      "time": 16.09,
+      "amplitude": 0.13,
+      "context": "bass and chord",
+      "eventDelayMs": 15.333333336187138,
+      "firstVisibleMs": 15.333333336187138,
+      "brightestFrameMs": 15.333333336187138,
+      "peakRGBSum": 788
+    },
+    {
+      "time": 16.593,
+      "amplitude": 0.23,
+      "context": "bass and chord",
+      "eventDelayMs": 13.666666669443828,
+      "firstVisibleMs": 13.666666669443828,
+      "brightestFrameMs": 13.666666669443828,
+      "peakRGBSum": 792
+    },
+    {
+      "time": 17.096,
+      "amplitude": 0.38,
+      "context": "bass and chord",
+      "eventDelayMs": 33.3333333356336,
+      "firstVisibleMs": 33.3333333356336,
+      "brightestFrameMs": 33.3333333356336,
+      "peakRGBSum": 792
+    },
+    {
+      "time": 17.599,
+      "amplitude": 0.13,
+      "context": "bass and chord",
+      "eventDelayMs": 10.333333335196926,
+      "firstVisibleMs": 10.333333335196926,
+      "brightestFrameMs": 10.333333335196926,
+      "peakRGBSum": 740
+    },
+    {
+      "time": 18.102,
+      "amplitude": 0.23,
+      "context": "bass and chord",
+      "eventDelayMs": 8.666666668077028,
+      "firstVisibleMs": 8.666666668077028,
+      "brightestFrameMs": 8.666666668077028,
+      "peakRGBSum": 792
+    },
+    {
+      "time": 18.605,
+      "amplitude": 0.38,
+      "context": "bass and chord",
+      "eventDelayMs": 17.66666666760841,
+      "firstVisibleMs": 17.66666666760841,
+      "brightestFrameMs": 17.66666666760841,
+      "peakRGBSum": 792
+    },
+    {
+      "time": 19.108,
+      "amplitude": 0.13,
+      "context": "bass and chord",
+      "eventDelayMs": 48.000000000456566,
+      "firstVisibleMs": 48.000000000456566,
+      "brightestFrameMs": 48.000000000456566,
+      "peakRGBSum": 792
+    },
+    {
+      "time": 19.611,
+      "amplitude": 0.23,
+      "context": "bass and chord",
+      "eventDelayMs": 3.666666666706675,
+      "firstVisibleMs": 3.666666666706675,
+      "brightestFrameMs": 3.666666666706675,
+      "peakRGBSum": 788
+    },
+    {
+      "time": 20.114,
+      "amplitude": 0.38,
+      "context": "bass and chord",
+      "eventDelayMs": 12.66666666624161,
+      "firstVisibleMs": 12.66666666624161,
+      "brightestFrameMs": 12.66666666624161,
+      "peakRGBSum": 792
+    },
+    {
+      "time": 20.617,
+      "amplitude": 0.13,
+      "context": "bass and chord",
+      "eventDelayMs": 10.99999999911816,
+      "firstVisibleMs": 10.99999999911816,
+      "brightestFrameMs": 10.99999999911816,
+      "peakRGBSum": 788
+    },
+    {
+      "time": 21.12,
+      "amplitude": 0.23,
+      "context": "bass and chord",
+      "eventDelayMs": 30.66666666531148,
+      "firstVisibleMs": 30.66666666531148,
+      "brightestFrameMs": 30.66666666531148,
+      "peakRGBSum": 792
+    },
+    {
+      "time": 21.623,
+      "amplitude": 0.38,
+      "context": "bass and chord",
+      "eventDelayMs": 18.333333331529644,
+      "firstVisibleMs": 18.333333331529644,
+      "brightestFrameMs": 18.333333331529644,
+      "peakRGBSum": 792
+    }
+  ],
+  "runtimeHashes": {
+    "patchers/Lunar Lens.maxpat": "1f534ed269bbe1ad2f22df2c5d67a291dbf18e7fbfe61b82d41ad5a6adc60d25",
+    "patchers/lens_runtime.js": "628d4e0444474aa66abee8f481558752db35e9432df4251799aab3eaeb317611",
+    "patchers/lens_screen.js": "26c19348c3264fc927c54ba2a9adb70a5987435992f2e87f38f5d02e2cda7295",
+    "patchers/lens_grid.js": "b72ad1c60aebae9380fc10879392d3d95636f98d955248bd7efba702fa36a635",
+    "patchers/lens_analysis.gendsp": "845d008779a0fea04be82120904c5a281bc908dc3e6d018d5a4e586432871581",
+    "patchers/lens_fx.gendsp": "8dee70dba943812f0569d7cc5ef3b64f1bba4745cd6132477ff1663f96304843"
+  },
+  "scope": "Known synthesized pitch-sweep kick onsets, event-driven strike frames and regular 33 ms tail frames. sfplay position comes from a post-render snapshot reply, with audio-vector timing uncertainty. Native software timing only; no physical DAC/display/Launchpad measurement; no labelled song-accuracy claim."
+}

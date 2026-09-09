@@ -1,0 +1,11 @@
+{
+  "sourceName": "ハッピーでバッドな眠りは浅い - Sana.mp3",
+  "comparisonSampleRate": 48000,
+  "recordingSeconds": 39.797333333333334,
+  "sourceOffsetSeconds": 80.6933125,
+  "gain": 0.3981068850705401,
+  "correlation": 0.9995776536716222,
+  "finite": true,
+  "peakDbFS": -7.958800315856934,
+  "relativeResidual": 0.029060527682304382
+}

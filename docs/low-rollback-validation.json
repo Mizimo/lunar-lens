@@ -1,0 +1,26 @@
+{
+  "version": "1.2.1",
+  "kind": "Rollback decision equivalence on captured real-mix features; not a kick precision/recall test",
+  "capture": "blossoms-final.jsonl",
+  "captureSHA256": "0dd36762067040b3bf713668a0ceb4ea0b94d1352848050e08121812e5a7138b",
+  "frames": 5849,
+  "lowDecisionMismatches": 0,
+  "lowThresholdMismatches": 0,
+  "eightBandDynamicsIdenticalToV12": true,
+  "midHighEventsIdenticalToV12": true,
+  "replayEventCounts": {
+    "rollback": 180,
+    "v11Reference": 180,
+    "v12": 391
+  },
+  "scope": "The same captured feature frames are supplied to all engines. Renderer captures omit some 20 ms analysis polls; these replay counts are not the original native event totals, and neither fewer events nor parity proves perceptual accuracy.",
+  "referenceSHA256": "458a2382c063b7fb8f52a530b738b7b3eb8d286459135467db6f0128aace44d1",
+  "runtimeHashes": {
+    "patchers/Lunar Lens.maxpat": "1f534ed269bbe1ad2f22df2c5d67a291dbf18e7fbfe61b82d41ad5a6adc60d25",
+    "patchers/lens_runtime.js": "80003c06f98e19d2c9ff517683273f564bb742a1c2048bf352dfbaa6f32bd6c4",
+    "patchers/lens_screen.js": "0ee9b399066d96e5676d8fa1c138440b272d9f21a66dbf53830a70491a446093",
+    "patchers/lens_grid.js": "b72ad1c60aebae9380fc10879392d3d95636f98d955248bd7efba702fa36a635",
+    "patchers/lens_analysis.gendsp": "845d008779a0fea04be82120904c5a281bc908dc3e6d018d5a4e586432871581",
+    "patchers/lens_fx.gendsp": "8dee70dba943812f0569d7cc5ef3b64f1bba4745cd6132477ff1663f96304843"
+  }
+}

@@ -1,0 +1,148 @@
+{
+  "version": "1.1.0",
+  "kind": "native Max controlled fixture; not labelled commercial vocals",
+  "frames": 1747,
+  "regions": {
+    "held": {
+      "meanRoles": [
+        0.0,
+        0.0,
+        0.07350211661551043,
+        0.6495902394720832,
+        0.0
+      ],
+      "events": [
+        0,
+        7,
+        0
+      ],
+      "phraseAndBedActiveFraction": 0.0
+    },
+    "articulated": {
+      "meanRoles": [
+        0.0,
+        0.009685866655466625,
+        0.5521462652868464,
+        0.0022278980616017526,
+        0.0007553864366164485
+      ],
+      "events": [
+        0,
+        13,
+        0
+      ],
+      "phraseAndBedActiveFraction": 0.0
+    },
+    "combined": {
+      "meanRoles": [
+        0.0,
+        1.6324957901570362e-05,
+        0.4845077620160106,
+        0.4413139982998443,
+        0.00026645589736664656
+      ],
+      "events": [
+        0,
+        10,
+        0
+      ],
+      "phraseAndBedActiveFraction": 0.952755905511811
+    },
+    "swell": {
+      "meanRoles": [
+        0.0,
+        0.6029017354915279,
+        1.952896217519827e-05,
+        0.00022788348409997692,
+        1.8760994720018114e-18
+      ],
+      "events": [
+        0,
+        0,
+        0
+      ],
+      "phraseAndBedActiveFraction": 0.0
+    },
+    "impacts": {
+      "meanRoles": [
+        0.26629114665521897,
+        0.27532691495213985,
+        0.0016194065389872232,
+        1.4223643191918446e-07,
+        1.3875499666799893e-85
+      ],
+      "events": [
+        8,
+        2,
+        0
+      ],
+      "phraseAndBedActiveFraction": 0.0
+    },
+    "outsideDefaultBand": {
+      "meanRoles": [
+        1.2914717710746915e-08,
+        0.15078955502076796,
+        0.18318711104831015,
+        6.258495751420538e-08,
+        1.0962861605751308e-140
+      ],
+      "events": [
+        0,
+        6,
+        0
+      ],
+      "phraseAndBedActiveFraction": 0.0
+    },
+    "insideWiderBand": {
+      "meanRoles": [
+        0.23949519073047668,
+        0.14236069851685867,
+        0.1777054508420055,
+        4.433480665446364e-08,
+        5.840275035901067e-196
+      ],
+      "events": [
+        6,
+        6,
+        0
+      ],
+      "phraseAndBedActiveFraction": 0.0
+    },
+    "silence": {
+      "meanRoles": [
+        7.795539865592601e-13,
+        1.1099383666814555e-08,
+        5.397099209744539e-14,
+        4.0503584883511723e-16,
+        6.092846874847999e-255
+      ],
+      "events": [
+        0,
+        0,
+        0
+      ],
+      "phraseAndBedActiveFraction": 0.0
+    }
+  },
+  "audio": {
+    "sampleRate": 48000,
+    "gain": 0.399999999929736,
+    "correlation": 1.0,
+    "alignmentSamples": 14337,
+    "peakDbFS": -19.037477493286133,
+    "finite": true
+  },
+  "monitorOffThroughout": false,
+  "monitorOnPositionRange": [
+    21.555999999998274,
+    25.25599999999491
+  ],
+  "impactControlledFixture": {
+    "truePositives": 8,
+    "knownImpacts": 8,
+    "slowSwellsFalsePositives": 0,
+    "outOfBandFalsePositives": 0,
+    "widerBandTruePositives": 6,
+    "note": "Controlled tests only; no human-labelled accuracy claim for commercial recordings."
+  }
+}

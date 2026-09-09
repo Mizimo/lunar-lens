@@ -1,0 +1,23 @@
+{
+  "kind": "Deterministic 20 ms envelope models, not native audio or real-song accuracy",
+  "v11": {
+    "held": {
+      "expected": 16,
+      "matched": 0
+    },
+    "afterDense": {
+      "expected": 12,
+      "matched": 0
+    }
+  },
+  "v12Fallback": {
+    "held": {
+      "expected": 16,
+      "matched": 16
+    },
+    "afterDense": {
+      "expected": 12,
+      "matched": 12
+    }
+  }
+}

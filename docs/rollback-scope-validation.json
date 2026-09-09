@@ -1,0 +1,22 @@
+{
+  "version": "1.2.1",
+  "unchangedFromV12": [
+    "code/lens_visual.js",
+    "code/lens_grid.js",
+    "code/lens_protocol.js",
+    "code/lens_fx.genexpr",
+    "scripts/analysis-source.mjs",
+    "patchers/lens_analysis.gendsp",
+    "patchers/lens_fx.gendsp"
+  ],
+  "runtimeHashes": {
+    "patchers/Lunar Lens.maxpat": "1f534ed269bbe1ad2f22df2c5d67a291dbf18e7fbfe61b82d41ad5a6adc60d25",
+    "patchers/lens_runtime.js": "80003c06f98e19d2c9ff517683273f564bb742a1c2048bf352dfbaa6f32bd6c4",
+    "patchers/lens_screen.js": "0ee9b399066d96e5676d8fa1c138440b272d9f21a66dbf53830a70491a446093",
+    "patchers/lens_grid.js": "b72ad1c60aebae9380fc10879392d3d95636f98d955248bd7efba702fa36a635",
+    "patchers/lens_analysis.gendsp": "845d008779a0fea04be82120904c5a281bc908dc3e6d018d5a4e586432871581",
+    "patchers/lens_fx.gendsp": "8dee70dba943812f0569d7cc5ef3b64f1bba4745cd6132477ff1663f96304843"
+  },
+  "syntheticDecisionParityFrames": 10000,
+  "scope": "Preservation and rollback correctness, not perceptual improvement."
+}

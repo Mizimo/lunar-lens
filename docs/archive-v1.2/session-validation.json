@@ -1,0 +1,269 @@
+{
+  "version": "1.2.0",
+  "touchDurationSeconds": 10.474666666666666,
+  "touchPeakDbFS": -22.77648162841797,
+  "alignmentSamples": 13824,
+  "relativeDryError": 0.019563250243663788,
+  "relativeHeldEffectError": 0.4699527621269226,
+  "relativeReleasedError": 0.02096940577030182,
+  "heldComparisonSeconds": [
+    4.2346666666668344,
+    6.52933333333292
+  ],
+  "pressureStrength": [
+    0.1972083035075161,
+    0.9090909090909091,
+    1,
+    0
+  ],
+  "plugin": "FabFilter Pro-R 2 VST3",
+  "monitorOffThroughout": true,
+  "allAudioFinite": true,
+  "checks": {
+    "lightPressure": {
+      "running": true,
+      "paused": false,
+      "position": 3.3853333333334383,
+      "duration": 48,
+      "gesture": {
+        "count": 1,
+        "strength": 0.1972083035075161,
+        "x": 0.42857142857142855,
+        "y": 0.42857142857142855
+      },
+      "pluginReady": false
+    },
+    "fullPressure": {
+      "running": true,
+      "paused": false,
+      "position": 3.785333333333484,
+      "duration": 48,
+      "gesture": {
+        "count": 1,
+        "strength": 0.9090909090909091,
+        "x": 0.42857142857142855,
+        "y": 0.42857142857142855
+      },
+      "pluginReady": false
+    },
+    "twoTouches": {
+      "running": true,
+      "paused": false,
+      "position": 6.585333333332953,
+      "duration": 48,
+      "gesture": {
+        "count": 2,
+        "strength": 1,
+        "x": 0.4956913259981513,
+        "y": 0.4956913259981513
+      },
+      "pluginReady": false
+    },
+    "released": {
+      "running": true,
+      "paused": false,
+      "position": 9.985333333333402,
+      "duration": 48,
+      "gesture": {
+        "count": 0,
+        "strength": 0,
+        "x": 0.5,
+        "y": 0.5
+      },
+      "pluginReady": false
+    },
+    "paused": {
+      "running": false,
+      "paused": true,
+      "position": 10.20800000000017,
+      "duration": 48,
+      "gesture": {
+        "count": 0,
+        "strength": 0,
+        "x": 0.5,
+        "y": 0.5
+      },
+      "pluginReady": false
+    },
+    "pauseHeld": {
+      "running": false,
+      "paused": true,
+      "position": 10.20800000000017,
+      "duration": 48,
+      "gesture": {
+        "count": 0,
+        "strength": 0,
+        "x": 0.5,
+        "y": 0.5
+      },
+      "pluginReady": false
+    },
+    "seekQuarter": {
+      "running": true,
+      "paused": false,
+      "position": 12.294666666666666,
+      "duration": 48,
+      "gesture": {
+        "count": 0,
+        "strength": 0,
+        "x": 0.5,
+        "y": 0.5
+      },
+      "pluginReady": false
+    },
+    "blackout": {
+      "running": true,
+      "paused": false,
+      "position": 12.694666666666668,
+      "duration": 48,
+      "gesture": {
+        "count": 1,
+        "strength": 0.9090909090909091,
+        "x": 0.14285714285714285,
+        "y": 0.14285714285714285
+      },
+      "pluginReady": false
+    },
+    "frozenTouch": {
+      "running": true,
+      "paused": false,
+      "position": 12.994666666666676,
+      "duration": 48,
+      "gesture": {
+        "count": 2,
+        "strength": 1,
+        "x": 0.27152440720932386,
+        "y": 0.27152440720932386
+      },
+      "pluginReady": false
+    },
+    "bodyFocus": {
+      "running": true,
+      "paused": false,
+      "position": 13.194666666666668,
+      "duration": 48,
+      "gesture": {
+        "count": 0,
+        "strength": 0,
+        "x": 0.5,
+        "y": 0.5
+      },
+      "pluginReady": false
+    },
+    "bassWeight": {
+      "running": true,
+      "paused": false,
+      "position": 13.394666666666657,
+      "duration": 48,
+      "gesture": {
+        "count": 0,
+        "strength": 0,
+        "x": 0.5,
+        "y": 0.5
+      },
+      "pluginReady": false
+    },
+    "restored": {
+      "running": true,
+      "paused": false,
+      "position": 13.594666666666644,
+      "duration": 48,
+      "gesture": {
+        "count": 0,
+        "strength": 0,
+        "x": 0.5,
+        "y": 0.5
+      },
+      "pluginReady": false
+    },
+    "restart": {
+      "running": true,
+      "paused": false,
+      "position": 0.1813333333333335,
+      "duration": 48,
+      "gesture": {
+        "count": 0,
+        "strength": 0,
+        "x": 0.5,
+        "y": 0.5
+      },
+      "pluginReady": false
+    },
+    "stop": {
+      "running": false,
+      "paused": false,
+      "position": 0,
+      "duration": 48,
+      "gesture": {
+        "count": 0,
+        "strength": 0,
+        "x": 0.5,
+        "y": 0.5
+      },
+      "pluginReady": false
+    },
+    "pluginReady": {
+      "running": false,
+      "paused": false,
+      "position": 0,
+      "duration": 48,
+      "gesture": {
+        "count": 0,
+        "strength": 0,
+        "x": 0.5,
+        "y": 0.5
+      },
+      "pluginReady": true
+    },
+    "pluginEnabled": {
+      "running": true,
+      "paused": false,
+      "position": 3.5040000000001186,
+      "duration": 48,
+      "gesture": {
+        "count": 0,
+        "strength": 0,
+        "x": 0.5,
+        "y": 0.5
+      },
+      "pluginReady": true
+    },
+    "pluginBypassed": {
+      "running": true,
+      "paused": false,
+      "position": 3.8040000000001526,
+      "duration": 48,
+      "gesture": {
+        "count": 0,
+        "strength": 0,
+        "x": 0.5,
+        "y": 0.5
+      },
+      "pluginReady": true
+    },
+    "readyForUser": {
+      "running": false,
+      "paused": false,
+      "position": 0,
+      "duration": 193.31628117913831,
+      "gesture": {
+        "count": 0,
+        "strength": 0,
+        "x": 0.5,
+        "y": 0.5
+      },
+      "pluginReady": true
+    }
+  },
+  "pluginDurationSeconds": 4.032,
+  "pluginPeakDbFS": -24.150484085083008,
+  "pluginBypassRestored": true,
+  "runtimeHashes": {
+    "patchers/Lunar Lens.maxpat": "1f534ed269bbe1ad2f22df2c5d67a291dbf18e7fbfe61b82d41ad5a6adc60d25",
+    "patchers/lens_runtime.js": "628d4e0444474aa66abee8f481558752db35e9432df4251799aab3eaeb317611",
+    "patchers/lens_screen.js": "26c19348c3264fc927c54ba2a9adb70a5987435992f2e87f38f5d02e2cda7295",
+    "patchers/lens_grid.js": "b72ad1c60aebae9380fc10879392d3d95636f98d955248bd7efba702fa36a635",
+    "patchers/lens_analysis.gendsp": "845d008779a0fea04be82120904c5a281bc908dc3e6d018d5a4e586432871581",
+    "patchers/lens_fx.gendsp": "8dee70dba943812f0569d7cc5ef3b64f1bba4745cd6132477ff1663f96304843"
+  }
+}

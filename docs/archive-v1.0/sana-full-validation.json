@@ -1,0 +1,66 @@
+{
+  "version": "1.0.0",
+  "sourceName": "ハッピーでバッドな眠りは浅い - Sana.mp3",
+  "runtimeHashes": {
+    "patchers/Lunar Lens.maxpat": "2f3ef94f1e098778808f03ce4f6133ab5d8297a110305b5a8285212fb485f7dc",
+    "patchers/lens_runtime.js": "6094ec36b48752c9c60214319dca7ae15395685e260128811bd40d0486f97093",
+    "patchers/lens_screen.js": "ca06e2b1e06bb1013f34d66613ae8c9276bb0d48cd2f7a2c03bdee13725d3048",
+    "patchers/lens_analysis.gendsp": "5c60cc884214ae00b7c0b15b36247d31a51bf28acf5a4b01f158a318a8d5395b",
+    "patchers/lens_fx.gendsp": "4cccd114b1708daa542ec7779629eb133672ab27a38218a5bdb6ebe1b7ac8c73"
+  },
+  "durationSeconds": 197.04453514739228,
+  "frames": 6056,
+  "activeFrames": 5910,
+  "meanFrameMs": 33.035012378267375,
+  "p99FrameMs": 34.00015830993652,
+  "maxFrameMs": 215.99984169006348,
+  "roleMedian": [
+    0.13399358375089132,
+    0.45317950457890166,
+    0.5700079932169286,
+    0.13355016297695
+  ],
+  "roleP95": [
+    0.7788004529726729,
+    0.7325896663737282,
+    0.8578664272729122,
+    0.8233779600325275
+  ],
+  "roleCorrelation": [
+    [
+      1.0,
+      0.2415390937374807,
+      0.0036838426758102677,
+      0.10311677682447423
+    ],
+    [
+      0.2415390937374807,
+      1.0,
+      -0.019670777935919728,
+      0.2204156787058177
+    ],
+    [
+      0.0036838426758102677,
+      -0.019670777935919728,
+      0.9999999999999999,
+      -0.07242291547559533
+    ],
+    [
+      0.10311677682447423,
+      0.2204156787058177,
+      -0.07242291547559533,
+      1.0
+    ]
+  ],
+  "eventCounts": [
+    388,
+    542,
+    718
+  ],
+  "monitorOffThroughout": true,
+  "endStopped": true,
+  "endBlack": true,
+  "rgbValid": true,
+  "maxSimultaneouslyLitCells": 53,
+  "maxPlaybackFrameMs": 52.00004577636719
+}
