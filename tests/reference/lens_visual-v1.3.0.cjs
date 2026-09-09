@@ -1,7 +1,7 @@
-/* Five sound behaviours, seven different spatial grammars.
+/* Five sound behaviours, six genuinely different spatial grammars.
    No score, title, transport position, instrument label or free-running beat. */
 if(typeof module!=="undefined"){
- var LensInteraction=require('./lens_interaction.js'),LensTransition=require('./lens_transition.js');
+ var LensInteraction=require('../../code/lens_interaction.js'),LensTransition=require('../../code/lens_transition.js');
 }
 var LensVisual=(function(){
  function clamp(x,a,b){return Math.max(a,Math.min(b,x));}
@@ -10,9 +10,7 @@ var LensVisual=(function(){
  function edge(d,w){return Math.exp(-d*d/(w*w));}
  function zeros(){var a=[];for(var i=0;i<64;i++)a.push(0);return a;}
  function empty(){return [zeros(),zeros(),zeros(),zeros(),zeros()];}
- // Resample inside the source, never clamp edges into long false streaks.
- function sample(layer,x,y){if(x<-.5||x>7.5)return 0;var l=Math.floor(x),f=x-l;return (l>=0&&l<8?layer[y*8+l]:0)*(1-f)+(l+1>=0&&l+1<8?layer[y*8+l+1]:0)*f;}
- var names=["重力／沉積","天體／公轉","織光／經緯","門廊／縱深","雙生／呼應","拼光／碎片","聲場／三域"];
+ var names=["重力／沉積","天體／公轉","織光／經緯","門廊／縱深","雙生／呼應","拼光／碎片"];
  var paletteNames=["琥珀冰川","月夜紫羅蘭","翡翠珊瑚","鈷藍熔岩","蘭花青檸","桃紅電光"];
  // impact / foundation / phrase / bed / detail; bounded palettes, never hue-cycling.
  var palettes=[
@@ -23,12 +21,12 @@ var LensVisual=(function(){
   [[1,.30,.71],[.48,.14,.93],[.72,1,.13],[.03,.57,.53],[1,.78,.37]],
   [[1,.84,.20],[1,.19,.37],[.12,.89,.81],[.36,.18,.85],[.75,.95,.99]]
  ];
- function palette(scene,choice){return palettes[choice?clamp(choice-1,0,5):scene===6?0:clamp(scene,0,5)];}
+ function palette(scene,choice){return palettes[choice?clamp(choice-1,0,5):clamp(scene,0,5)];}
  function Engine(interaction){this.input=interaction||new LensInteraction.Engine();this.transition=new LensTransition.Engine();this.time=0;this.motion=0;this.serial=0;this.clear();}
  Engine.prototype.clear=function(){
   this.input.clear();this.transition.clear();this.impacts=[];this.particles=[];this.lastCounts=[0,0,0];
   this.trails=empty();this.layers=empty();this.frame=[];this.midHistory=[];this.flash=0;
-  this.spatial=null;this.phraseClock=0;this.bedClock=0;this.turn=0;this.lastScene=-1;
+  this.phraseClock=0;this.bedClock=0;this.turn=0;this.lastScene=-1;
  };
  // Compatibility accessors for existing standalone renderers; state lives in input.
  Object.defineProperty(Engine.prototype,"held",{get:function(){return this.input.held;},set:function(v){this.input.held=v;}});
@@ -39,9 +37,8 @@ var LensVisual=(function(){
  Engine.prototype.gesture=function(){return this.input.gesture();};
  Engine.prototype.step=function(f,dt,p){
   dt=clamp(dt,.001,.1);this.time+=dt;var g=this.gesture(),i,j,k,x,y,pt;
-  var ev=f.eventVisual||{},roleSettings=p.roles||[],spatial=f.spatial||{valid:false,amount:0,roles:[]};
-  if(!p.freeze||!this.spatial)this.spatial=spatial;else spatial=this.spatial;
-  var scene=clamp(p.scene||0,0,6),counts=f.counts||[0,0,0],hits=f.transients||[0,0,0];
+  var ev=f.eventVisual||{},roleSettings=p.roles||[];
+  var scene=clamp(p.scene||0,0,5),counts=f.counts||[0,0,0],hits=f.transients||[0,0,0];
   var body=f.body===undefined?f.bands[0]:f.body,b=f.behaviour;
   var phrase=b?(b.phrase||0):f.bands[1],bed=b?(b.bed||0):0,art=b?(b.articulation||0):.6,contour=f.midContour===undefined?.5:f.midContour;
   var dynamics=f.bandDynamics||[],bassAttack=0,midAttack=0,register=0;
@@ -155,48 +152,21 @@ var LensVisual=(function(){
     next[2][idx]=fore*phrase*(.64+flash*.3)*(1+(ev.entry||0)*.22);
     next[3][idx]=bedShape*bed*.55*(1-clamp(fore*phrase,0,.6))*(1-(ev.release||0)*.35)*(1-(ev.reframe||0)*.65*edge(x-((ev.direction||0)?4.5:2.5),.9));
     next[4][idx]=detail*(1+(ev.texture||0)*.25);
-    if(scene===6){
-     // 2 columns x 5 rows per position: ten distinct 280 Hz–16 kHz bins.
-     // Lower rows remain one bass mass. Dark columns separate the three spectra.
-     var channel=x<2?0:x>=3&&x<5?1:x>=6?2:-1;
-     var cellIndex=(y-3)*2+(channel<0?0:x-[0,3,6][channel]);
-     var level=y>=3&&channel>=0&&spatial.valid&&spatial.cells?spatial.cells[cellIndex][channel]:0;
-     var rowRole=cellIndex<6?2:4;
-     for(var layer=0;layer<5;layer++)next[layer][idx]=0;
-     // A single relative-power mapping; no second multiplication by song loudness.
-     if(y>=3){
-      if(rowRole===2){var midTotal=Math.max(.001,phrase+bed);next[2][idx]=level*.9*phrase/midTotal;next[3][idx]=level*.9*bed/midTotal;}
-      else next[4][idx]=level*.9;
-     }
-     if(y<3){
-      // The low register remains one continuous mass, regardless of its stereo input.
-      var lowLevel=spatial.valid&&spatial.lowSpectrum?spatial.lowSpectrum[y]:0;
-      next[1][idx]=lowLevel*Math.max(0,f.slow||0)*.85*clamp((1+low*2.5-Math.abs(x-3.5))/.8,0,1);
-      // Impact timing and weight are unchanged; no left/centre/right copies.
-      if(y===0)for(i=0;i<this.impacts.length;i++){
-       var pulse=this.impacts[i];next[0][idx]+=edge(x-3.5,2.2)*Math.sqrt(pulse.p)*Math.exp(-pulse.t/.055)*weight;
-      }
-     }
-    }
    }
    var tau=[.035,.09+p.trails*.25,.045+p.trails*.11,.18+p.trails*.30,.020+p.trails*.025];
-   for(j=0;j<5;j++)for(i=0;i<64;i++){next[j][i]=Math.max(next[j][i],this.trails[j][i]*Math.exp(-dt/((scene===6&&j>=2?.025+p.trails*.045:tau[j])*((roleSettings[j]||{}).release||1))));if(next[j][i]<.0001)next[j][i]=0;}
+   for(j=0;j<5;j++)for(i=0;i<64;i++){next[j][i]=Math.max(next[j][i],this.trails[j][i]*Math.exp(-dt/(tau[j]*((roleSettings[j]||{}).release||1))));if(next[j][i]<.0001)next[j][i]=0;}
    this.trails=next;this.layers=next;
   }
-  var budgets=scene===6?[5.2,5.3,12,12,12]:[5.2,5.3,3.7,2.6,1.6],scales=[],colours=palette(scene,p.palette||0);
+  var budgets=[5.2,5.3,3.7,2.6,1.6],scales=[],colours=palette(scene,p.palette||0);
   for(j=0;j<5;j++){var sum=0;for(i=0;i<64;i++)sum+=this.layers[j][i];scales[j]=Math.min(1,budgets[j]/Math.max(.001,sum));}
   var rgb=[],live=[],total=0;
   for(y=0;y<8;y++)for(x=0;x<8;x++){
    var idx=y*8+x,c=[0,0,0],attack=[0,0,0],local=0;
    for(j=0;j<5;j++){
-    // Original six-scene width sampling: one moving form, no L/C/R copies.
     var settings=roleSettings[j]||{},wide=(settings.width||1)*(j===3?1+(ev.spread||0)*.35:1),sx=clamp(3.5+(x-3.5)/wide,0,7),left=Math.floor(sx),right=Math.min(7,left+1);
-    var sampled=this.layers[j][y*8+left]*(1-(sx-left))+this.layers[j][y*8+right]*(sx-left);
-    if(scene===6&&j>=2)sampled=this.layers[j][idx];
-    var value=focus&&focus!==j+1?0:sampled*scales[j]*(settings.gain===undefined?1:settings.gain);local+=value;
-    var spatialChannel=x<2?0:x>=3&&x<5?1:x>=6?2:-1;
-    var colour=scene===6&&j>=2&&spatialChannel>=0?[[.12,.86,.98],[1,.61,.18],[1,.16,.52]][spatialChannel]:colours[j];
-    for(k=0;k<3;k++)if(j===0)attack[k]+=value*colour[k];else c[k]+=value*colour[k];
+    var sample=this.layers[j][y*8+left]*(1-(sx-left))+this.layers[j][y*8+right]*(sx-left);
+    var value=focus&&focus!==j+1?0:sample*scales[j]*(settings.gain===undefined?1:settings.gain);local+=value;
+    for(k=0;k<3;k++)if(j===0)attack[k]+=value*colours[j][k];else c[k]+=value*colours[j][k];
    }
    for(k=0;k<3;k++){c[k]/=Math.max(1,Math.pow(local,.65));attack[k]/=Math.max(1,Math.pow(local,.65));}
    for(var key in this.held){var h=this.held[key],v=glow(x,y,h.x,h.y,.24+h.p*.3)*(.55+h.p*.65);attack[0]+=v;attack[1]+=v*.69;attack[2]+=v*.34;}

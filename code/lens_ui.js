@@ -26,7 +26,7 @@ function paint(){
  var paintStart=new Date().getTime();
  rect(0,0,1180,830,C.bg);hit=[];
  text("LUNAR LENS",28,46,29);text("重量、延續、碎裂，各自成形。",30,72,12,C.dim);
- text("MEASURE → EVENT → FORM",849,43,13,C.cyan);text("Max · Launchpad Pro MK3 · 1.4.0",849,66,11,C.dim);
+ text("MEASURE → EVENT → FORM",849,43,13,C.cyan);text("Max · Launchpad Pro MK3 · 1.4.1",849,66,11,C.dim);
  if(!S){text("正在建立音訊分析與燈光引擎…",28,150,16,C.cyan);return;}
  var p=S.params,f=S.features,i,x,y;
  button("載入音訊",28,96,93,"openfile");button("DEMO",129,96,66,"demo");
@@ -60,7 +60,7 @@ function paint(){
  text("信心 "+Math.round(f.confidence*100)+"%",213,649,10,C.dim);
  text("寬度 "+Math.round(f.width*100)+"% · 起音 "+f.count,28,681,11,C.dim);
  var scenes=["重力 / 沉積","天體 / 公轉","織光 / 經緯","門廊 / 縱深","雙生 / 呼應","拼光 / 碎片","聲場 / 三域"];
- text(scenes[p.scene],336,173,14,C.cyan);text(p.freeze?"背景已凍結":p.focus?"獨看："+labels[p.focus-1]:"五個聲音行為",581,172,11,C.dim);
+ text(scenes[p.scene],336,173,14,C.cyan);text(p.freeze?"背景已凍結":p.focus?"獨看："+labels[p.focus-1]:p.scene===6?"左青／中金／右紅":"原版視覺邏輯",581,172,11,C.dim);
  rect(320,190,448,448,[.012,.019,.034,1],12);
  for(y=0;y<8;y++)for(x=0;x<8;x++){
   // The overlaid lens_grid.js draws at event/animation speed. Keep coordinates
@@ -128,8 +128,8 @@ function paint(){
    slider("事件視覺份量",p.eventAmount,810,622,342,"param",["eventAmount"],0,1);
   }else if(p.inspector===3){
    var ss=S.measurements&&S.measurements.stereoSpectrum,valid=ss&&ss.valid&&S.measurements.active;
-   text("中高頻：左 / 聚中 / 右",810,252,17,C.cyan);
-   text("電平接近 + 高度同相才聚中；低頻保持整體",810,279,11,C.dim);
+   text("測量：左 / 聚中 / 右",810,252,17,C.cyan);
+   text("嚴格測量保留；六構圖使用原版視覺邏輯",810,279,11,C.dim);
    var peak=0;if(valid)for(i=6;i<16;i++)for(var ch=0;ch<3;ch++)peak=Math.max(peak,ss.bands[i].power[ch]);
    var channelColors=[C.cyan,C.gold,[.93,.4,.63,1]],channelLabels=["L 左側","C 聚中線索","R 右側"];
    for(ch=0;ch<3;ch++){
@@ -146,8 +146,7 @@ function paint(){
     if(i<2){text("整體重量 / 不分左右",891,y,10,C.dim);continue;}
     if(valid&&mapping&&mapping.valid)for(ch=0;ch<3;ch++){var width=mapping.roles[i][ch]*269;rect(offset,y-9,width,8,channelColors[ch],1);offset+=width;}
    }
-   slider("聲場位置",p.spatialAmount,810,588,160,"param",["spatialAmount"],0,1);
-   slider("側向細節",p.spatialContrast,991,588,161,"param",["spatialContrast"],0,1,undefined,C.gold);
+   slider("三域細節可見度",p.spatialContrast,810,588,342,"param",["spatialContrast"],0,1,undefined,C.gold);
    button("查看聲場／三域 · 低頻完整基座",810,627,342,"param",["scene",6],p.scene===6,C.violet);
   }else{
    text("原始頻帶診斷",810,261,17,C.cyan);

@@ -60,5 +60,5 @@ active=[f for f in frames if f['running'] and f['features']['active'] and f['pos
 assert all(f['measurements']['stereoSpectrum']['valid'] for f in active)
 assert all(0<=v<=127 for f in frames for v in f['leds'])
 assert all(max(f['leds'])==0 for f in rows('silence'))
-report={'version':'1.4.0','purpose':'Native known spatial placement and silence checks; not stem separation or music accuracy','sampleRate':sr,'frames':len(frames),'passed':True,'results':result,'runtimeHashes':{str(p.relative_to(root)):hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted((root/'patchers').glob('*')) if p.is_file()}}
+report={'version':json.loads((root/'package.json').read_text())['version'],'purpose':'Native known spatial placement and silence checks; not stem separation or music accuracy','sampleRate':sr,'frames':len(frames),'passed':True,'results':result,'runtimeHashes':{str(p.relative_to(root)):hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted((root/'patchers').glob('*')) if p.is_file()}}
 (root/'docs/stereo-calibration.json').write_text(json.dumps(report,indent=2)+'\n');print(json.dumps({k:v for k,v in report.items() if k!='runtimeHashes'},indent=2))

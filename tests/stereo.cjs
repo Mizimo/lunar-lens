@@ -30,13 +30,14 @@ test('Stale, absent, silent and malformed spatial measurements cannot keep paint
  m.reset();m.spectrum(Array(55).fill(NaN),2);assert.equal(m.step([],2,48000,true).stereoSpectrum.valid,false);
  m.spectrum([0,0,0,0,0,0,2],2);assert.equal(m.step([],2,48000,true).stereoSpectrum.valid,false);
 });
-function rendered(shares,scene=0,amount=1,focus=3){const v=new V.Engine(),f={...feature,spatial:{valid:true,amount,roles:Array(5).fill(shares),lowSpectrum:[.8,.7,.5],spectrum:Array.from({length:8},()=>shares)}};let out;
+function rendered(shares,scene=0,amount=1,focus=3){const v=new V.Engine(),f={...feature,spatial:{valid:true,amount,roles:Array(5).fill(shares),lowSpectrum:[.8,.7,.5],cells:Array.from({length:10},()=>shares),spectrum:Array.from({length:8},()=>shares)}};let out;
  for(let i=0;i<60;i++)out=v.step(f,.02,{...settings,scene,focus,palette:1,brightness:.8,trails:.2,detail:.5,transition:0});return out;}
 function centroid(rgb){let power=0,moment=0;for(let i=0;i<64;i++){const v=rgb.slice(i*3,i*3+3).reduce((a,b)=>a+b,0);power+=v;moment+=(i%8)*v;}return moment/Math.max(1,power);}
-test('Middle-register art visibly moves to its own side; the comparison control restores identical base geometry',()=>{
- assert(centroid(rendered([1,0,0]))<2);assert(centroid(rendered([0,0,1]))>5);
- assert(Math.abs(centroid(rendered([0,1,0]))-3.5)<.05);
- assert.deepEqual(rendered([1,0,0],0,0),rendered([0,0,1],0,0));
+test('Original six-scene PHRASE geometry does not acquire left/centre/right copies',()=>{
+ for(let scene=0;scene<6;scene++){
+  assert.deepEqual(rendered([1,0,0],scene),rendered([0,0,1],scene));
+  assert.deepEqual(rendered([1,0,0],scene),rendered([0,1,0],scene));
+ }
 });
 test('L/C/R dedicated scene keeps silence dark, hard sides distinct, and all seven scenes bounded',()=>{
  const a=rendered([1,0,0],6),b=rendered([0,0,1],6);assert(centroid(a)<1);assert(centroid(b)>6);
@@ -52,23 +53,19 @@ test('Spatial projection is independent from event visual amount and does not mu
  const p=new P.Engine(),f=structuredClone(feature),m=measure({1:[1,0,0]});const out=p.step(f,{epoch:1,events:[],state:{}},.02,0,m,settings);
  assert.equal(out.spatial.amount,1);assert.deepEqual(f,feature);assert.deepEqual(out.counts,f.counts);
 });
-test('Side readability reveals weak middle-register parts without changing measurement or inventing sides',()=>{
- const m=measure({9:[.035,.93,.035]}),saved=JSON.stringify(m);
- const a=P.spatial(m,{...settings,spatialContrast:0}),b=P.spatial(m,{...settings,spatialContrast:1});
- assert.deepEqual(a.roles,b.roles);assert(b.displayRoles[2][0]>a.displayRoles[2][0]*3);
- const mono=P.spatial(measure({9:[0,1,0]}),{...settings,spatialContrast:1});assert.deepEqual(mono.displayRoles[2],[0,1,0]);
- const params={...settings,scene:0,focus:3,palette:1,brightness:.8,trails:.2,detail:.5,transition:0};
- const old=new V.Engine(),enhanced=new V.Engine();let aa,bb;
- for(let i=0;i<90;i++){aa=old.step({...feature,spatial:a},.02,params);bb=enhanced.step({...feature,spatial:b},.02,params);}
- function sideEnergy(rgb){return rgb.reduce((sum,v,i)=>sum+(Math.floor(i/3)%8<2||Math.floor(i/3)%8>5?v:0),0);}
- // Compare L vs R visibility with the same strong middle, not total side light
- // (the old wide middle itself leaked into the outer columns).
- function directionalDifference(contrast){
-  const l=new V.Engine(),r=new V.Engine(),ls=P.spatial(measure({9:[.07,.93,0]}),{...settings,spatialContrast:contrast}),rs=P.spatial(measure({9:[0,.93,.07]}),{...settings,spatialContrast:contrast});let sum=0;
-  for(let i=0;i<90;i++){const left=l.step({...feature,spatial:ls},.02,params),right=r.step({...feature,spatial:rs},.02,params);sum+=left.reduce((total,v,n)=>total+Math.abs(v-right[n]),0);}
-  return sum;
- }
- assert(directionalDifference(1)>directionalDifference(0)*2);assert.equal(JSON.stringify(m),saved);
+test('Triptych uses ten distinct bins and one shared mid/high reference without bass dimming',()=>{
+ const m=measure({0:[200,0,0],6:[1,0,0],7:[0,0,4],9:[0,2,0]}),s=P.spatial(m,{...settings,spatialContrast:.6});
+ assert.equal(s.cells.length,10);assert.equal(s.cells[1][2],1);assert(s.cells[0][0]<1&&s.cells[0][0]>.1);assert.equal(s.cells[0][1],0);
+ const noBass=measure({6:[1,0,0],7:[0,0,4],9:[0,2,0]});assert.deepEqual(s.cells,P.spatial(noBass,{...settings,spatialContrast:.6}).cells);
+});
+ test('Triptych positions have different hues and adjacent cells show different registers',()=>{
+ const l=rendered([1,0,0],6),c=rendered([0,1,0],6),r=rendered([0,0,1],6);
+ function sum(a,ch){let v=0;for(let y=3;y<8;y++)for(let x=0;x<8;x++)v+=a[(y*8+x)*3+ch];return v;}
+ assert(sum(l,2)>sum(l,0)*2);assert(sum(c,0)>sum(c,2)*2);assert(sum(r,0)>sum(r,1)*2);
+ const v=new V.Engine(),f={...feature,spatial:P.spatial(measure({6:[1,0,0],7:[0,0,1]}),settings)},p={...settings,scene:6,focus:3,palette:1,brightness:.8,trails:0,detail:.5,transition:0};let rgb;
+ for(let i=0;i<40;i++)rgb=v.step(f,.02,p);
+ const cell=(x,y)=>rgb.slice((y*8+x)*3,(y*8+x)*3+3).reduce((a,b)=>a+b,0);
+ assert(cell(0,3)>10&&cell(1,3)===0);assert(cell(6,3)===0&&cell(7,3)>10);
 });
 test('Generated FFT frame transports 55 coherent values and receives the real host sample rate',()=>{
  const p=JSON.parse(fs.readFileSync('patchers/lens_spectral.maxpat')).patcher;
@@ -84,7 +81,7 @@ test('Spatial inspector paints finite rectangles and exposes the live mapping sl
  function Task(){this.repeat=this.schedule=this.cancel=()=>{};}
  const c={Task,post:()=>{},arrayfromargs:x=>Array.from(x),outlet:()=>{},File:function(){this.isopen=false;},patcher:{filepath:__dirname+'/../patchers/Lunar Lens.maxpat',getnamed:()=>({message:()=>{}})}};
  vm.createContext(c);vm.runInContext(fs.readFileSync('patchers/lens_runtime.js','utf8'),c);c.P.detector=true;c.P.inspector=3;c.measured=measure({1:[1,0,0],9:[0,.4,0],14:[0,0,.2]});c.lastFeatures=Date.now()/1000;c.render();
- ui.state(JSON.stringify(c.snapshot()));ui.paint();let h=ui.hit.find(h=>h.args[0]==='spatialAmount');assert(h);ui.onclick(h.x,h.y+5);assert.equal(calls.at(-1)[3],0);
+ ui.state(JSON.stringify(c.snapshot()));ui.paint();let h=ui.hit.find(h=>h.args[0]==='spatialContrast');assert(h);ui.onclick(h.x,h.y+5);assert.equal(calls.at(-1)[3],0);
  assert(ui.hit.some(h=>h.args[0]==='scene'&&h.args[1]===6));assert(ui.hit.some(h=>h.args[0]==='spatialContrast'));
 });
 console.log('PASS '+passed+' spatial measurement and rendering groups');

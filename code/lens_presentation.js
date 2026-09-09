@@ -31,7 +31,15 @@ var LensPresentation=(function(){
    // Visual compression only; diagnostic power and role proportions stay raw.
    rows[i][ch]=Math.pow(ratio,ch===1?.5:.5-strength*.22);
   }
-  return {valid:valid,roles:roles,displayRoles:displayRoles,contrast:contrast,spectrum:rows,lowSpectrum:lowSpectrum,amount:valid?clamp(p.spatialAmount===undefined?.85:p.spatialAmount,0,1):0};
+  // Ten mid/high bins, one common reference for all three positions.
+  // These are the same strict powers shown by the measurement inspector.
+  var cells=[],cellPeak=0;
+  if(valid)for(i=6;i<16;i++)for(ch=0;ch<3;ch++)cellPeak=Math.max(cellPeak,s.bands[i].power[ch]);
+  for(i=6;i<16;i++){
+   var cell=[0,0,0];for(ch=0;ch<3;ch++)cell[ch]=valid&&cellPeak>1e-12?Math.pow(s.bands[i].power[ch]/cellPeak,.65-contrast*.25):0;
+   cells.push(cell);
+  }
+  return {valid:valid,roles:roles,displayRoles:displayRoles,contrast:contrast,cells:cells,spectrum:rows,lowSpectrum:lowSpectrum,amount:valid?clamp(p.spatialAmount===undefined?.85:p.spatialAmount,0,1):0};
  }
  function Engine(){this.clear();}
  Engine.prototype.clear=function(){this.epoch=-1;this.seen={};this.reframe=0;this.entry=0;this.texture=0;this.release=0;this.direction=0;};

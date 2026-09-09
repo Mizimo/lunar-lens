@@ -13,7 +13,7 @@ for(const row of valid){
  const p=P.spatial(row.measurements,row.params);if(p.roles[2].reduce((sum,v,c)=>sum+Math.abs(v-p.roles[3][c]),0)>.24)differentMid++;
 }
 if(valid.length!==active.length)throw Error(`Stale stereo frames: ${active.length-valid.length}`);
-const report={version:'1.4.0',label,activeFrames:active.length,validFrames:valid.length,passed:valid.length===active.length,
+const report={version:JSON.parse(fs.readFileSync('package.json')).version,label,activeFrames:active.length,validFrames:valid.length,passed:valid.length===active.length,
  overallSharesMedian:totalShares.map(a=>perc(a,.5)),globallyBalancedFrames:balanced,balancedFramesWithOppositeRegisters:opposed,
  foregroundVsBedSpatialDifferenceFrames:differentMid,computeP99Ms:perc(rows.map(r=>r.computeMs),.99),analysisP99Ms:perc(rows.map(r=>r.analysisMs),.99),
  interpretation:'Opposite registers: overall residual balance within 5%, yet two bands above 1% total power lean more than 20% in opposite directions. Foreground vs bed: L1 distance > 0.24. These report observable spatial differences, not correct instrument or stem separation.'};

@@ -5,7 +5,7 @@ var self=this,analysis=new LensFeatures.Engine(),measurements=new LensMeasuremen
 var interaction=new LensInteraction.Engine(),presentation=new LensPresentation.Engine(),visual=new LensVisual.Engine(interaction);
 var behaviours=new LensBehaviours.Engine(),roleMaskChanged=false;
 var audioSampleRate=44100,measured=null,perception=events.snapshot(),behaviourFrame=analysis.snapshot();
-var P={master:.4,brightness:.55,sensitivity:1,trails:.25,detail:.55,bassWeight:1.2,focus:0,scene:0,palette:0,detector:false,detectorBand:8,impactLo:35,impactHi:160,impactSensitivity:1,impactGap:.16,freeze:false,black:false,fx:true,fxdepth:.85,monitor:false,loop:false,input:0,livegain:1,plugin:false,role:0,roles:LensBehaviours.defaults(),transition:.85,eventAmount:.7,spatialAmount:.85,spatialContrast:.65,inspector:0};
+var P={master:.4,brightness:.55,sensitivity:1,trails:.25,detail:.55,bassWeight:1.2,focus:0,scene:0,palette:0,detector:false,detectorBand:8,impactLo:35,impactHi:160,impactSensitivity:1,impactGap:.16,freeze:false,black:false,fx:true,fxdepth:.85,monitor:false,loop:false,input:0,livegain:1,plugin:false,role:0,roles:LensBehaviours.defaults(),transition:.85,eventAmount:.7,spatialAmount:.85,spatialContrast:.85,inspector:0};
 var file="",pendingFile="",loaded=false,running=false,paused=false,position=0,duration=0,samplerate=0,channels=2;
 var hw=false,identity=false,layout=false,connected=false,inputPort="none",outputPort="none",lastReply=0,lastQuery=0,lastLed={},midiStatus=0,midiData=[],sx=null;
 var enumerating=false,portLists={input:[],output:[]};
@@ -28,7 +28,7 @@ function init(){
  if(initialized)return;initialized=true;
  ramp("master",P.master);ramp("monitor",0);ramp("file-gain",1);ramp("live-gain",0);ramp("mono",0);ramp("plugin-dry",1);ramp("plugin-wet",0);
  msg("analysis","impactLo",P.impactLo);msg("analysis","impactHi",P.impactHi);msg("vst","disable",1);msg("recorder","samptype","float32");msg("poll","int",1);refreshports();
- tickTask.interval=33;tickTask.repeat();status("READY · 五個聲音行為 · v1.4.0");
+ tickTask.interval=33;tickTask.repeat();status("READY · 五個聲音行為 · v1.4.1");
 }
 function openfile(){msg("file-dialog","bang");}
 function demo(){loadfile(rootPath()+"media/Lunar-Departure-demo.wav");}
@@ -126,7 +126,7 @@ function palettecycle(){param("palette",(P.palette+1)%7);}
 function spacepanel(){param("detector",1);param("inspector",3);}
 function inspectband(i){param("detectorBand",i);param("inspector",2);param("detector",1);}
 function detectorreset(){param("impactLo",35);param("impactHi",160);param("impactSensitivity",1);param("impactGap",.16);P.roles[0].sensitivity=1;}
-function defaults(){var d={brightness:.55,sensitivity:1,trails:.25,detail:.55,bassWeight:1.2,focus:0,scene:0,palette:0,detector:false,transition:.85,eventAmount:.7,spatialAmount:.85,spatialContrast:.65,freeze:false,black:false,fx:true,fxdepth:.85};for(var k in d)param(k,d[k]);clear();status("視覺與觸控效果已恢復預設，播放與音量保持原狀。");}
+function defaults(){var d={brightness:.55,sensitivity:1,trails:.25,detail:.55,bassWeight:1.2,focus:0,scene:0,palette:0,detector:false,transition:.85,eventAmount:.7,spatialAmount:.85,spatialContrast:.85,freeze:false,black:false,fx:true,fxdepth:.85};for(var k in d)param(k,d[k]);clear();status("視覺與觸控效果已恢復預設，播放與音量保持原狀。");}
 function render(){
  var t=now(),dt=lastFrame?LensFeatures.clamp(t-lastFrame,.001,.1):.05;lastFrame=t;
  if(t-lastFeatures>.15)analyse([],t);
@@ -143,7 +143,7 @@ function render(){
   if(uiDict){uiDict.parse(packet);outlet(0,"dictionary",uiDict.name);}else outlet(0,"state",packet);
  }
  if(capture&&capture.isopen){
-  pendingCapture={time:t,position:position,running:running,features:f,measurements:measured,perception:perception,transition:visual.transition.snapshot(),raw:analysis.raw,leds:leds,gesture:g,params:P,featureTime:lastFeatures,analysisMs:analysisMs,renderMs:(now()-t)*1000,computeMs:(computed-t)*1000,fxMs:(fxSent-computed)*1000,uiMs:(now()-fxSent)*1000,uiProfile:uiProfile};
+  pendingCapture={sourceName:file.split("/").pop(),input:P.input,time:t,position:position,running:running,features:f,measurements:measured,perception:perception,transition:visual.transition.snapshot(),raw:analysis.raw,leds:leds,gesture:g,params:P,featureTime:lastFeatures,analysisMs:analysisMs,renderMs:(now()-t)*1000,computeMs:(computed-t)*1000,fxMs:(fxSent-computed)*1000,uiMs:(now()-fxSent)*1000,uiProfile:uiProfile};
   // Max can defer messages returning to the same JS object. Flush from the
   // snapshot reply, rather than accidentally storing the PREVIOUS frame position.
   if(running&&P.input===0)msg("capture-position","bang");else frameposition(position*1000);

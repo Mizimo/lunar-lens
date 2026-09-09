@@ -1,0 +1,15 @@
+{
+  "version": "1.4.1",
+  "sourceNames": [
+    "colorful (feat. ほとけ)_spotdown.org.mp3"
+  ],
+  "traceSha256": "cf4f3731fda82a35d5ce83fb5714192e16a48aea7f7c5775ba7df7bfe9a0d065",
+  "frames": 3831,
+  "activeFrames": 3819,
+  "sixSceneFrameComparisons": 22986,
+  "originalV13VisualRGBExact": true,
+  "triptychRetainedAndRedesigned": true,
+  "comparisonPosition": 15.00666666666902,
+  "passed": true,
+  "scope": "Identical captured real-audio features through the production and frozen v1.3.0 renderers. All six original scenes must match every RGB value. Seventh spectrum intentionally differs. No claim of stem separation, kick accuracy or physical LED timing."
+}

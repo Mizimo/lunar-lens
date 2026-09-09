@@ -1,7 +1,7 @@
 /* Five sound behaviours, seven different spatial grammars.
    No score, title, transport position, instrument label or free-running beat. */
 if(typeof module!=="undefined"){
- var LensInteraction=require('./lens_interaction.js'),LensTransition=require('./lens_transition.js');
+ var LensInteraction=require('../../code/lens_interaction.js'),LensTransition=require('../../code/lens_transition.js');
 }
 var LensVisual=(function(){
  function clamp(x,a,b){return Math.max(a,Math.min(b,x));}
@@ -12,6 +12,19 @@ var LensVisual=(function(){
  function empty(){return [zeros(),zeros(),zeros(),zeros(),zeros()];}
  // Resample inside the source, never clamp edges into long false streaks.
  function sample(layer,x,y){if(x<-.5||x>7.5)return 0;var l=Math.floor(x),f=x-l;return (l>=0&&l<8?layer[y*8+l]:0)*(1-f)+(l+1>=0&&l+1<8?layer[y*8+l+1]:0)*f;}
+ function project(layer,x,y,anchor,scale){
+  if(scale>=1)return sample(layer,3.5+(x-anchor)/scale,y);
+  // Area integration prevents a narrow moving phrase disappearing between LEDs.
+  var a=3.5+(x-.5-anchor)/scale,b=3.5+(x+.5-anchor)/scale,sum=0;
+  for(var cell=Math.max(0,Math.floor(a+.5));cell<=Math.min(7,Math.floor(b+.5));cell++)sum+=layer[y*8+cell]*Math.max(0,Math.min(b,cell+.5)-Math.max(a,cell-.5));
+  return sum/(b-a);
+ }
+ function spatialSample(layer,x,y,width,shares,amount,separation){
+  var base=sample(layer,3.5+(x-3.5)/width,y);if(!amount)return base;
+  var value=0,sep=separation||0,anchors=[1.25-.3*sep,3.5,5.75+.3*sep],sizes=[.48-.14*sep,.76-.22*sep,.48-.14*sep];
+  for(var ch=0;ch<3;ch++)value+=shares[ch]*project(layer,x,y,anchors[ch],width*sizes[ch])/sizes[ch];
+  return base*(1-amount)+value*amount;
+ }
  var names=["重力／沉積","天體／公轉","織光／經緯","門廊／縱深","雙生／呼應","拼光／碎片","聲場／三域"];
  var paletteNames=["琥珀冰川","月夜紫羅蘭","翡翠珊瑚","鈷藍熔岩","蘭花青檸","桃紅電光"];
  // impact / foundation / phrase / bed / detail; bounded palettes, never hue-cycling.
@@ -76,7 +89,7 @@ var LensVisual=(function(){
    for(i=this.impacts.length-1;i>=0;i--){if(this.impacts[i].fresh)this.impacts[i].fresh=false;else this.impacts[i].t+=dt;if(this.impacts[i].t>.52)this.impacts.splice(i,1);}
    for(i=this.particles.length-1;i>=0;i--){pt=this.particles[i];pt.t+=dt;pt.life=Math.max(0,1-pt.t/pt.duration);if(pt.life<=0)this.particles.splice(i,1);}
    var next=empty(),cx=3.5+(g.count?(g.x*7-3.5)*g.strength*.55:0),cy=3.5+(g.count?(g.y*7-3.5)*g.strength*.4:0);
-   cx+=(ev.pan||0)*.7;
+   if(!spatial.valid)cx+=(ev.pan||0)*.7;
    var spread=1+(f.width||0)*.25+(ev.reframe||0)*.16,pc=this.phraseClock+(ev.entry||0)*.35,
     bc=this.bedClock+(ev.reframe||0)*.6,turn=this.turn,flash=this.flash;
    for(y=0;y<8;y++)for(x=0;x<8;x++){
@@ -156,17 +169,15 @@ var LensVisual=(function(){
     next[3][idx]=bedShape*bed*.55*(1-clamp(fore*phrase,0,.6))*(1-(ev.release||0)*.35)*(1-(ev.reframe||0)*.65*edge(x-((ev.direction||0)?4.5:2.5),.9));
     next[4][idx]=detail*(1+(ev.texture||0)*.25);
     if(scene===6){
-     // 2 columns x 5 rows per position: ten distinct 280 Hz–16 kHz bins.
-     // Lower rows remain one bass mass. Dark columns separate the three spectra.
-     var channel=x<2?0:x>=3&&x<5?1:x>=6?2:-1;
-     var cellIndex=(y-3)*2+(channel<0?0:x-[0,3,6][channel]);
-     var level=y>=3&&channel>=0&&spatial.valid&&spatial.cells?spatial.cells[cellIndex][channel]:0;
-     var rowRole=cellIndex<6?2:4;
+     // Three separated lanes, eight registers from bottom (low) to top (high).
+     // One shared power reference across all lanes. No random particle placement.
+     var channel=x<2?0:x>=3&&x<5?1:x>=6?2:-1,level=channel>=0&&spatial.valid?spatial.spectrum[y][channel]:0;
+     var rowRole=y<3?1:y<6?2:4;
      for(var layer=0;layer<5;layer++)next[layer][idx]=0;
-     // A single relative-power mapping; no second multiplication by song loudness.
-     if(y>=3){
-      if(rowRole===2){var midTotal=Math.max(.001,phrase+bed);next[2][idx]=level*.9*phrase/midTotal;next[3][idx]=level*.9*bed/midTotal;}
-      else next[4][idx]=level*.9;
+     next[rowRole][idx]=level*Math.max(0,f.slow||0)*.85;
+     if(rowRole===2){
+      var midLevel=next[2][idx],midTotal=Math.max(.001,phrase+bed);
+      next[2][idx]=midLevel*phrase/midTotal;next[3][idx]=midLevel*bed/midTotal;
      }
      if(y<3){
       // The low register remains one continuous mass, regardless of its stereo input.
@@ -180,23 +191,23 @@ var LensVisual=(function(){
     }
    }
    var tau=[.035,.09+p.trails*.25,.045+p.trails*.11,.18+p.trails*.30,.020+p.trails*.025];
-   for(j=0;j<5;j++)for(i=0;i<64;i++){next[j][i]=Math.max(next[j][i],this.trails[j][i]*Math.exp(-dt/((scene===6&&j>=2?.025+p.trails*.045:tau[j])*((roleSettings[j]||{}).release||1))));if(next[j][i]<.0001)next[j][i]=0;}
+   for(j=0;j<5;j++)for(i=0;i<64;i++){next[j][i]=Math.max(next[j][i],this.trails[j][i]*Math.exp(-dt/(tau[j]*((roleSettings[j]||{}).release||1))));if(next[j][i]<.0001)next[j][i]=0;}
    this.trails=next;this.layers=next;
   }
-  var budgets=scene===6?[5.2,5.3,12,12,12]:[5.2,5.3,3.7,2.6,1.6],scales=[],colours=palette(scene,p.palette||0);
+  var budgets=[5.2,5.3,3.7,2.6,1.6],scales=[],colours=palette(scene,p.palette||0);
   for(j=0;j<5;j++){var sum=0;for(i=0;i<64;i++)sum+=this.layers[j][i];scales[j]=Math.min(1,budgets[j]/Math.max(.001,sum));}
   var rgb=[],live=[],total=0;
   for(y=0;y<8;y++)for(x=0;x<8;x++){
    var idx=y*8+x,c=[0,0,0],attack=[0,0,0],local=0;
    for(j=0;j<5;j++){
-    // Original six-scene width sampling: one moving form, no L/C/R copies.
-    var settings=roleSettings[j]||{},wide=(settings.width||1)*(j===3?1+(ev.spread||0)*.35:1),sx=clamp(3.5+(x-3.5)/wide,0,7),left=Math.floor(sx),right=Math.min(7,left+1);
-    var sampled=this.layers[j][y*8+left]*(1-(sx-left))+this.layers[j][y*8+right]*(sx-left);
-    if(scene===6&&j>=2)sampled=this.layers[j][idx];
+    var settings=roleSettings[j]||{},wide=(settings.width||1)*(j===3?1+(ev.spread||0)*.35:1);
+    var sampled=spatialSample(this.layers[j],x,y,wide,(spatial.displayRoles||spatial.roles||[])[j]||[0,1,0],j<2?0:spatial.amount||0,j===2||j===3?spatial.contrast||0:0);
+    if(scene===6&&j>=2){
+     var lane=x<2?0:x>=3&&x<5?1:x>=6?2:-1,anchor=[.5,3.5,6.5][lane];
+     sampled=lane<0?0:sample(this.layers[j],anchor+(x-anchor)/wide,y);
+    }
     var value=focus&&focus!==j+1?0:sampled*scales[j]*(settings.gain===undefined?1:settings.gain);local+=value;
-    var spatialChannel=x<2?0:x>=3&&x<5?1:x>=6?2:-1;
-    var colour=scene===6&&j>=2&&spatialChannel>=0?[[.12,.86,.98],[1,.61,.18],[1,.16,.52]][spatialChannel]:colours[j];
-    for(k=0;k<3;k++)if(j===0)attack[k]+=value*colour[k];else c[k]+=value*colour[k];
+    for(k=0;k<3;k++)if(j===0)attack[k]+=value*colours[j][k];else c[k]+=value*colours[j][k];
    }
    for(k=0;k<3;k++){c[k]/=Math.max(1,Math.pow(local,.65));attack[k]/=Math.max(1,Math.pow(local,.65));}
    for(var key in this.held){var h=this.held[key],v=glow(x,y,h.x,h.y,.24+h.p*.3)*(.55+h.p*.65);attack[0]+=v;attack[1]+=v*.69;attack[2]+=v*.34;}
