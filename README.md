@@ -155,6 +155,6 @@ python3 scripts/verify-release.py
 
 Max 端使用原生物件，JavaScript 測試沒有 npm 第三方依賴。選用的音訊／影片驗證腳本需要 Python、NumPy／Pillow 與 ffmpeg，執行專案不需要它們。
 
-[工程分層](docs/工程設計.md) · [量測、事件契約與研究](docs/事件引擎與轉場.md) · [本輪驗證](docs/驗證紀錄.md) · [真實混音事件時間線](media/event-timelines.png)
+[完整迭代紀錄：1.0–1.4.1](docs/迭代紀錄.md) · [工程分層](docs/工程設計.md) · [量測、事件契約與研究](docs/事件引擎與轉場.md) · [本輪驗證](docs/驗證紀錄.md) · [真實混音事件時間線](media/event-timelines.png)
 
 `docs/ci-workflow.yml.example` 是 GitHub Actions 回歸範本。目前推送憑證沒有 workflow 權限，範本未啟用；日後可由有權限的維護者放到 `.github/workflows/verify.yml`。本輪建置、測試與封裝驗證都已在本機執行。

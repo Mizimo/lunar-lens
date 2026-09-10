@@ -2,7 +2,7 @@
   "version": "1.4.1",
   "files": {
     ".gitignore": "32715027beee14618a6066a07562de8f053b191561c7a37456acd2fc426fd227",
-    "README.md": "15e591e2ca087ab11d4e480918b7070c8443ab858cdbb055ddf0aa30c70f6d7a",
+    "README.md": "b4570445d008153b6f2bc901101629dee31f827597eb227502688bfa69ec7093",
     "code/lens_analysis.genexpr": "5ff88470b37140a354693fec8898e8db9ec925da6d547f1880d357def99ac2d4",
     "code/lens_behaviours.js": "1dbf2c49b3f65a117dd54d99054aed09736ba3b8eea8ecad65d402a9af5989ae",
     "code/lens_context.genexpr": "4b6c64473dd048d115b447182bdfad662a3aea978fd59bb0bfb23277080bd67b",
@@ -76,7 +76,7 @@
     "docs/工程設計.md": "428018826c447510ba519b392ac42d31286ab97d7128640ac1f7b5a189be0d78",
     "docs/立體聲頻譜.md": "4131b08624db68c344259936e11ada4601d6b49fef77f6c17a6642f45efa62ba",
     "docs/視覺分層研究.md": "d7c9dcf06e3a444438be082048ade3604bf2ab32c7861d1507e3cdd2753367d6",
-    "docs/迭代紀錄.md": "42dff9f43927fc17f242d997ffbb2abfa12ccbfdef56cabe4e2aaacbe2dd8819",
+    "docs/迭代紀錄.md": "05120ddf498d5186ceeb211d494c191777ca25ffb644a17cb3abc2abf488ec3b",
     "docs/驗證紀錄.md": "6b4a6571b63c636412a6174b9736b8e47e90665c771d4ff084eb42191574388d",
     "lunar-lens.maxproj": "98f335c0b6cca487d90b4cfe353a06eb5f895dd08457766251711edf3bbdf442",
     "media/Lunar-Departure-demo.wav": "31d5b9670b755f2bb553e8aae1f44fbc2aca481989f8cb50e12cc4a555826315",
