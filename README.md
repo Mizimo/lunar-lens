@@ -1,4 +1,15 @@
-# Lunar Lens 1.4.1
+# Lunar Lens · 開發工作區
+
+**目前穩定版：v1.4.1。這個 `main` 工作區用於開發，日常使用請開獨立的穩定版。**
+
+| 用途 | 本機入口（相對於 Developer） |
+| --- | --- |
+| 日常使用 | `lunar-lens-releases/開啟穩定版.command` 或 `lunar-lens-releases/current/lunar-lens.maxproj` |
+| 開發／測試 | `lunar-lens/開啟開發版.command` 或本目錄的 `lunar-lens.maxproj` |
+| 未發布候選 | `lunar-lens/dist/candidates/` |
+| 歷史 ZIP | `lunar-lens-releases/archives/<tag>/` |
+
+其他電腦可從 [v1.4.1 Release](https://github.com/Mizimo/lunar-lens/releases/tag/v1.4.1) 下載正式 ZIP。完整目錄責任、安装、驗證及切換流程見 **[開發與發布](docs/開發與發布.md)**。
 
 **六種構圖恢復原本視覺邏輯；三域保留並提高空間可讀性。**
 
@@ -16,7 +27,7 @@ Max 9 / Novation Launchpad Pro MK3。播放任意錄音或接即時輸入；原�
 
 ## 開始使用
 
-1. 保留完整資料夾，用 **Max 9** 開啟 **lunar-lens.maxproj**。主視窗未出現時，開 **patchers/Lunar Lens.maxpat**。
+1. 日常使用先進入上述**穩定版目錄**，保留完整資料夾，用 **Max 9** 開啟 **lunar-lens.maxproj**。主視窗未出現時，開同一版本的 **patchers/Lunar Lens.maxpat**。
 2. 按 **載入音訊**，或把 WAV / AIFF / MP3 拖入 **DROP AUDIO HERE**。**DEMO** 是原創合成器片段，走相同路徑。
 3. 按 **PLAY**；要聆聽時，把 **聲音 OFF** 切成 **聲音 ON**。Master 預設 40%；右上 **音訊設定** 選擇裝置。
 4. 插上 Launchpad Pro MK3，按 **重掃**。MIDI IN / LED OUT 選 **Launchpad Pro MK3 LPProMK3 MIDI**，再按 **CONNECT MK3**。
@@ -150,10 +161,11 @@ IMPACT 使用 **20–160 Hz 下限、70–400 Hz 上限**，預設 35–160 Hz�
 npm run build
 npm test
 npm run package
-python3 scripts/verify-release.py
+npm run verify:package
+npm run stable:verify
 ```
 
-Max 端使用原生物件，JavaScript 測試沒有 npm 第三方依賴。選用的音訊／影片驗證腳本需要 Python、NumPy／Pillow 與 ffmpeg，執行專案不需要它們。
+以上命令只在開發工作區執行。封裝只產生 `dist/candidates/` 中的候選包，不會覆寫正式 ZIP 或更新穩定版。`stable:verify` 是已有本機安裝時的額外核對。Max 端使用原生物件；開發測試需要 Node.js 與 Python 3.9+，沒有 npm／Python 第三方依賴。選用的音訊／影片驗證腳本另需 NumPy／Pillow 與 ffmpeg，執行專案不需要它們。
 
 [完整迭代紀錄：1.0–1.4.1](docs/迭代紀錄.md) · [工程分層](docs/工程設計.md) · [量測、事件契約與研究](docs/事件引擎與轉場.md) · [本輪驗證](docs/驗證紀錄.md) · [真實混音事件時間線](media/event-timelines.png)
 

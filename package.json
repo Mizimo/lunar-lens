@@ -5,7 +5,15 @@
   "description": "Track-independent Max / Launchpad Pro MK3 audio-reactive light instrument",
   "scripts": {
     "build": "node scripts/build.mjs",
-    "test": "node tests/validate.cjs && node tests/roles.cjs && node tests/behaviour.cjs && node tests/dynamics.cjs && node tests/low-rollback.cjs && node tests/events.cjs && node tests/stereo.cjs && node tests/visual-rollback.cjs",
-    "package": "node scripts/package.mjs"
+    "test": "node tests/validate.cjs && node tests/roles.cjs && node tests/behaviour.cjs && node tests/dynamics.cjs && node tests/low-rollback.cjs && node tests/events.cjs && node tests/stereo.cjs && node tests/visual-rollback.cjs && python3 tests/distribution.py",
+    "package": "node scripts/package.mjs",
+    "verify:package": "python3 scripts/verify-release.py",
+    "test:distribution": "python3 tests/distribution.py",
+    "stable:install": "python3 scripts/stable.py install",
+    "stable:verify": "python3 scripts/stable.py verify",
+    "stable:status": "python3 scripts/stable.py status",
+    "stable:use": "python3 scripts/stable.py use",
+    "open:stable": "python3 scripts/stable.py open",
+    "open:dev": "sh ./開啟開發版.command"
   }
 }

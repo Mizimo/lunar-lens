@@ -3,10 +3,40 @@ import path from 'node:path';
 import crypto from 'node:crypto';
 import {fileURLToPath} from 'node:url';
 import {execFileSync} from 'node:child_process';
-const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
-function walk(dir){return fs.readdirSync(path.join(root,dir),{withFileTypes:true}).flatMap(e=>{if(['tmp','.git','node_modules','.DS_Store','SHA256SUMS.json'].includes(e.name))return [];let f=dir?dir+'/'+e.name:e.name;return e.isDirectory()?walk(f):[f];});}
-const files=walk('').sort(),hashes={};for(const f of files)hashes[f]=crypto.createHash('sha256').update(fs.readFileSync(path.join(root,f))).digest('hex');
-fs.writeFileSync(path.join(root,'SHA256SUMS.json'),JSON.stringify({version:JSON.parse(fs.readFileSync(path.join(root,'package.json'))).version,files:hashes},null,2)+'\n');
-const archive=path.join(path.dirname(root),'lunar-lens-v'+JSON.parse(fs.readFileSync(path.join(root,'package.json'))).version+'.zip');
-const script=`import pathlib,zipfile,json,hashlib,sys\nr=pathlib.Path(sys.argv[1]);zpath=pathlib.Path(sys.argv[2]);m=json.loads((r/'SHA256SUMS.json').read_text())['files']\nwith zipfile.ZipFile(zpath,'w',zipfile.ZIP_DEFLATED) as z:\n for f in list(m)+['SHA256SUMS.json']: z.write(r/f,'lunar-lens/'+f)\nwith zipfile.ZipFile(zpath) as z:\n for f,h in m.items(): assert hashlib.sha256(z.read('lunar-lens/'+f)).hexdigest()==h,f\nprint('Verified',len(m)+1,'files; archive bytes',zpath.stat().st_size)\nprint('SHA256',hashlib.sha256(zpath.read_bytes()).hexdigest())\n`;
-process.stdout.write(execFileSync('python3',['-c',script,root,archive]));console.log(archive);
+const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const excluded = new Set(['tmp', 'dist', '.git', 'node_modules', '.DS_Store', '__pycache__', 'SHA256SUMS.json']);
+function walk(dir = '') {
+  return fs.readdirSync(path.join(root, dir), {withFileTypes: true}).flatMap(entry => {
+    if (excluded.has(entry.name) || entry.name.endsWith('.pyc')) return [];
+    const file = dir ? dir + '/' + entry.name : entry.name;
+    if (entry.isSymbolicLink()) throw new Error('Do not package symlinks: ' + file);
+    if (entry.isDirectory()) return walk(file);
+    if (!entry.isFile()) throw new Error('Unsupported file: ' + file);
+    return [file];
+  });
+}
+const pkg = JSON.parse(fs.readFileSync(path.join(root, 'package.json')));
+const hashes = Object.fromEntries(walk().sort().map(file => [file,
+  crypto.createHash('sha256').update(fs.readFileSync(path.join(root, file))).digest('hex')]));
+fs.writeFileSync(path.join(root, 'SHA256SUMS.json'), JSON.stringify({version: pkg.version, files: hashes}, null, 2) + '\n');
+// Unique candidate names. Packaging never writes to archives/, versions/ or current.
+const stamp = new Date().toISOString().replace(/[-:.]/g, '');
+const filename = `lunar-lens-v${pkg.version}-candidate-${stamp}-${crypto.randomUUID().slice(0, 8)}.zip`;
+const output = path.join(root, 'dist/candidates');
+fs.mkdirSync(output, {recursive: true});
+const archive = path.join(output, filename);
+const script = `import pathlib,zipfile,json,sys
+sys.path.insert(0, str(pathlib.Path(sys.argv[1])/'scripts'))
+from release_files import inspect_archive,digest
+r=pathlib.Path(sys.argv[1]); archive=pathlib.Path(sys.argv[2])
+m=json.loads((r/'SHA256SUMS.json').read_text())
+with zipfile.ZipFile(archive,'x',zipfile.ZIP_DEFLATED) as z:
+ for f in list(m['files'])+['SHA256SUMS.json']: z.write(r/f,'lunar-lens/'+f)
+inspect_archive(archive)
+print(json.dumps({'archive':str(archive),'sha256':digest(archive),'files':len(m['files'])+1}))
+`;
+const result = JSON.parse(execFileSync('python3', ['-c', script, root, archive], {encoding: 'utf8'}));
+const candidate = {channel: 'candidate', baseVersion: pkg.version, ...result};
+fs.writeFileSync(archive + '.json', JSON.stringify(candidate, null, 2) + '\n');
+fs.writeFileSync(path.join(output, 'latest.json'), JSON.stringify(candidate, null, 2) + '\n');
+console.log(`Candidate only (${result.files} files): ${archive}\nSHA256 ${result.sha256}\nStable release unchanged.`);
