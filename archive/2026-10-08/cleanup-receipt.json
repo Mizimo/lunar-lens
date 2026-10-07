@@ -1,0 +1,38 @@
+{
+  "date": "2026-10-08",
+  "status": "complete",
+  "development": "suspended locally; moved to another environment",
+  "archiveRepository": "https://github.com/Mizimo/lunar-av-archive",
+  "archiveFolder": "archive/2026-10-08",
+  "archiveRelease": "https://github.com/Mizimo/lunar-av-archive/releases/tag/suspended-2026-10-08",
+  "archiveSHA256": "ed2aaa4b4a46ab72df05d545daf7f0b6195342ad6c08e916b6e80863d5d93953",
+  "logicalFilesRetained": 823,
+  "verifiedUniqueObjects": 528,
+  "downloadAndRestoreVerified": true,
+  "restoredStableFilesVerified": 157,
+  "removedRegularFiles": 1210,
+  "removedFileBytes": 1840099233,
+  "removedProjectLocations": [
+    "~/Developer/lunar-lens",
+    "~/Developer/lunar-departure",
+    "~/Developer/lunar-lens-releases",
+    "~/Developer/lunar-departure*.zip",
+    "~/.cache/lunar-lens-validation-history"
+  ],
+  "maxDependencyCacheFilesRemoved": 4,
+  "maxCalendarEntriesRemoved": 10,
+  "maxRecentEntriesRemoved": 6,
+  "unrelatedMaxHistoryPreserved": true,
+  "projectBackgroundProcessesRemaining": 0,
+  "projectAutomationsRemaining": 0,
+  "localProjectPathsAbsent": true,
+  "localStagingRemoved": true,
+  "localRetentionFolders": 0,
+  "sharedResourcesPreserved": [
+    "Max application",
+    "Shared Node/Python/ffmpeg and audio plug-ins",
+    "Original music library and unrelated projects"
+  ],
+  "scope": "Deletion of project-owned files and scoped Max history, verified by path absence; not forensic erasure of global system backups or application chat history",
+  "validationLimit": "No new native playback, full-song event accuracy or physical Launchpad acceptance claim"
+}
